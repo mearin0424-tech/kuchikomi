@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>復縁屋さん | 月々6,300~ の復縁工作</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Shippori+Mincho:wght@400;700&family=Noto+Serif+JP:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-rose: #8E3E49; 
+            --dark-rose: #632B32;
+            --accent-rose: #C04851;
+            --light-rose: #E8D5D2;
+            --bg-beige: #F5F1EE;
+            --cta-bg: #FDF1F2; 
+            --text-dark: #2D2D2D;
+            --cta-yellow: #E6B422; 
+            --line-green: #06C755;
+            --shadow-yellow: #B38808;
+            --shadow-green: #048F3E;
+            --highlight-red: #D94A5A;
+            --shining-gold: linear-gradient(45deg, #D4AF37 0%, #FFF3B0 50%, #B38808 100%);
+            --burgundy-pink: #A64D5D;
+            --light-burgundy: #F9F1F2;
+        }
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: var(--bg-beige);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        .font-hannari { font-family: 'Shippori Mincho', serif; }
+        .font-serif-jp { font-family: 'Noto Serif JP', serif; }
+        
+        /* ヒーローエリア */
+        .hero-gradient {
+            background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.75)), 
+                        url('https://lh3.googleusercontent.com/d/1DlxFwDYK6MX1IIyU8d2A1Yy1vI0FXKGi');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* グラデーションマーカー線 */
+        .custom-underline {
+            background: linear-gradient(transparent 70%, rgba(217, 74, 90, 0.4) 70%);
+            display: inline;
+            padding-bottom: 2px;
+        }
+
+        /* お悩みエリア */
+        .maze-bg-container {
+            position: relative;
+            background-image: url('https://lh3.googleusercontent.com/d/1r8v7NCGgKwUPwG4dPMoTEbQXSEVMbLOG');
+            background-size: cover;
+            background-position: center;
+        }
+        .maze-overlay {
+            background: linear-gradient(to bottom, #FFF 0%, rgba(255,255,255,0.4) 15%, rgba(255,255,255,0.4) 85%, var(--bg-beige) 100%),
+                        linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.95) 100%);
+        }
+
+        /* 解決の根拠エリア */
+        .logic-section-gradient {
+            background: linear-gradient(to bottom, 
+                var(--bg-beige) 0%, 
+                var(--primary-rose) 10%, 
+                var(--burgundy-pink) 90%, 
+                #FFF 100%
+            );
+        }
+
+        /* グラスモーフィズム */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+        }
+
+        .glass-morphism-header {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        /* リボン見出し */
+        .ribbon-title-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.1));
+        }
+        .ribbon-title {
+            position: relative;
+            background: var(--primary-rose);
+            color: #FFFFFF;
+            padding: 12px 40px;
+            font-size: 1.25rem;
+            font-weight: 900;
+            letter-spacing: 0.1em;
+            z-index: 2;
+        }
+        .ribbon-title::before, .ribbon-title::after {
+            content: "";
+            position: absolute;
+            top: 10px;
+            width: 40px;
+            height: 100%;
+            background: var(--dark-rose);
+            z-index: -1;
+        }
+        .ribbon-title::before {
+            left: -20px;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 25% 50%);
+        }
+        .ribbon-title::after {
+            right: -20px;
+            clip-path: polygon(0 0, 100% 0, 75% 50%, 100% 100%, 0 100%);
+        }
+
+        /* 料金用バルーン */
+        .price-balloon {
+            position: relative;
+            background: var(--accent-rose);
+            color: white;
+            padding: 3px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 800;
+            display: inline-block;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 10px rgba(192, 72, 81, 0.3);
+        }
+        .price-balloon::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 5px solid transparent;
+            border-top-color: var(--accent-rose);
+        }
+
+        /* CTA誘導文 */
+        .cta-callout {
+            display: block;
+            font-weight: bold;
+            color: #666; 
+            font-size: 13px;
+            margin-bottom: 14px;
+            letter-spacing: 0.05em;
+        }
+
+        /* プレミアム3Dボタン & フローティング */
+        .btn-premium-3d {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            border-radius: 1rem;
+            font-weight: 900;
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-decoration: none;
+            border: 1px solid rgba(0,0,0,0.05);
+            padding: 1.25rem 1rem;
+        }
+        
+        .floating-action {
+            animation: floating 3.5s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .btn-yellow {
+            background: linear-gradient(to bottom, #FFD700 0%, var(--cta-yellow) 100%);
+            color: #5C4300;
+            box-shadow: 0 6px 0 var(--shadow-yellow), 0 8px 15px rgba(0,0,0,0.1);
+        }
+        .btn-green {
+            background: linear-gradient(to bottom, #07E060 0%, var(--line-green) 100%);
+            color: #FFFFFF;
+            box-shadow: 0 6px 0 var(--shadow-green), 0 8px 15px rgba(0,0,0,0.1);
+        }
+
+        /* プロの言葉デザイン */
+        .professional-quote-container {
+            position: relative;
+            padding: 2.5rem 1.5rem;
+            border-radius: 0.25rem;
+            border: 2px solid var(--burgundy-pink);
+            box-shadow: 0 10px 30px rgba(166, 77, 93, 0.1);
+            background-color: var(--light-burgundy);
+        }
+        .notebook-speech-bubble {
+            background-color: #fff;
+            background-image: repeating-linear-gradient(transparent, transparent 31px, #E5E7EB 31px, #E5E7EB 32px);
+            padding: 1.5rem;
+            border-radius: 0.25rem;
+            line-height: 32px;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 10;
+            border: 1px solid rgba(166, 77, 93, 0.1);
+        }
+        .quote-mark-v2 {
+            font-family: 'serif';
+            font-size: 80px;
+            line-height: 1;
+            position: absolute;
+            color: var(--burgundy-pink);
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        /* 選ばれる理由：エレガントカード */
+        .elegant-card {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 10px 30px rgba(142, 62, 73, 0.05);
+            border-radius: 4px;
+        }
+        .elegant-number {
+            font-family: 'serif';
+            font-style: italic;
+            background: linear-gradient(to bottom, #D4AF37, var(--primary-rose));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            opacity: 0.3;
+            line-height: 1;
+            font-size: 5rem;
+        }
+
+        /* キラキラ装飾アイコン */
+        .glitter-icon {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            color: var(--cta-yellow);
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        /* ハッシュタグ：デザイン強化版 */
+        .hash-tag {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(6px);
+            border: 1.5px solid rgba(255, 255, 255, 0.5);
+            color: #FFFFFF;
+            padding: 6px 14px;
+            border-radius: 9999px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* 満足度セクション統合背景 */
+        .satisfaction-integrated-bg {
+            background: linear-gradient(to bottom, #4B1A21 0%, #7A2E38 40%, #7A2E38 85%, #FFFFFF 100%);
+        }
+
+        /* 満足度バナー */
+        .satisfaction-banner-v3 {
+            position: relative;
+            width: 100%;
+            max-width: 460px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem 1.5rem;
+            border-radius: 4px;
+            color: #FFFFFF;
+            text-align: center;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            backdrop-filter: blur(5px);
+        }
+        .gold-shining {
+            background: var(--shining-gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+        }
+        .banner-score {
+            font-size: 5rem;
+            font-family: 'serif';
+            font-weight: 900;
+            line-height: 1;
+        }
+        .banner-unit {
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin-left: 0.2rem;
+        }
+
+        /* 利用者の声：手紙風 */
+        .letter-card {
+            min-width: 340px;
+            background-color: #FFFFFF;
+            background-image: radial-gradient(#d1d1d1 1.2px, transparent 1.2px);
+            background-size: 20px 20px;
+            padding: 3.5rem 1.8rem 1.8rem 1.8rem;
+            border-radius: 2px;
+            box-shadow: 3px 6px 25px rgba(0,0,0,0.25);
+            position: relative;
+            border: 1px solid #f0f0f0;
+            overflow: visible !important;
+            display: flex;
+            flex-direction: column;
+        }
+        .polaroid-frame {
+            background: white;
+            padding: 6px 6px 22px 6px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            transform: rotate(-4deg);
+            width: 105px;
+            height: 125px;
+            position: absolute;
+            top: 15px; 
+            left: 15px;
+            z-index: 100;
+            border: 1px solid #eee;
+            overflow: visible; 
+        }
+        .polaroid-img-box {
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+            background: #fff;
+        }
+        .polaroid-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            display: block;
+            border: 1px solid #eee;
+        }
+        .red-clip-svg {
+            position: absolute;
+            top: -15px; 
+            left: 60px;
+            z-index: 110;
+            width: 30px;
+            filter: drop-shadow(1px 2px 3px rgba(0,0,0,0.4));
+        }
+        .pink-marker {
+            background: linear-gradient(transparent 60%, rgba(217, 74, 90, 0.15) 60%);
+            font-weight: bold;
+            display: inline;
+        }
+
+        /* スクロールアニメーション用 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1), transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: opacity, transform;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .scrolling-wrapper {
+            padding-top: 60px;
+            margin-top: -20px;
+            overflow-x: auto;
+            overflow-y: visible;
+        }
+
+        .check-item {
+            border-bottom: 1px solid rgba(142, 62, 73, 0.08);
+            padding: 16px 0;
+        }
+        .check-icon {
+            color: var(--primary-rose);
+            font-size: 1.1rem;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="max-w-[480px] mx-auto shadow-2xl bg-white min-h-screen pb-40 text-center">
+
+    <!-- 1. ファーストビュー -->
+    <section class="relative h-[90vh] flex flex-col justify-end p-8 hero-gradient text-white">
+        <div class="absolute top-10 left-8">
+            <div class="flex flex-wrap items-center gap-2 mb-4">
+                <span class="hash-tag">#実績1,000件突破</span>
+                <span class="hash-tag">#最安値保障</span>
+            </div>
+            <!-- 紹介文：サイズアップと太字で強調 -->
+            <p class="text-sm font-bold tracking-[0.15em] mb-1 text-white opacity-100 uppercase font-sans">実効性のある復縁技術「復縁屋さん」</p>
+        </div>
+        
+        <div class="mb-10 text-white text-left">
+            <h1 class="font-bold leading-tight mb-5 drop-shadow-xl font-hannari text-white">
+                <span class="text-xl block mb-2 opacity-95 font-medium tracking-wider text-white text-left">偶然を待つか、</span>
+                <span class="text-5xl block mb-2 leading-tight text-white text-left">
+                    ”<span style="color: var(--highlight-red); text-shadow: 0 0 20px rgba(217, 74, 90, 0.6);">必然</span>”を創るか。
+                </span>
+                <span class="text-xl font-medium block mt-6 italic text-white text-left"><span class="custom-underline">本気で復縁したいあなたへ</span></span>
+            </h1>
+            <p class="text-sm leading-relaxed mb-8 font-light opacity-90 tracking-wide text-white text-left">
+                月々6,300円から。<br>
+                10年以上磨き続けたプロの工作で、<br>
+                もう一度、あの人の隣へ。
+            </p>
+        </div>
+    </section>
+
+    <!-- 2. 悩みへの共感 -->
+    <div class="maze-bg-container">
+        <section class="maze-overlay p-10 flex flex-col items-end min-h-[600px] justify-center">
+            <h2 class="w-full text-center text-rose font-bold text-xl mb-12 tracking-wider font-hannari text-rose">
+                あなたは今、<br>出口のない迷路にいませんか？
+            </h2>
+            
+            <div class="w-[65%] glass-panel rounded-3xl p-6 mr-[-1rem] text-left">
+                <div class="space-y-1">
+                    <div class="check-item flex items-start">
+                        <span class="check-icon">✔</span>
+                        <p class="text-[13px] text-gray-800 font-bold tracking-tight leading-snug">LINEやSNSをブロックされ、連絡手段が一切ない</p>
+                    </div>
+                    <div class="check-item flex items-start">
+                        <span class="check-icon">✔</span>
+                        <p class="text-[13px] text-gray-800 font-bold tracking-tight leading-snug">相手に新しい恋人の影があり、諦めかけている</p>
+                    </div>
+                    <div class="check-item flex items-start">
+                        <span class="check-icon">✔</span>
+                        <p class="text-[13px] text-gray-800 font-bold tracking-tight leading-snug">別れの本当の理由が分からず、どうしても納得できない</p>
+                    </div>
+                    <div class="check-item flex items-start border-none pb-0">
+                        <span class="check-icon">✔</span>
+                        <p class="text-[13px] text-gray-800 font-bold tracking-tight leading-snug">自力で動くほど状況が悪化し、焦りと不安が止まらない</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 警告文 -->
+            <div class="w-full mt-14 text-center font-hannari leading-relaxed">
+                <span class="text-xl md:text-2xl font-bold italic" style="color: var(--primary-rose);">
+                    感情に任せた行動は、<br>
+                    復縁の可能性をゼロにするリスクがあります。
+                </span>
+            </div>
+        </section>
+    </div>
+
+    <!-- 3. 解決の根拠 (プロの声) -->
+    <section class="logic-section-gradient text-white pb-16">
+        <h2 class="text-center font-bold text-3xl md:text-4xl mb-12 tracking-wider font-hannari text-white pt-24 leading-relaxed">
+            復縁は「想い」だけでは<br>実現しない。
+        </h2>
+        
+        <div class="p-8">
+            <div class="professional-quote-container overflow-hidden">
+                <!-- セリフエリア：ノート風背景 -->
+                <div class="notebook-speech-bubble">
+                    <span class="quote-mark-v2 -top-4 -left-2 text-left">“</span>
+                    <p class="text-base md:text-lg font-bold font-hannari relative z-10 text-left text-[#444]">
+                        私たちは占いや気休めのアドバイスではなく、「物理的な行動」による現実の変革を追求しています。<br><br>
+                        最新の行動心理学と長年の現場経験を掛け合わせ、不可能な状況を”必然”へと変えていきます。
+                    </p>
+                </div>
+
+                <!-- 紹介エリア -->
+                <div class="flex items-center gap-5 relative z-10 pt-2 text-left">
+                    <div class="w-24 h-24 rounded-xl overflow-hidden shadow-lg border-2 border-white shrink-0">
+                        <img src="https://lh3.googleusercontent.com/d/1yVkCgFQ8zp2FRvclO7a4BPEm12G_7CUR" alt="三上裕司" class="w-full h-full object-cover">
+                    </div>
+                    <div class="text-left">
+                        <p class="text-[9px] font-bold mb-0.5 tracking-widest uppercase" style="color: var(--burgundy-pink);">Expert Director</p>
+                        <p class="text-[10px] font-bold text-gray-500 mb-0.5">復縁心理学Lab 所長</p>
+                        <p class="text-3xl font-serif-jp font-black tracking-widest text-[#2D2D2D]">三上 裕司</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. 復縁成功までの流れ -->
+    <section class="p-10 bg-white overflow-hidden pb-16">
+        <h2 class="text-center font-bold text-2xl md:text-3xl mb-14 tracking-wider font-serif-jp text-center" style="color: var(--primary-rose);">復縁成功までの5ステップ</h2>
+        
+        <div class="space-y-10 relative mb-12">
+            <div class="flex gap-6 relative step-line text-left">
+                <div class="z-10 w-10 h-10 rounded-full text-white flex items-center justify-center font-bold shadow-lg shrink-0" style="background: linear-gradient(135deg, var(--primary-rose), var(--dark-rose));">1</div>
+                <div>
+                    <h3 class="font-bold text-rose text-base mb-2 tracking-wide font-serif-jp">カウンセリング・状況分析</h3>
+                    <p class="text-xs text-gray-500 leading-relaxed">
+                        専門のカウンセラーが、すれ違いの原因や相手の深層心理を深くヒアリング。最適な第一歩を決定します。
+                    </p>
+                </div>
+            </div>
+            <div class="flex gap-6 relative step-line text-left">
+                <div class="z-10 w-10 h-10 rounded-full text-white flex items-center justify-center font-bold shadow-lg shrink-0" style="background: linear-gradient(135deg, var(--primary-rose), var(--dark-rose));">2</div>
+                <div>
+                    <h3 class="font-bold text-rose text-base mb-2 tracking-wide font-serif-jp">戦略プランの提案・ご契約</h3>
+                    <p class="text-xs text-gray-500 leading-relaxed">
+                        あなたの協力も得ながら、最も確実な「必然」のプランを構築。納得いただいた上でご契約となります。
+                    </p>
+                </div>
+            </div>
+            <div class="flex gap-6 relative step-line text-left">
+                <div class="z-10 w-10 h-10 rounded-full text-white flex items-center justify-center font-bold shadow-lg shrink-0" style="background: linear-gradient(135deg, var(--primary-rose), var(--dark-rose));">3</div>
+                <div>
+                    <h3 class="font-bold text-rose text-base mb-2 tracking-wide font-serif-jp">調査・工作の実行</h3>
+                    <p class="text-xs text-gray-500 leading-relaxed">
+                        専門スタッフが身辺調査を行い、接触ポイントを特定。心理誘導を駆使した工作員が相手の心に働きかけます。
+                    </p>
+                </div>
+            </div>
+            <div class="flex gap-6 relative step-line text-left">
+                <div class="z-10 w-10 h-10 rounded-full text-white flex items-center justify-center font-bold shadow-lg shrink-0" style="background: linear-gradient(135deg, var(--primary-rose), var(--dark-rose));">4</div>
+                <div>
+                    <h3 class="font-bold text-rose text-base mb-2 tracking-wide font-serif-jp">復縁の達成・詳細報告</h3>
+                    <p class="text-xs text-gray-500 leading-relaxed">
+                        復縁成功後、詳細な報告書を作成。今後の二人の関係を維持するための具体的なアドバイスをお伝えします。
+                    </p>
+                </div>
+            </div>
+            <div class="flex gap-6 text-left">
+                <div class="z-10 w-10 h-10 rounded-full text-white flex items-center justify-center font-bold shadow-lg shrink-0" style="background: linear-gradient(135deg, var(--primary-rose), var(--dark-rose));">5</div>
+                <div>
+                    <h3 class="font-bold text-rose text-base mb-2 tracking-wide font-serif-jp">無料アフターサポート</h3>
+                    <p class="text-xs text-gray-500 leading-relaxed">
+                        関係が安定するまで、カウンセラーや工作員が無料で継続的な相談や言動のアドバイスを行います。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. 選ばれる理由 -->
+    <section class="p-10 overflow-hidden relative" style="background: linear-gradient(to bottom, #FFF 0%, #F7F1EB 15%, #E8D5D2 50%, #4B1A21 100%);">
+        <svg class="glitter-icon top-12 left-10" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0l2.5 9.5 9.5 2.5-9.5 2.5-2.5 9.5-2.5-9.5-9.5-2.5 9.5-2.5z"/></svg>
+        <svg class="glitter-icon top-24 right-12 scale-75" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0l2.5 9.5 9.5 2.5-9.5 2.5-2.5 9.5-2.5-9.5-9.5-2.5 9.5-2.5z"/></svg>
+        <svg class="glitter-icon bottom-20 left-14 scale-50" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0l2.5 9.5 9.5 2.5-9.5 2.5-2.5 9.5-2.5-9.5-9.5-2.5 9.5-2.5z"/></svg>
+
+        <div class="text-center mb-12">
+            <h2 class="font-serif-jp text-2xl md:text-3xl tracking-widest text-center" style="color: var(--primary-rose);">選ばれる理由</h2>
+        </div>
+        
+        <div class="space-y-12">
+            <div class="elegant-card p-8 pt-12 relative text-center">
+                <div class="absolute top-2 right-6 elegant-number select-none">01</div>
+                <h3 class="font-serif-jp text-lg mb-4 text-[#5A3E3E] relative z-10">業界最安値への挑戦</h3>
+                <p class="text-xs text-[#7A6E6E] leading-relaxed px-4 relative z-10 text-center">
+                    月々 6,300円〜の分割払いに対応。他社様のお見積りよりさらに割引く「最安値保障」で経済的ハードルを最小限に抑えます。
+                </p>
+            </div>
+            <div class="elegant-card p-8 pt-12 relative text-center">
+                <div class="absolute top-2 right-6 elegant-number select-none">02</div>
+                <h3 class="font-serif-jp text-lg mb-4 text-[#5A3E3E] relative z-10">1,000件以上の成功実績</h3>
+                <p class="text-xs text-[#7A6E6E] leading-relaxed px-4 relative z-10 text-center">
+                    10年以上の歴史で蓄積された実例データ。「何をしてはいけないか」を知り尽くしているからこそ、致命的なミスを回避します。
+                </p>
+            </div>
+            <div class="elegant-card p-8 pt-12 relative text-center">
+                <div class="absolute top-2 right-6 elegant-number select-none">03</div>
+                <h3 class="font-serif-jp text-lg mb-4 text-[#5A3E3E] relative z-10">心理学・脳科学アプローチ</h3>
+                <p class="text-xs text-[#7A6E6E] leading-relaxed px-4 relative z-10 text-center">
+                    拒絶反応を和らげる「心理誘導」を実施。感情論ではなく再現性の高い戦略に基づき、相手が自らあなたを求める環境を構築します。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. 満足度指標 & 利用者の声 -->
+    <section class="pb-24 satisfaction-integrated-bg overflow-hidden">
+        
+        <!-- 満足度バナー：横長コンパクト -->
+        <div class="px-6 pt-12 mb-8 text-center">
+            <div class="satisfaction-banner-v3">
+                <svg class="w-10 h-10 text-[#D4AF37] mx-auto mb-2" fill="currentColor" viewBox="0 0 24 24"><path d="M5 16L3 5l5.5 5L12 4l3.5 6 5.5-5-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/></svg>
+                <p class="text-xs font-black tracking-[0.4em] gold-shining mb-1 uppercase">業界No.1</p>
+                <h3 class="text-2xl font-black text-white mb-4 font-hannari text-center">お客様満足度</h3>
+                <div class="flex items-baseline justify-center gold-shining mb-4 text-center">
+                    <span class="banner-score">98.8</span>
+                    <span class="banner-unit">%</span>
+                </div>
+                <p class="text-[8px] text-white/40 font-medium tracking-wider text-center">※2026年1月時点 利用者アンケート結果</p>
+            </div>
+        </div>
+
+        <div class="text-center mb-6 px-10">
+            <p class="text-xl font-bold text-white italic font-hannari opacity-95 text-center">実際に喜びの声が寄せられています</p>
+        </div>
+        
+        <!-- 横スクロール体験談 -->
+        <div class="scrolling-wrapper hide-scrollbar">
+            <div class="flex gap-12 px-10 pb-8 overflow-y-visible">
+                
+                <!-- Case 1 (20代女性) -->
+                <div class="letter-card snap-center">
+                    <svg class="red-clip-svg" viewBox="0 0 28 40" fill="none">
+                        <path d="M20 10V25C20 28.3137 17.3137 31 14 31C10.6863 31 8 28.3137 8 25V7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7V25C16 26.1046 15.1046 27 14 27C12.8954 27 12 26.1046 12 25V10" stroke="#C04851" stroke-width="3" stroke-linecap="round"/>
+                    </svg>
+                    <div class="polaroid-frame">
+                        <div class="polaroid-img-box">
+                            <img src="https://lh3.googleusercontent.com/d/1wgQPSwCgXZrWzISvNYirjhh-tl6YPA2t" alt="利用者">
+                        </div>
+                    </div>
+                    <div class="pl-28 pt-1 text-left">
+                        <h3 class="font-bold text-base leading-tight mb-2 text-[#C04851] text-left">元彼から「会いたい」の連絡。</h3>
+                        <p class="text-[10px] text-gray-400 font-bold mb-4 text-left">(20代女性：会社員)</p>
+                    </div>
+                    <div class="mt-8 text-[13px] text-[#444] space-y-4 font-medium tracking-wider text-left">
+                        <p>感情的になって彼を追い詰め、LINEもブロック。<span class="pink-marker">絶望していましたが、工作員の方が自然に接触</span>してくれました。</p>
+                        <p><span class="pink-marker">彼の本音を聞き出し、私の変化を伝えてくれた</span></p>
+                        <p>おかげで彼の方からブロックを解除してくれました。</p>
+                    </div>
+                </div>
+
+                <!-- Case 2 (30代女性) -->
+                <div class="letter-card snap-center">
+                    <svg class="red-clip-svg" viewBox="0 0 28 40" fill="none">
+                        <path d="M20 10V25C20 28.3137 17.3137 31 14 31C10.6863 31 8 28.3137 8 25V7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7V25C16 26.1046 15.1046 27 14 27C12.8954 27 12 26.1046 12 25V10" stroke="#C04851" stroke-width="3" stroke-linecap="round"/>
+                    </svg>
+                    <div class="polaroid-frame">
+                        <div class="polaroid-img-box">
+                            <img src="https://lh3.googleusercontent.com/d/1YHYsHw9Lt12S-jYVfPjqrqNkcG3ndjki" alt="利用者">
+                        </div>
+                    </div>
+                    <div class="pl-28 pt-1 text-left">
+                        <h3 class="font-bold text-base leading-tight mb-2 text-[#C04851] text-left">信頼関係の再構築が成功。</h3>
+                        <p class="text-[10px] text-gray-400 font-bold mb-4 text-left">(30代女性：公務員)</p>
+                    </div>
+                    <div class="mt-8 text-[13px] text-[#444] space-y-4 font-medium tracking-wider text-left">
+                        <p>遠距離ですれ違い破局。<span class="pink-marker">アドバイスだけでは解決しない物理的な距離</span>を、工作員の方が埋めてくれました。</p>
+                        <p><span class="pink-marker">彼の生活実態を把握した上での戦略的アプローチ</span></p>
+                        <p>不信感が消え、今は<span class="pink-marker">結婚を前提に同居</span>を始めています。</p>
+                    </div>
+                </div>
+
+                <!-- Case 3 (20代男性) -->
+                <div class="letter-card snap-center">
+                    <svg class="red-clip-svg" viewBox="0 0 28 40" fill="none">
+                        <path d="M20 10V25C20 28.3137 17.3137 31 14 31C10.6863 31 8 28.3137 8 25V7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7V25C16 26.1046 15.1046 27 14 27C12.8954 27 12 26.1046 12 25V10" stroke="#C04851" stroke-width="3" stroke-linecap="round"/>
+                    </svg>
+                    <div class="polaroid-frame">
+                        <div class="polaroid-img-box">
+                            <img src="https://lh3.googleusercontent.com/d/1gnYux6dnpIYhjtTbhjr-kAgJEVv35K6F" alt="利用者">
+                        </div>
+                    </div>
+                    <div class="pl-28 pt-1 text-left">
+                        <h3 class="font-bold text-base leading-tight mb-2 text-[#C04851] text-left">もう一度、隣を歩ける幸せ。</h3>
+                        <p class="text-[10px] text-gray-400 font-bold mb-4 text-left">(20代男性：自営業)</p>
+                    </div>
+                    <div class="mt-8 text-[13px] text-[#444] space-y-4 font-medium tracking-wider text-left">
+                        <p>自分の幼さが原因でフラれ、連絡も遮断。絶望的な状況でしたが、工作によって<span class="pink-marker">第三者から自分の変化を伝えてもらいました</span>。</p>
+                        <p><span class="pink-marker">彼女が「やっぱりこの人しかいない」と思える演出</span></p>
+                        <p>無事に復縁でき、今は将来に向けた話をしています。</p>
+                    </div>
+                </div>
+
+                <!-- Case 4 (40代男性) -->
+                <div class="letter-card snap-center">
+                    <svg class="red-clip-svg" viewBox="0 0 28 40" fill="none">
+                        <path d="M20 10V25C20 28.3137 17.3137 31 14 31C10.6863 31 8 28.3137 8 25V7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7V25C16 26.1046 15.1046 27 14 27C12.8954 27 12 26.1046 12 25V10" stroke="#C04851" stroke-width="3" stroke-linecap="round"/>
+                    </svg>
+                    <div class="polaroid-frame">
+                        <div class="polaroid-img-box">
+                            <img src="https://lh3.googleusercontent.com/d/1IpZQ3L0pvE9tshlN9I6dMCs8FR-depuq" alt="利用者">
+                        </div>
+                    </div>
+                    <div class="pl-28 pt-1 text-left">
+                        <h3 class="font-bold text-base leading-tight mb-2 text-[#C04851] text-left">逆転の復縁が叶いました。</h3>
+                        <p class="text-[10px] text-gray-400 font-bold mb-4 text-left">(40代男性：経営者)</p>
+                    </div>
+                    <div class="mt-8 text-[13px] text-[#444] space-y-4 font-medium tracking-wider text-left">
+                        <p>別れて半年、彼女には新しい彼が。自分ではどうしようもできず、<span class="pink-marker">最後にここへ依頼しました</span>。</p>
+                        <p><span class="pink-marker">彼女に「本当に大切な人」を再認識させる環境作り</span></p>
+                        <p>工作のおかげで、無事にヨリを戻すことができました。心から感謝しています。</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- 誘導文字：位置を上によせて余白を削減 -->
+        <div class="text-center -mt-6 pb-12">
+            <p class="text-[10px] text-white/60 font-bold text-center">← 横にスライドして詳細を確認できます →</p>
+        </div>
+    </section>
+
+    <!-- 7. 料金・安心材料 -->
+    <section class="p-10 bg-white text-center">
+        <div class="p-10 rounded-[2.5rem] glass-panel text-rose relative text-center">
+            <div class="ribbon-title-container text-center">
+                <h2 class="ribbon-title font-hannari text-center text-white">業界最安値への挑戦</h2>
+            </div>
+            <div class="mb-12 relative inline-block text-center mt-4">
+                <div class="price-balloon text-center text-white">分割払いなら</div>
+                <div class="flex items-baseline justify-center gap-1 text-center">
+                    <span class="text-sm text-gray-500 font-bold">月々</span>
+                    <span class="text-6xl font-black text-[#A3333E] tracking-tighter">6,300</span>
+                    <span class="text-xl font-bold text-[#A3333E]">円〜</span>
+                </div>
+            </div>
+            <ul class="text-sm space-y-4 mb-10 font-medium border-b border-rose/10 pb-10 text-left">
+                <li class="flex items-center gap-3 text-left"><span class="w-5 h-5 bg-rose/10 rounded-full flex items-center justify-center text-xs text-rose text-center font-bold">✔</span> 最安値保障（他社見積り持参OK）</li>
+                <li class="flex items-center gap-3 text-left"><span class="w-5 h-5 bg-rose/10 rounded-full flex items-center justify-center text-xs text-rose text-center font-bold">✔</span> 完全秘匿義務の徹底</li>
+                <li class="flex items-center gap-3 text-left"><span class="w-5 h-5 bg-rose/10 rounded-full flex items-center justify-center text-xs text-rose text-center font-bold">✔</span> 相談・見積りは何度でも無料</li>
+            </ul>
+            <div class="text-left text-[9px] text-gray-400 leading-loose space-y-1 opacity-80 font-light text-left">
+                <p>※分割ローンお支払いには別途手数料がかかります。</p>
+                <p>※頭金として一部料金をお支払いいただいております。</p>
+                <p>※調査内容・期間・体制により変動します. 詳細はお問い合わせください。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 最終CTAセクション -->
+    <section class="p-12 text-center" style="background: linear-gradient(to bottom, #FFF 0%, var(--cta-bg) 50%, #FFF 100%);">
+        <h2 class="font-hannari text-3xl md:text-4xl mb-8 leading-tight font-bold text-center" style="color: var(--highlight-red);">
+            今、動き出さなければ<br>
+            時間は止まったまま。
+        </h2>
+        <p class="text-sm text-gray-600 mb-12 leading-loose text-center">
+            迷っている間にも、お相手との距離は<br>
+            刻一刻と離れていくかもしれません。<br>
+            <span class="font-bold text-lg" style="color: var(--highlight-red);">勇気ある一歩が、二人の未来を変える。</span><br>
+            私たちはあなたの味方です。
+        </p>
+        
+        <div class="space-y-16 px-2 text-center">
+            <div class="flex flex-col items-center">
+                <span class="cta-callout text-center">＼ まずは復縁の可能性と具体的な費用を確認 ／</span>
+                <a href="https://fukuenyasan.jp/diagnosis/index.html" class="btn-premium-3d btn-yellow py-5 text-2xl shadow-xl w-full floating-action">
+                    <span class="font-hannari text-center text-[#5C4300]">無料復縁診断を受ける</span>
+                </a>
+            </div>
+            <div class="flex flex-col items-center">
+                <span class="cta-callout text-center">＼ 今すぐ専門家に具体的な相談を始める ／</span>
+                <a href="https://line.me/R/ti/p/@fukuenyasan" class="btn-premium-3d btn-green text-2xl flex-row gap-3 shadow-xl py-5 w-full floating-action">
+                    <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M24 10.304c0-4.577-4.705-8.304-10.5-8.304s-10.5 3.727-10.5 8.304c0 4.1 3.756 7.532 8.816 8.169l-2.251 2.251c-.146.146-.146.382 0 .528.073.073.169.11.264.11.096 0 .191-.037.264-.11l3.541-3.541.666.038c5.795 0 10.5-3.727 10.5-8.304z"/></svg>
+                    <span class="font-hannari text-center text-white">LINEで無料相談する</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="p-10 bg-white border-t border-gray-100">
+        <h2 class="text-center font-bold text-xl mb-10 text-rose tracking-wider font-serif-jp text-center text-center" style="color: var(--primary-rose);">よくあるご質問</h2>
+        <div class="space-y-4">
+            <details class="bg-white p-5 rounded-2xl shadow-sm group border border-gray-100">
+                <summary class="list-none font-bold text-sm cursor-pointer flex justify-between items-center text-gray-700">全国どこでも対応してもらえますか？<span class="text-rose group-open:rotate-180 transition-transform text-center font-bold">▼</span></summary>
+                <p class="text-xs text-gray-500 mt-5 leading-relaxed bg-gray-50 p-4 rounded-xl text-left">はい、全国どこでも対応可能です。各地域に精通したスタッフがおりますので、地方にお住まいの方や、お相手が遠方へ引っ越してしまった場合でも安心してご相談ください。</p>
+            </details>
+            <details class="bg-white p-5 rounded-2xl shadow-sm group border border-gray-100">
+                <summary class="list-none font-bold text-sm cursor-pointer flex justify-between items-center text-gray-700">オンラインでの相談も可能ですか？<span class="text-rose group-open:rotate-180 transition-transform text-center font-bold">▼</span></summary>
+                <p class="text-xs text-gray-500 mt-5 leading-relaxed bg-gray-50 p-4 rounded-xl text-left">はい、ZoomやLINE通話等を利用したオンライン相談も無料で承っております。「家を空けられない」「まずは気軽に話を聞きたい」という方にも最適です。</p>
+            </details>
+            <details class="bg-white p-5 rounded-2xl shadow-sm group border border-gray-100">
+                <summary class="list-none font-bold text-sm cursor-pointer flex justify-between items-center text-gray-700">本当に相手にバレませんか？<span class="text-rose group-open:rotate-180 transition-transform text-center font-bold">▼</span></summary>
+                <p class="text-xs text-gray-500 mt-5 leading-relaxed bg-gray-50 p-4 rounded-xl text-left">10年以上の実績の中で発覚事例はありません。プロの工作員が心理学に基づいた極めて自然な接触を演出するため、ご安心ください。</p>
+            </details>
+            <details class="bg-white p-5 rounded-2xl shadow-sm group border border-gray-100">
+                <summary class="list-none font-bold text-sm cursor-pointer flex justify-between items-center text-gray-700">復縁工作に違法性はありませんか？<span class="text-rose group-open:rotate-180 transition-transform text-center font-bold">▼</span></summary>
+                <p class="text-xs text-gray-500 mt-5 leading-relaxed bg-gray-50 p-4 rounded-xl text-left">当社は探偵業法に基づき適正に運営しております。公序良俗に反する行為などは一切お受けしておりませんので、安心してご利用いただけます。</p>
+            </details>
+            <details class="bg-white p-5 rounded-2xl shadow-sm group border border-gray-100">
+                <summary class="list-none font-bold text-sm cursor-pointer flex justify-between items-center text-gray-700">成功率はどのくらいですか？<span class="text-rose group-open:rotate-180 transition-transform text-center font-bold">▼</span></summary>
+                <p class="text-xs text-gray-500 mt-5 leading-relaxed bg-gray-50 p-4 rounded-xl text-left">成功率はケースにより異なりますが、事前に無料診断を行い、成功の見込みが極めて低い場合は正直にお伝えしております。</p>
+            </details>
+            <details class="bg-white p-5 rounded-2xl shadow-sm group border border-gray-100">
+                <summary class="list-none font-bold text-sm cursor-pointer flex justify-between items-center text-gray-700">工作の期間はどのくらいかかりますか？<span class="text-rose group-open:rotate-180 transition-transform text-center font-bold">▼</span></summary>
+                <p class="text-xs text-gray-500 mt-5 leading-relaxed bg-gray-50 p-4 rounded-xl text-left">平均的には2ヶ月〜4ヶ月程度の期間をいただくケースが多いです。お相手の警戒心や状況に合わせて、最も成功率の高いペースで進めます。</p>
+            </details>
+            <details class="bg-white p-5 rounded-2xl shadow-sm group border border-gray-100">
+                <summary class="list-none font-bold text-sm cursor-pointer flex justify-between items-center text-gray-700">匿名で相談することは可能ですか？<span class="text-rose group-open:rotate-180 transition-transform text-center font-bold">▼</span></summary>
+                <p class="text-xs text-gray-500 mt-5 leading-relaxed bg-gray-50 p-4 rounded-xl text-left">はい、初回の無料診断・相談段階ではニックネーム等でも構いません。ご契約時には身分証が必要となりますが、秘密保持義務は徹底しております。</p>
+            </details>
+            <details class="bg-white p-5 rounded-2xl shadow-sm group border border-gray-100">
+                <summary class="list-none font-bold text-sm cursor-pointer flex justify-between items-center text-gray-700">相談だけでも大丈夫でしょうか？<span class="text-rose group-open:rotate-180 transition-transform text-center font-bold">▼</span></summary>
+                <p class="text-xs text-gray-500 mt-5 leading-relaxed bg-gray-50 p-4 rounded-xl text-left">もちろんです。相談だけでお悩みが解決するケースもございます。無理な勧誘は一切ございませんので、お気軽にご連絡ください。</p>
+            </details>
+        </div>
+    </section>
+
+    <!-- 運営会社情報 -->
+    <section class="p-10 bg-gray-50 text-[10px] text-gray-500 leading-relaxed border-t border-gray-100 text-left text-center">
+        <div class="max-w-sm mx-auto space-y-4 text-left">
+            <h2 class="text-xs font-bold border-b border-gray-200 pb-2 text-gray-600 uppercase tracking-widest text-center text-rose text-center">Company Profile</h2>
+            <dl class="grid grid-cols-3 gap-x-4 gap-y-2">
+                <dt class="font-bold text-gray-600 text-left">サービス名</dt><dd class="col-span-2 text-left">復縁屋さん</dd>
+                <dt class="font-bold text-gray-600 text-left">商号</dt><dd class="col-span-2 text-left">株式会社Azucar</dd>
+                <dt class="font-bold text-gray-600 text-left">法人番号</dt><dd class="col-span-2 text-left">7011601025568</dd>
+                <dt class="font-bold text-gray-600 text-left">所在地</dt><dd class="col-span-2 text-left">〒176-0025 東京都練馬区中村南2丁目21番15号</dd>
+                <dt class="font-bold text-gray-600 text-left">連絡先</dt><dd class="col-span-2 font-bold text-gray-700 text-left font-sans">0120-972-119</dd>
+                <dt class="font-bold text-gray-600 text-left">資本金</dt><dd class="col-span-2 text-left">5,000,000円</dd>
+                <dt class="font-bold text-gray-600 text-left text-left text-left">探偵業届出</dt><dd class="col-span-2 text-left text-left text-left">第30210334号</dd>
+            </dl>
+        </div>
+    </section>
+
+    <!-- 固定CTA -->
+    <div class="fixed bottom-0 left-0 right-0 max-w-[480px] mx-auto glass-morphism-header px-5 py-5 z-50 shadow-[0_-10px_30px_rgba(0,0,0,0.1)]">
+        <div class="flex gap-4 items-stretch h-16">
+            <a href="https://fukuenyasan.jp/diagnosis/index.html" class="flex-1 btn-premium-3d btn-yellow floating-action shadow-lg">
+                <span class="text-[9px] mb-0.5 font-normal leading-none opacity-80 text-center">2分で完了！</span>
+                <span class="font-hannari leading-none text-xl tracking-tighter text-center text-[#5C4300]">無料復縁診断</span>
+            </a>
+            <a href="https://line.me/R/ti/p/@fukuenyasan" class="flex-1 btn-premium-3d btn-green floating-action shadow-lg">
+                <div class="flex items-center gap-1.5 text-left">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 10.304c0-4.577-4.705-8.304-10.5-8.304s-10.5 3.727-10.5 8.304c0 4.1 3.756 7.532 8.816 8.169l-2.251 2.251c-.146.146-.146.382 0 .528.073.073.169.11.264.11.096 0 .191-.037.264-.11l3.541-3.541.666.038c5.795 0 10.5-3.727 10.5-8.304z"/></svg>
+                    <div class="text-left leading-tight text-left">
+                        <p class="text-[8px] font-normal opacity-90 text-left">24時間受付</p>
+                        <p class="font-hannari text-xl text-left text-white">LINE相談</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <footer class="p-10 text-center text-gray-400 text-[10px] mb-20 bg-white border-t border-gray-50 text-center">
+        <p class="mb-2 text-center font-sans">株式会社Azucar</p>
+        <p class="text-center font-sans text-center">© 2024 Fukuenyasan All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, observerOptions);
+        
+        // アニメーション対象のリスト
+        document.querySelectorAll('section, .elegant-card, .check-item, .step-line, .glass-panel, .professional-quote-container, .letter-card').forEach(el => {
+            el.classList.add('fade-in');
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
