@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>お問い合わせ・無料診断フォーム | 一般社団法人口コミ対策センター</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              navy: '#0B2240',
+              blue: '#004494',
+              blueHover: '#003370',
+              gold: '#E5A93C',
+              goldHover: '#CD932B',
+              lightBg: '#F8F9FA',
+              footerBg: '#F4F4F2',
+              inputBg: '#FFFFFF'
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="text-gray-800 bg-brand-lightBg antialiased font-sans leading-relaxed pb-20">
+
+  <header class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm">
+    <div class="container mx-auto px-4 md:px-8 py-3.5 flex justify-between items-center max-w-6xl">
+      <a href="../contact/" class="flex items-center gap-2">
+        <img src="../assets/img/brand/logo_header.png" alt="一般社団法人 口コミ対策センター" class="h-8 md:h-9 object-contain">
+        <div class="flex flex-col text-left">
+          <span class="text-xs md:text-sm font-extrabold text-brand-navy tracking-wider leading-none">一般社団法人</span>
+          <span class="text-sm md:text-base font-black text-brand-navy tracking-widest mt-0.5 leading-none">口コミ対策センター</span>
+          <span class="text-[8px] text-gray-400 font-medium tracking-wide mt-0.5 leading-none">Review Risk Management Center</span>
+        </div>
+      </a>
+      <button class="flex items-center gap-1.5 text-xs font-bold text-brand-navy group focus:outline-none" aria-label="メニューを開く">
+        <div class="flex flex-col gap-1 w-4">
+          <span class="h-0.5 w-full bg-brand-navy group-hover:bg-brand-blue transition"></span>
+          <span class="h-0.5 w-full bg-brand-navy group-hover:bg-brand-blue transition"></span>
+        </div>
+        <span class="tracking-wider text-[10px] md:text-xs">MENU</span>
+      </button>
+    </div>
+  </header>
+
+  <section class="pt-14 pb-8 text-center max-w-3xl mx-auto px-4">
+    <h1 class="text-xl md:text-3xl font-bold text-brand-navy tracking-wide">
+      お問い合わせ
+    </h1>
+    <div class="mt-4 text-xs text-gray-500 leading-relaxed max-w-xl mx-auto">
+      <p>※ご回答内容を確認後、</p>
+      <p>担当の専門スタッフより最短で即日中にご連絡を差し上げます。</p>
+    </div>
+  </section>
+
+  <main class="container mx-auto px-4 md:px-6 relative z-20 max-w-2xl mb-20">
+    <div class="bg-white rounded-[24px] md:rounded-[32px] p-6 sm:p-10 md:p-12 border border-gray-100 shadow-sm">
+      
+      <form action="#" method="POST" class="space-y-8 text-xs md:text-sm">
+        
+        <div class="space-y-2">
+          <label class="block font-bold text-gray-700">会社・屋号名</label>
+          <input type="text" placeholder="会社名"
+                 class="w-full bg-white border border-gray-200 rounded-md px-4 py-3 text-gray-800 placeholder-gray-300 focus:outline-none focus:border-brand-blue transition text-xs">
+        </div>
+
+        <div class="space-y-3">
+          <label class="block font-bold text-gray-700">
+            現在お悩みの内容<span class="text-red-500 ml-1">*</span>
+          </label>
+          <div class="space-y-2.5 pl-1">
+            <label class="flex items-start gap-2.5 cursor-pointer text-gray-600 font-medium leading-normal">
+              <input type="checkbox" name="trouble" class="mt-0.5 rounded border-gray-300 text-brand-blue focus:ring-0 w-3.5 h-3.5">
+              <span>Googleマップの低評価や悪質な口コミを何とかしたい</span>
+            </label>
+            <label class="flex items-start gap-2.5 cursor-pointer text-gray-600 font-medium leading-normal">
+              <input type="checkbox" name="trouble" class="mt-0.5 rounded border-gray-300 text-brand-blue focus:ring-0 w-3.5 h-3.5">
+              <span>掲示板や口コミサイトに気になる書き込みがある</span>
+            </label>
+            <label class="flex items-start gap-2.5 cursor-pointer text-gray-600 font-medium leading-normal">
+              <input type="checkbox" name="trouble" class="mt-0.5 rounded border-gray-300 text-brand-blue focus:ring-0 w-3.5 h-3.5">
+              <span>投稿した人物を特定したい（発信者情報開示）</span>
+            </label>
+            <label class="flex items-start gap-2.5 cursor-pointer text-gray-600 font-medium leading-normal">
+              <input type="checkbox" name="trouble" class="mt-0.5 rounded border-gray-300 text-brand-blue focus:ring-0 w-3.5 h-3.5">
+              <span>検索結果・検索サジェストにネガティブな情報が表示される</span>
+            </label>
+            <label class="flex items-start gap-2.5 cursor-pointer text-gray-600 font-medium leading-normal">
+              <input type="checkbox" name="trouble" class="mt-0.5 rounded border-gray-300 text-brand-blue focus:ring-0 w-3.5 h-3.5">
+              <span>風評被害で、問い合わせや採用応募が減っている気がする</span>
+            </label>
+            <label class="flex items-start gap-2.5 cursor-pointer text-gray-600 font-medium leading-normal">
+              <input type="checkbox" name="trouble" class="mt-0.5 rounded border-gray-300 text-brand-blue focus:ring-0 w-3.5 h-3.5">
+              <span>とにかく急いで対応してほしい</span>
+            </label>
+            <label class="flex items-start gap-2.5 cursor-pointer text-gray-600 font-medium leading-normal">
+              <input type="checkbox" name="trouble" class="mt-0.5 rounded border-gray-300 text-brand-blue focus:ring-0 w-3.5 h-3.5">
+              <span>まず何から相談すべきか分からず、専門家の意見が聞きたい</span>
+            </label>
+            <label class="flex items-start gap-2.5 cursor-pointer text-gray-600 font-medium leading-normal">
+              <input type="checkbox" name="trouble" class="mt-0.5 rounded border-gray-300 text-brand-blue focus:ring-0 w-3.5 h-3.5">
+              <span>まずは現状のネット上の評価状況とリスクを知りたい</span>
+            </label>
+            <label class="flex items-start gap-2.5 cursor-pointer text-gray-600 font-medium leading-normal">
+              <input type="checkbox" name="trouble" class="mt-0.5 rounded border-gray-300 text-brand-blue focus:ring-0 w-3.5 h-3.5">
+              <span>その他</span>
+            </label>
+          </div>
+          <input type="text" placeholder="特定の具体的な内容"
+                 class="w-full bg-white border border-gray-200 rounded-md px-4 py-3 text-gray-800 placeholder-gray-300 focus:outline-none focus:border-brand-blue transition text-xs mt-1">
+        </div>
+
+        <div class="space-y-2">
+          <label class="block font-bold text-gray-700">
+            ご担当者名<span class="text-red-500 ml-1">*</span>
+          </label>
+          <input type="text" placeholder="ご担当者名" required
+                 class="w-full bg-white border border-gray-200 rounded-md px-4 py-3 text-gray-800 placeholder-gray-300 focus:outline-none focus:border-brand-blue transition text-xs">
+        </div>
+
+        <div class="space-y-2">
+          <label class="block font-bold text-gray-700">
+            ご担当者様メールアドレス<span class="text-red-500 ml-1">*</span>
+          </label>
+          <input type="email" placeholder="メールアドレス" required
+                 class="w-full bg-white border border-gray-200 rounded-md px-4 py-3 text-gray-800 placeholder-gray-300 focus:outline-none focus:border-brand-blue transition text-xs">
+        </div>
+
+        <div class="space-y-2">
+          <label class="block font-bold text-gray-700">
+            ご担当者様電話番号<span class="text-red-500 ml-1">*</span>
+          </label>
+          <input type="tel" placeholder="電話番号" required
+                 class="w-full bg-white border border-gray-200 rounded-md px-4 py-3 text-gray-800 placeholder-gray-300 focus:outline-none focus:border-brand-blue transition text-xs">
+        </div>
+
+        <div class="space-y-4">
+          <label class="block font-bold text-gray-700">
+            連絡希望日時<span class="text-red-500 ml-1">*</span>
+          </label>
+          <div class="flex flex-col sm:flex-row gap-3 sm:gap-6 pl-1">
+            <label class="flex items-center gap-2 cursor-pointer text-gray-600 font-medium">
+              <input type="radio" name="contact_time" checked class="border-gray-300 text-brand-blue focus:ring-0 w-3.5 h-3.5">
+              <span>なるべく早く折り返し希望</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer text-gray-600 font-medium">
+              <input type="radio" name="contact_time" class="border-gray-300 text-brand-blue focus:ring-0 w-3.5 h-3.5">
+              <span>資料請求希望</span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer text-gray-600 font-medium">
+              <input type="radio" name="contact_time" class="border-gray-300 text-brand-blue focus:ring-0 w-3.5 h-3.5">
+              <span>日時を指定したい</span>
+            </label>
+          </div>
+          
+          <p class="text-[11px] text-brand-blue font-medium pl-1">
+            「日時を指定したい」を選んだ場合は、ご希望の日時を最大3つご入力ください。
+          </p>
+
+          <div class="space-y-4 bg-gray-50/60 p-4 rounded-xl border border-gray-100 text-xs">
+            <div class="space-y-1.5">
+              <span class="font-bold text-gray-700 block">第一希望</span>
+              <div class="flex flex-wrap items-center gap-2">
+                <input type="date" class="bg-white border border-gray-200 rounded px-2 py-2 text-gray-600 w-full sm:w-auto">
+                <input type="time" placeholder="10:00" class="bg-white border border-gray-200 rounded px-2 py-2 text-gray-500 w-[45%] sm:w-28 text-center">
+                <span class="text-gray-400">～</span>
+                <input type="time" placeholder="12:00" class="bg-white border border-gray-200 rounded px-2 py-2 text-gray-500 w-[45%] sm:w-28 text-center">
+              </div>
+            </div>
+            <div class="space-y-1.5">
+              <span class="font-bold text-gray-700 block">第二希望</span>
+              <div class="flex flex-wrap items-center gap-2">
+                <input type="date" class="bg-white border border-gray-200 rounded px-2 py-2 text-gray-600 w-full sm:w-auto">
+                <input type="time" placeholder="10:00" class="bg-white border border-gray-200 rounded px-2 py-2 text-gray-500 w-[45%] sm:w-28 text-center">
+                <span class="text-gray-400">～</span>
+                <input type="time" placeholder="12:00" class="bg-white border border-gray-200 rounded px-2 py-2 text-gray-500 w-[45%] sm:w-28 text-center">
+              </div>
+            </div>
+            <div class="space-y-1.5">
+              <span class="font-bold text-gray-700 block">第三希望</span>
+              <div class="flex flex-wrap items-center gap-2">
+                <input type="date" class="bg-white border border-gray-200 rounded px-2 py-2 text-gray-600 w-full sm:w-auto">
+                <input type="time" placeholder="10:00" class="bg-white border border-gray-200 rounded px-2 py-2 text-gray-500 w-[45%] sm:w-28 text-center">
+                <span class="text-gray-400">～</span>
+                <input type="time" placeholder="12:00" class="bg-white border border-gray-200 rounded px-2 py-2 text-gray-500 w-[45%] sm:w-28 text-center">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <label class="block font-bold text-gray-700">
+            当社のサービスをどこで知りましたか<span class="text-red-500 ml-1">*</span>
+          </label>
+          <input type="text" placeholder="はがき、インターネット検索、知人の紹介 等" required
+                 class="w-full bg-white border border-gray-200 rounded-md px-4 py-3 text-gray-800 placeholder-gray-300 focus:outline-none focus:border-brand-blue transition text-xs">
+        </div>
+
+        <div class="flex items-center justify-center pt-2">
+          <label class="flex items-center gap-2 cursor-pointer select-none text-xs text-gray-600 font-medium">
+            <input type="checkbox" required class="w-3.5 h-3.5 rounded border-gray-300 text-brand-blue focus:ring-0">
+            <span>
+              <a href="../contact/" class="text-brand-blue underline hover:text-brand-navy transition">プライバシーポリシー</a> に同意する
+            </span>
+          </label>
+        </div>
+
+        <div class="flex justify-center pt-2">
+          <button type="submit" 
+                  class="w-full bg-brand-blue hover:bg-brand-blueHover text-white font-bold py-3.5 rounded transition duration-200 tracking-wider shadow text-center">
+            送信する
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+  </main>
+
+  <footer class="bg-brand-footerBg text-gray-600 pt-16 pb-24 md:pb-16 text-xs border-t border-gray-200/60">
+    <div class="container mx-auto px-6 max-w-5xl">
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 items-start mb-12">
+        <div class="md:col-span-1 flex flex-col items-start gap-3">
+          <img src="../assets/img/brand/logo_footer.png" alt="口コミ対策センターロゴ" class="h-10 object-contain">
+          <div class="text-left">
+            <p class="font-black text-sm text-brand-navy tracking-wider">一般社団法人</p>
+            <p class="font-black text-base text-brand-navy tracking-widest mt-0.5">口コミ対策センター</p>
+            <p class="text-[9px] text-gray-400 font-medium tracking-wide mt-1">Review Risk Management Center</p>
+          </div>
+        </div>
+
+        <div class="md:col-span-2 grid grid-cols-2 gap-6 md:gap-4 text-left font-medium text-gray-600 text-[11px] md:text-xs">
+          <div class="space-y-3">
+            <a href="../contact/" class="block hover:text-brand-blue hover:underline transition">ホーム</a>
+            <a href="../contact/" class="block hover:text-brand-blue hover:underline transition">代表者挨拶</a>
+            <a href="../contact/" class="block hover:text-brand-blue hover:underline transition">当センターについて</a>
+            <a href="../contact/" class="block hover:text-brand-blue hover:underline transition">サービス内容</a>
+            <a href="../contact/" class="block hover:text-brand-blue hover:underline transition">お問い合わせ</a>
+          </div>
+          <div class="space-y-3">
+            <a href="../contact/" class="block hover:text-brand-blue hover:underline transition">プライバシーポリシー</a>
+            <a href="../contact/" class="block hover:text-brand-blue hover:underline transition">ソーシャルメディアポリシー</a>
+            <a href="../contact/" class="block hover:text-brand-blue hover:underline transition">情報セキュリティ基本方針</a>
+            <a href="../contact/" class="block hover:text-brand-blue hover:underline transition">採用情報</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-t border-gray-300/60 pt-6 text-center text-[10px] text-gray-400 tracking-wide">
+        <p>©2025 一般社団法人口コミ対策センター</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <div class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-t border-gray-200 shadow-2xl px-4 py-3 flex justify-between items-center z-50 md:max-w-xl md:mx-auto md:rounded-t-2xl">
+    <div class="flex items-center gap-2 pl-1">
+      <img src="../assets/img/brand/logo_fixed_bar.png" alt="ロゴ" class="h-5 w-auto object-contain">
+      <div class="flex flex-col text-left">
+        <span class="text-[8px] font-bold text-brand-navy leading-none">一般社団法人</span>
+        <span class="text-[10px] font-black text-brand-navy tracking-tight leading-none mt-0.5">口コミ対策センター</span>
+      </div>
+    </div>
+    <a href="../contact/" class="bg-brand-gold hover:bg-brand-goldHover text-white font-bold text-xs md:text-sm px-5 py-2.5 rounded-lg shadow-md transition duration-200 tracking-wider flex items-center gap-2">
+      <span class="text-[9px] bg-white/20 px-1.5 py-0.5 rounded-sm">簡単1分で完了!</span>
+      <span>無料診断・お申し込み</span>
+      <span class="text-[10px] font-bold">&gt;</span>
+    </a>
+  </div>
+
+<script src="../assets/js/editor.js?v=20260629a" data-editor-skip></script>
+</body>
+</html>

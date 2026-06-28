@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>無料診断のご依頼ありがとうございました | 一般社団法人口コミ対策センター</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              navy: '#0B2240',
+              blue: '#00539C',
+              lightBg: '#F8F9FA',
+              lineGreen: '#06C755',
+              lineGreenHover: '#05B34C'
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="text-gray-800 bg-brand-lightBg antialiased font-sans leading-relaxed flex flex-col min-h-screen">
+
+  <header class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm">
+    <div class="container mx-auto px-4 md:px-8 py-3.5 flex justify-between items-center max-w-6xl">
+      <a href="../contact/" class="flex items-center gap-2">
+        <img src="../assets/img/brand/logo_header.png" alt="一般社団法人 口コミ対策センター" class="h-8 md:h-9 object-contain">
+        <div class="flex flex-col text-left">
+          <span class="text-xs md:text-sm font-extrabold text-brand-navy tracking-wider leading-none">一般社団法人</span>
+          <span class="text-sm md:text-base font-black text-brand-navy tracking-widest mt-0.5 leading-none">口コミ対策センター</span>
+          <span class="text-[8px] text-gray-400 font-medium tracking-wide mt-0.5 leading-none">Review Risk Management Center</span>
+        </div>
+      </a>
+      <button class="flex items-center gap-1.5 text-xs font-bold text-brand-navy group focus:outline-none" aria-label="メニューを開く">
+        <div class="flex flex-col gap-1 w-4">
+          <span class="h-0.5 w-full bg-brand-navy group-hover:bg-brand-blue transition"></span>
+          <span class="h-0.5 w-full bg-brand-navy group-hover:bg-brand-blue transition"></span>
+        </div>
+        <span class="tracking-wider text-[10px] md:text-xs">MENU</span>
+      </button>
+    </div>
+  </header>
+
+  <main class="flex-grow flex items-center justify-center pt-16 pb-24 px-4">
+    <div class="text-center max-w-2xl mx-auto w-full px-4">
+      
+      <h1 class="text-2xl md:text-4xl font-black text-brand-navy tracking-wide leading-[1.4] mb-8">
+        無料診断のご依頼<br>
+        ありがとうございます
+      </h1>
+      
+      <p class="text-xs md:text-sm text-gray-600 font-medium tracking-wide mb-12">
+        ３営業日以内にご返信差し上げますので、しばらくお待ちください。
+      </p>
+      
+      <div class="space-y-6">
+        <p class="text-xs md:text-sm text-gray-500 leading-loose max-w-md mx-auto">
+          なお公式LINEでは、24時間専門家と無料でメッセージのやり取りが可能です。<br>
+          お急ぎの方はこちらからご相談ください。
+        </p>
+        
+        <div class="flex justify-center">
+          <a href="../contact/" class="inline-flex items-center justify-center gap-2 bg-brand-lineGreen hover:bg-brand-lineGreenHover text-white font-bold text-sm md:text-base px-10 py-4 rounded-full shadow-lg transition duration-200 tracking-wider w-full max-w-md transform hover:-translate-y-0.5">
+            <img src="../assets/img/brand/icon_line.png" alt="LINE" class="w-5 h-5 object-contain brightness-0 invert">
+            <span>LINEで今すぐ相談する</span>
+          </a>
+        </div>
+        
+        <p class="text-[11px] text-gray-400">
+          ※友だち追加後、自動メッセージが届きます。
+        </p>
+      </div>
+
+    </div>
+  </main>
+
+<script src="../assets/js/editor.js?v=20260629a" data-editor-skip></script>
+</body>
+</html>

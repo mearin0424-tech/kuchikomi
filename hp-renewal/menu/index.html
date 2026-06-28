@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>メニュー | 一般社団法人口コミ対策センター</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              navy: '#0B2240',
+              blue: '#00539C',
+              blueHover: '#00427D',
+              grayBg: '#F8F9FA'
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-400 min-h-screen flex justify-center items-start font-sans antialiased">
+
+  <div class="w-full max-w-md md:max-w-xl bg-transparent min-h-screen flex flex-col relative mx-auto shadow-2xl">
+    
+    <div class="h-32 bg-gray-400/80 backdrop-blur-sm relative flex justify-end p-4">
+      <button class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-black/10 transition duration-200" aria-label="メニューを閉じる">
+        <i class="fa-solid fa-xmark text-lg text-gray-700 opacity-80"></i>
+      </button>
+    </div>
+
+    <div class="bg-white px-6 py-4 flex-grow">
+      <nav class="divide-y divide-gray-100">
+        <a href="../contact/" class="block py-4 text-sm font-bold text-gray-800 hover:text-brand-blue transition tracking-wider">
+          ホーム
+        </a>
+        <a href="../contact/" class="block py-4 text-sm font-bold text-gray-800 hover:text-brand-blue transition tracking-wider">
+          当センターについて
+        </a>
+        <a href="../contact/" class="block py-4 text-sm font-bold text-gray-800 hover:text-brand-blue transition tracking-wider">
+          代表者挨拶
+        </a>
+        <a href="../contact/" class="block py-4 text-sm font-bold text-gray-800 hover:text-brand-blue transition tracking-wider">
+          サービス紹介
+        </a>
+        <a href="../contact/" class="block py-4 text-sm font-bold text-gray-800 hover:text-brand-blue transition tracking-wider">
+          採用情報
+        </a>
+      </nav>
+
+      <div class="pt-6 pb-4">
+        <a href="../contact/" class="inline-block bg-brand-blue hover:bg-brand-blueHover text-white text-xs font-bold px-6 py-3 rounded shadow transition duration-200 tracking-wider">
+          無料診断・お申し込み
+        </a>
+      </div>
+    </div>
+
+    <div class="bg-brand-grayBg px-6 py-8 border-t border-gray-100 flex flex-col gap-3">
+      <a href="../contact/" class="text-[11px] font-medium text-gray-500 hover:text-brand-blue transition tracking-wide">
+        プライバシーポリシー
+      </a>
+      <a href="../contact/" class="text-[11px] font-medium text-gray-500 hover:text-brand-blue transition tracking-wide">
+        ソーシャルメディアポリシー
+      </a>
+      <a href="../contact/" class="text-[11px] font-medium text-gray-500 hover:text-brand-blue transition tracking-wide">
+        情報セキュリティ基本方針
+      </a>
+    </div>
+
+  </div>
+
+<script src="../assets/js/editor.js?v=20260629a" data-editor-skip></script>
+</body>
+</html>

@@ -1,10 +1,15 @@
 (() => {
   const navToggle = document.querySelector('.nav-toggle');
   const navList = document.querySelector('.global-nav-list');
+  const navClose = document.querySelector('.nav-close');
   if (navToggle && navList) {
     navToggle.addEventListener('click', () => {
       const open = navList.classList.toggle('is-open');
       navToggle.setAttribute('aria-expanded', String(open));
+    });
+    if (navClose) navClose.addEventListener('click', () => {
+      navList.classList.remove('is-open');
+      navToggle.setAttribute('aria-expanded', 'false');
     });
     navList.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
       navList.classList.remove('is-open');
