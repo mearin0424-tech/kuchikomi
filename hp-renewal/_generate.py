@@ -85,6 +85,60 @@ INDUSTRIES = [
     ("bridal", "ブライダル", "結婚式場・フォト・プランナー"),
 ]
 
+# 業種別の成功事例（守秘義務の範囲内・icon, タイトル, 概要）
+CASES = {
+    "restaurant": [
+        ("store", "Googleマップ★1レビューの是正", "事実無根の名指し中傷★1レビュー6件のうち4件が削除。検索流入が施策前比+38%まで回復。"),
+        ("map", "食べログ低評価クチコミへの対応", "来店実態のない不自然な低評価投稿について、媒体規約に基づく申請で複数件を是正。予約数が回復基調に。"),
+        ("alert", "元従業員によると見られる連続投稿の沈静化", "退職者と見られる誹謗投稿の拡散を早期検知し、初動対応で炎上を未然に回避。"),
+    ],
+    "medical": [
+        ("medical", "医師個人名サジェストの浄化", "医師個人名＋ネガティブワードのサジェスト固定化を、3か月で実質非表示化。"),
+        ("shield", "医療広告規制に配慮した口コミ是正", "医療広告ガイドラインに抵触しない範囲で、事実誤認レビューの訂正・削除申請を実施。"),
+        ("eye", "再発防止モニタリングの導入", "是正後の再投稿を24時間監視。兆候検知から即時対応する体制を構築。"),
+    ],
+    "beauty": [
+        ("map", "競合と疑われる連続投稿への対応", "短期間に集中投稿された不審レビュー群について、規約準拠の申請で大半が削除。"),
+        ("store", "ホットペッパービューティー低評価対策", "施術実態と乖離した低評価クチコミへの是正申請で、店舗評価スコアが改善。"),
+        ("chart", "サロン名サジェストの改善", "サロン名＋ネガティブサジェストを中長期施策で押し下げ、新規予約の離脱を抑制。"),
+    ],
+    "realestate": [
+        ("shield", "会社名＋ネガティブサジェスト対策", "会社名に付随するネガティブな検索候補を段階的に浄化。問い合わせ数の低下に歯止め。"),
+        ("store", "Googleマップの入居者トラブル投稿対応", "事実確認の取れない一方的な投稿について、規約に基づき是正申請。"),
+        ("alert", "地域掲示板の風評スレッド監視", "地域掲示板上の名指し投稿を継続監視し、拡散を抑止。"),
+    ],
+    "legal": [
+        ("shield", "巨大掲示板の名指しスレッド対策", "巨大掲示板上の名指しスレッドについて、運営規約に基づく申請で削除に成功。"),
+        ("medical", "代表弁護士名サジェストの浄化", "代表弁護士名＋ネガティブワードの検索候補を、3か月で実質非表示化。"),
+        ("eye", "相談検討者が見る検索面の健全化", "依頼検討者が目にする検索結果を健全化し、受任機会の損失を防止。"),
+    ],
+    "retail": [
+        ("store", "ECモール低評価レビューへの対応", "競合や愉快犯によると見られる不自然な低評価について、媒体規約に基づき是正申請。"),
+        ("chart", "ブランド名サジェストの改善", "ブランド名＋ネガティブな関連キーワードを中長期施策で押し下げ。"),
+        ("globe", "海外ミラーサイトの転載対応", "海外サーバー上に転載された誹謗コンテンツへ、現地規約準拠で対応。"),
+    ],
+    "school": [
+        ("shield", "講師個人名の中傷投稿対策", "講師個人を名指しする投稿について、規約に基づく申請で是正。"),
+        ("store", "塾名の口コミサイト対策", "在籍実態の不明な低評価クチコミへの是正申請で、体験申込の離脱を抑制。"),
+        ("eye", "入塾シーズン前のモニタリング", "繁忙期前に検索面を監視し、風評の固定化を予防。"),
+    ],
+    "auto": [
+        ("store", "Googleマップの整備クレーム投稿対応", "事実確認の取れない一方的なクレーム投稿について、規約に基づき是正申請。"),
+        ("chart", "店舗名サジェストの改善", "店舗名＋ネガティブサジェストを中長期施策で押し下げ、来店機会の損失を抑制。"),
+        ("alert", "掲示板の名指し投稿監視", "車種・店舗を名指しする投稿を継続監視し、拡散を抑止。"),
+    ],
+    "hotel": [
+        ("globe", "海外レビューサイト対策", "英語圏レビューでの事実誤認に対し、現地規約準拠の申請で訂正反映。"),
+        ("store", "予約サイトの不当レビュー対応", "宿泊実態と乖離したレビューについて、媒体規約に基づき是正申請。評価スコアが改善。"),
+        ("eye", "繁忙期前の風評監視", "予約シーズン前に検索・レビュー面を監視し、初動対応の体制を構築。"),
+    ],
+    "bridal": [
+        ("shield", "式場名の中傷投稿対策", "式場を名指しする一方的な投稿について、規約に基づく申請で是正。"),
+        ("map", "口コミサイトの低評価対応", "挙式実態の不明な低評価クチコミへの是正申請で、見学予約の離脱を抑制。"),
+        ("chart", "会社名サジェストの改善", "会社名＋ネガティブサジェストを中長期施策で押し下げ。"),
+    ],
+}
+
 PLATFORMS = [
     ("google-maps", "Googleマップ口コミ対策", "Googleビジネスプロフィール（MEO）"),
     ("5ch", "5ch（旧2ch）スレッド対策", "5ちゃんねる/ピンクちゃんねる/コピーサイト"),
@@ -196,6 +250,9 @@ COLUMNS = [
      "経営課題としてのWEBリスクの位置づけと、推奨されるガバナンス整備。"),
 ]
 
+# 投稿記事の4分類（コラム）
+COLUMN_CATEGORIES = ["お役立ち記事", "用語解説", "事例紹介", "コラム・その他"]
+
 # 追加: 注意喚起・お知らせ
 NOTICES = [
     ("law-update", "改正プロバイダ責任制限法（発信者情報開示請求）について",
@@ -253,9 +310,13 @@ ICONS = {
 }
 
 # ----------- 共通テンプレート -----------
+ASSET_VER = "20260703d"  # CSS/JSキャッシュバスター（アセット更新時にここを上げる）
+
 GLOBAL_NAV = [
-    ("対策とは", "/knowledge/"),
-    ("無料相談", "/contact/"),
+    ("ホーム", "/"),
+    ("当センターについて", "/about/"),
+    ("代表者挨拶", "/message/"),
+    ("サービス紹介", "/service/"),
     ("解決プロセス", "/process/"),
     ("成功事例", "/cases/"),
     ("料金", "/pricing/"),
@@ -263,7 +324,9 @@ GLOBAL_NAV = [
     ("業種別", "/industry/"),
     ("媒体別", "/platform/"),
     ("コラム", "/column/"),
-    ("組織概要", "/about/"),
+    ("FAQ", "/faq/"),
+    ("採用情報", "/recruit/"),
+    ("お問い合わせ", "/contact/"),
 ]
 
 def rel(prefix_depth: int, path: str) -> str:
@@ -284,8 +347,11 @@ def header(depth: int, active: str = "") -> str:
     <div class="topbar">
       <div class="topbar__inner">
         <div class="topbar__left">
+          <a href="{rel(depth,'/admin/')}" class="topbar__admin" title="運営管理者向けページ（現在はモック）">
+            <span class="topbar__admin-ico">&#128273;</span>管理ログイン<span class="topbar__admin-tag">MOCK</span>
+          </a>
           <span class="topbar__badge">本日も無料診断対応中</span>
-          <span>受付時間 10:00 - 20:00（年中無休）</span>
+          <span class="topbar__hours">受付時間 10:00 - 20:00（年中無休）</span>
         </div>
         <div class="topbar__right">
           <a href="{rel(depth,'/news/')}">お知らせ</a>
@@ -297,12 +363,8 @@ def header(depth: int, active: str = "") -> str:
 
     <header class="site-header">
       <div class="site-header__inner">
-        <a href="{root}" class="site-logo">
-          <span class="site-logo__mark">口</span>
-          <span>
-            <span class="site-logo__name">一般社団法人</span>
-            <span class="site-logo__title">口コミ対策センター</span>
-          </span>
+        <a href="{root}" class="site-logo" aria-label="一般社団法人 口コミ対策センター トップページ">
+          <img src="{rel(depth, '/assets/img/brand/logo_header.png')}" alt="一般社団法人 口コミ対策センター" class="site-logo__image">
         </a>
         <div class="security-badges">
           <span class="security-badge">{ICONS['shield']}ISMS準拠</span>
@@ -328,13 +390,19 @@ def header(depth: int, active: str = "") -> str:
       </div>
     </header>
 
-    <nav class="global-nav" aria-label="グローバルナビ">
+    <nav class="global-nav" aria-label="グローバルナビゲーション">
       <div class="global-nav__inner">
-        <button class="nav-toggle" aria-expanded="false" aria-label="メニュー">
+        <button class="nav-toggle" aria-expanded="false" aria-label="メニューを開く">
           <span></span><span></span><span></span>
         </button>
         <div class="global-nav-list">
-          {nav_items}
+          <div class="global-nav-list__panel-head">
+            <span>メニュー</span>
+            <button type="button" class="nav-close" aria-label="メニューを閉じる">×</button>
+          </div>
+          <div class="global-nav-list__primary">{nav_items}</div>
+          <div class="global-nav-list__cta"><a href="{rel(depth,'/form/')}" class="btn btn--primary btn--sm">無料診断・お申し込み</a></div>
+          <div class="global-nav-list__policies"><a href="{rel(depth,'/privacypolicy/')}">プライバシーポリシー</a><a href="{rel(depth,'/social-policy/')}">ソーシャルメディアポリシー</a><a href="{rel(depth,'/security-policy/')}">情報セキュリティ基本方針</a><a href="{rel(depth,'/regulation/')}">特定商取引法に基づく表記</a></div>
         </div>
       </div>
     </nav>
@@ -366,6 +434,18 @@ def industry_banners(depth: int) -> str:
             f'<div class="banner__cover"><span class="banner__cover-label">業種別</span>{svg_placeholder(name,"navy",640,360)}</div>'
             f'<div class="banner__body"><div class="banner__title">{name}の口コミ対策</div>'
             f'<div class="banner__sub">{sub}</div><div class="banner__cta">対策事例を見る</div></div></a>'
+        )
+    return f'<div class="banner-grid">{"".join(items)}</div>'
+
+def cases_banners(depth: int) -> str:
+    items = []
+    for slug, name, sub in INDUSTRIES:
+        count = len(CASES.get(slug, []))
+        items.append(
+            f'<a class="banner" href="{rel(depth, f"/cases/{slug}/")}">'
+            f'<div class="banner__cover"><span class="banner__cover-label">成功事例</span>{svg_placeholder(name,"navy",640,360)}</div>'
+            f'<div class="banner__body"><div class="banner__title">{name}の成功事例</div>'
+            f'<div class="banner__sub">{sub}（{count}件）</div><div class="banner__cta">事例を見る</div></div></a>'
         )
     return f'<div class="banner-grid">{"".join(items)}</div>'
 
@@ -520,14 +600,18 @@ def mega_footer(depth: int) -> str:
             <a href="{rel(depth,'/regulation/')}">特商法表記</a>
             <a href="{rel(depth,'/sitemap/')}">サイトマップ</a>
             <a href="{rel(depth,'/contact/')}">お問い合わせ</a>
+            <a href="{rel(depth,'/admin/')}" class="footer-admin-link">運営者ログイン</a>
           </span>
         </div>
       </div>
     </footer>
 
-    <div class="float-cta">
-      <a href="tel:0120000001" class="f-tel">電話相談</a>
-      <a href="{rel(depth,'/contact/')}" class="f-mail">無料診断</a>
+    <div class="contact-band" role="complementary" aria-label="お問い合わせ">
+      <div class="contact-band__inner">
+        <span class="contact-band__text">ネットの風評・口コミにお困りですか？<strong>無料診断・ご相談を受付中です</strong></span>
+        <a href="tel:0120000001" class="contact-band__tel">{ICONS['phone']}<span>0120-000-001</span></a>
+        <a href="{rel(depth,'/contact/')}" class="contact-band__btn">無料診断・お問い合わせ</a>
+      </div>
     </div>
     """
 
@@ -535,9 +619,11 @@ def write_page(path: Path, html: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(html, encoding="utf-8")
 
-def page_html(*, depth: int, title: str, description: str, body: str, active: str = "") -> str:
-    css = rel(depth, "/assets/css/style.css")
-    js = rel(depth, "/assets/js/main.js")
+def page_html(*, depth: int, title: str, description: str, body: str, active: str = "",
+              robots: str = "all", extra_scripts: str = "") -> str:
+    css = rel(depth, "/assets/css/style.css") + f"?v={ASSET_VER}"
+    js = rel(depth, "/assets/js/main.js") + f"?v={ASSET_VER}"
+    editor_js = rel(depth, "/assets/js/editor.js") + f"?v={ASSET_VER}"
     return dedent(f"""<!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -545,7 +631,7 @@ def page_html(*, depth: int, title: str, description: str, body: str, active: st
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title}</title>
 <meta name="description" content="{description}">
-<meta name="robots" content="all">
+<meta name="robots" content="{robots}">
 <meta property="og:site_name" content="一般社団法人 口コミ対策センター">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{description}">
@@ -562,6 +648,8 @@ def page_html(*, depth: int, title: str, description: str, body: str, active: st
 </main>
 {mega_footer(depth)}
 <script src="{js}"></script>
+<script src="{editor_js}" data-editor-skip></script>
+{extra_scripts}
 </body>
 </html>
 """)
@@ -1064,6 +1152,8 @@ def build_industry_pages():
                 {name}業界の事業者様についても、当センターの標準料金体系（初期費用・着手金0円／完全成功報酬制）が適用されます。
                 結果が出るまでご請求は発生しません。まずは無料診断から、お気軽にご相談ください。
               </p>
+
+              <p><a href="{rel(2,f'/cases/{slug}/')}">{name}の成功事例を見る →</a></p>
             </div>
             {cta_trio(2)}
           </div>
@@ -1398,29 +1488,52 @@ def build_other_pages():
                   body=body, active="解決プロセス"),
         encoding="utf-8")
 
-    # /cases/
+    # /cases/ （業種別の入口＝バナー一覧）
     body = f"""
-    {page_header_block("CASES", "成功事例", "業種・媒体別の解決事例（守秘義務の範囲内で記載）", 1)}
+    {page_header_block("CASES", "成功事例", "業種別の解決事例（守秘義務の範囲内で記載）", 1)}
     <section class="section"><div class="container container--wide">
-      <div class="grid grid--2">
-        {"".join([
-            f'<div class="card"><div class="card__icon">{ICONS["store"]}</div><h3>飲食店 — Googleマップ★1レビューの是正</h3><p>事実無根の名指し中傷★1レビュー6件のうち4件が削除。検索流入が施策前比+38%まで回復。</p></div>',
-            f'<div class="card"><div class="card__icon">{ICONS["medical"]}</div><h3>クリニック — 医師個人名サジェスト浄化</h3><p>医師個人名＋ネガティブワードのサジェスト固定化を、3か月で実質非表示化。</p></div>',
-            f'<div class="card"><div class="card__icon">{ICONS["chart"]}</div><h3>上場企業 — 株主掲示板の風評対応</h3><p>短信前後の風評投稿モニタリング体制を構築。広報部と連携した初動対応で炎上回避。</p></div>',
-            f'<div class="card"><div class="card__icon">{ICONS["map"]}</div><h3>美容サロン — 競合と疑われる連続投稿</h3><p>短期間に集中投稿された不審レビュー群について、規約準拠の申請で大半が削除。</p></div>',
-            f'<div class="card"><div class="card__icon">{ICONS["shield"]}</div><h3>士業事務所 — 名指しスレッド対策</h3><p>巨大掲示板上の名指しスレッドについて、運営規約に基づく申請で削除に成功。</p></div>',
-            f'<div class="card"><div class="card__icon">{ICONS["globe"]}</div><h3>宿泊 — 海外レビューサイト対策</h3><p>英語圏レビューでの事実誤認に対し、現地規約準拠の申請で訂正反映。</p></div>',
-        ])}
+      <div class="prose">
+        <p>業種ごとに、口コミ対策・誹謗中傷対策の解決事例をまとめています。気になる業種をお選びください。守秘義務の範囲内で記載しています。</p>
       </div>
+      {cases_banners(1)}
       {cta_trio(1)}
     </div></section>
     """
     (ROOT / "cases").mkdir(exist_ok=True)
     (ROOT / "cases/index.html").write_text(
         page_html(depth=1, title="成功事例｜一般社団法人 口コミ対策センター",
-                  description="業種別・媒体別の口コミ対策・誹謗中傷対策の解決事例（守秘義務の範囲内で記載）。",
+                  description="業種別の口コミ対策・誹謗中傷対策の解決事例（守秘義務の範囲内で記載）。飲食・医療・美容・不動産・士業ほか全業種。",
                   body=body, active="成功事例"),
         encoding="utf-8")
+
+    # /cases/{slug}/ （業種ごとの成功事例ページ）
+    for slug, name, sub in INDUSTRIES:
+        cards = "".join(
+            f'<div class="card"><div class="card__icon">{ICONS[icon]}</div>'
+            f'<h3>{name} — {title}</h3><p>{desc}</p></div>'
+            for icon, title, desc in CASES.get(slug, [])
+        )
+        d = ROOT / "cases" / slug
+        d.mkdir(parents=True, exist_ok=True)
+        body = f"""
+        {page_header_block("CASES", f"{name}の成功事例", f"{sub}の解決事例（守秘義務の範囲内で記載）", 2)}
+        <section class="section"><div class="container container--wide">
+          <div class="grid grid--2">
+            {cards}
+          </div>
+          <div class="prose">
+            <p>掲載内容は守秘義務の範囲内で加工・要約したものです。{name}業界の対策方針の詳細は<a href="{rel(2,f'/industry/{slug}/')}">{name}の口コミ対策</a>ページをご覧ください。</p>
+            <p><a href="{rel(2,'/cases/')}">← 成功事例（業種一覧）に戻る</a></p>
+          </div>
+          {cta_trio(2)}
+        </div></section>
+        """
+        (d / "index.html").write_text(
+            page_html(depth=2,
+                title=f"{name}の成功事例｜口コミ対策｜一般社団法人 口コミ対策センター",
+                description=f"{name}業界（{sub}）の口コミ対策・誹謗中傷対策の解決事例。守秘義務の範囲内で記載。完全成功報酬・初期費用0円。",
+                body=body, active="成功事例"),
+            encoding="utf-8")
 
     # /faq/
     items = [
@@ -1912,6 +2025,73 @@ def build_misc_pages():
             title=f"{name}｜一般社団法人口コミ対策センター",
             description=lead, body=body, active=""))
 
+def build_admin():
+    """運営者ページの入口（モックのログイン + ダッシュボード）。"""
+    base = ROOT / "admin"
+    base.mkdir(exist_ok=True)
+    admin_js = f'<script src="{rel(1, "/assets/js/admin.js")}?v={ASSET_VER}" data-editor-skip></script>'
+    body = f"""
+    {page_header_block("ADMIN", "運営者ページ", "サイト運営用ツールの入口です。ログインしてご利用ください。", 1)}
+    <section class="section"><div class="container">
+      <div class="admin-wrap" data-admin-page data-editor-skip>
+
+        <div class="admin-login" data-admin-login>
+          <div class="admin-card">
+            <h2 class="admin-card__title">運営者ログイン</h2>
+            <form data-admin-form autocomplete="off">
+              <label class="admin-field">
+                <span>ユーザー名</span>
+                <input type="text" name="user" autocomplete="username" placeholder="admin">
+              </label>
+              <label class="admin-field">
+                <span>パスワード</span>
+                <input type="password" name="pass" autocomplete="current-password" placeholder="••••••••">
+              </label>
+              <p class="admin-error" data-admin-error hidden>ユーザー名またはパスワードが違います。</p>
+              <button type="submit" class="btn btn--primary">ログイン</button>
+            </form>
+            <p class="admin-note">
+              ※これは<strong>モック（デモ）用</strong>のログインです。認証はブラウザ内でのみ行われ、実際のアクセス制御・セキュリティ保護はありません。本番運用時にはサーバー側の認証に置き換えてください。<br>
+              デモ用ログイン: ユーザー名 <code>admin</code> ／ パスワード <code>kuchikomi</code>
+            </p>
+          </div>
+        </div>
+
+        <div class="admin-dashboard" data-admin-dashboard hidden>
+          <div class="admin-dashboard__head">
+            <div>
+              <h2 class="admin-card__title">運営者ダッシュボード</h2>
+              <p class="admin-dashboard__lead">運営用ツールの一覧です。</p>
+            </div>
+            <button type="button" class="btn btn--navy btn--sm" data-admin-logout>ログアウト</button>
+          </div>
+          <div class="admin-tools">
+            <a class="admin-tool" href="{rel(1,'/column/post/')}">
+              <div class="admin-tool__icon">✎</div>
+              <div class="admin-tool__body">
+                <div class="admin-tool__title">コラム記事の投稿・編集</div>
+                <div class="admin-tool__desc">新しい記事を書く／ブログのHTMLをインポート／投稿済み記事を編集</div>
+              </div>
+            </a>
+            <div class="admin-tool is-soon">
+              <div class="admin-tool__icon">＋</div>
+              <div class="admin-tool__body">
+                <div class="admin-tool__title">今後の運営ツール</div>
+                <div class="admin-tool__desc">必要に応じてここに追加していきます。</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div></section>
+    """
+    write_page(base / "index.html", page_html(depth=1,
+        title="運営者ページ｜一般社団法人口コミ対策センター",
+        description="サイト運営者向けページ。", body=body, active="",
+        robots="noindex, nofollow", extra_scripts=admin_js))
+
+
 def build_columns():
     base = ROOT / "column"
     base.mkdir(exist_ok=True)
@@ -1920,14 +2100,30 @@ def build_columns():
         f'<div class="banner__body"><div class="banner__title">{name}</div><div class="banner__sub">{lead}</div><div class="banner__cta">記事を読む</div></div></a>'
         for slug, name, lead in COLUMNS
     )
+    column_js = f'<script src="{rel(1, "/assets/js/column.js")}?v={ASSET_VER}" data-editor-skip></script>'
     body = f"""
     {page_header_block("COLUMN", "コラム・ノウハウ", "口コミ対策・風評対策の知見をまとめたコラム集。", 1)}
-    <section class="section"><div class="container container--wide"><div class="banner-grid">{items}</div></div></section>
+    <section class="section"><div class="container container--wide">
+      <div class="user-posts" data-user-posts hidden>
+        <h2 class="user-posts__title">記事一覧</h2>
+        <div class="post-filter" data-post-filter>
+          <div class="post-filter__row">
+            <div class="post-filter__cats" data-filter-cats></div>
+            <input type="search" class="post-filter__search" data-filter-search placeholder="キーワードで検索（タイトル・本文・タグ）" aria-label="記事を検索">
+          </div>
+          <div class="post-filter__tags" data-filter-tags hidden></div>
+        </div>
+        <div class="news-list" id="userPostList"></div>
+        <p class="post-filter__empty muted" data-filter-empty hidden>条件に一致する記事がありません。</p>
+      </div>
+      <h2 class="user-posts__title">特集コラム</h2>
+      <div class="banner-grid">{items}</div>
+    </div></section>
     """
     write_page(base / "index.html", page_html(depth=1,
         title="コラム｜口コミ対策・風評対策のノウハウ｜一般社団法人口コミ対策センター",
         description="口コミ対策・WEBレピュテーション対策に関する専門家コラム。事例、IT法務、自社でできる予防策まで。",
-        body=body, active=""))
+        body=body, active="コラム", extra_scripts=column_js))
 
     for slug, name, lead in COLUMNS:
         d = base / slug
@@ -1956,6 +2152,127 @@ def build_columns():
         write_page(d / "index.html", page_html(depth=2,
             title=f"{name}｜コラム｜一般社団法人口コミ対策センター",
             description=lead, body=body, active=""))
+
+    column_js2 = f'<script src="{rel(2, "/assets/js/column.js")}?v={ASSET_VER}" data-editor-skip></script>'
+
+    # /column/post/ 記事投稿ページ（運営者ログイン必須）
+    admin_js2 = f'<script src="{rel(2, "/assets/js/admin.js")}?v={ASSET_VER}" data-editor-skip></script>'
+    body = f"""
+    <div data-admin-guard data-admin-home="{rel(2,'/admin/')}" data-editor-skip hidden></div>
+    <div data-admin-content hidden>
+    {page_header_block("COLUMN", "記事の投稿", "エディタで書く／ブログ等のHTMLをそのまま貼り付けて投稿できます。", 2)}
+    <section class="section"><div class="container">
+      <p class="composer-back" data-editor-skip><a href="{rel(2,'/admin/')}">← 管理トップに戻る</a>　<a href="{rel(2,'/column/')}">コラム一覧を見る</a></p>
+      <div class="column-composer" data-column-composer data-editor-skip>
+
+        <div class="composer-fields">
+          <label class="composer-field composer-field--wide">
+            <span>タイトル <em>必須</em></span>
+            <input type="text" id="postTitle" placeholder="記事タイトルを入力">
+          </label>
+          <label class="composer-field">
+            <span>分類 <em>必須</em></span>
+            <select id="postCategory">
+              {"".join(f'<option value="{c}">{c}</option>' for c in COLUMN_CATEGORIES)}
+            </select>
+          </label>
+          <label class="composer-field">
+            <span>公開日</span>
+            <input type="date" id="postDate">
+          </label>
+          <div class="composer-field composer-field--wide">
+            <span>タグ（カンマまたはEnterで区切り／絞り込みに使えます）</span>
+            <div class="composer-tags" data-tags-box>
+              <div class="composer-tags__chips" id="postTagChips"></div>
+              <input type="text" id="postTagInput" placeholder="例: Googleマップ, 削除依頼, 弁護士">
+            </div>
+          </div>
+          <label class="composer-field composer-field--wide">
+            <span>リード文（一覧・検索結果に表示）</span>
+            <textarea id="postSummary" rows="2" placeholder="記事の概要を1〜2文で"></textarea>
+          </label>
+        </div>
+
+        <div class="composer-tabs" role="tablist">
+          <button type="button" data-tab="visual" class="is-active">エディタで書く</button>
+          <button type="button" data-tab="html">HTMLを直接編集・インポート</button>
+        </div>
+
+        <div class="composer-toolbar" data-pane="visual">
+          <button type="button" data-cmd="h2">見出し</button>
+          <button type="button" data-cmd="h3">小見出し</button>
+          <button type="button" data-cmd="p">本文</button>
+          <span class="sep"></span>
+          <button type="button" data-cmd="bold"><b>B</b></button>
+          <button type="button" data-cmd="italic"><i>I</i></button>
+          <span class="sep"></span>
+          <button type="button" data-cmd="insertUnorderedList">・リスト</button>
+          <button type="button" data-cmd="insertOrderedList">1. 番号</button>
+          <button type="button" data-cmd="quote">❝ 引用</button>
+          <span class="sep"></span>
+          <button type="button" data-cmd="link">🔗 リンク</button>
+          <button type="button" data-cmd="image">🖼 画像</button>
+          <button type="button" data-cmd="hr">― 区切り線</button>
+        </div>
+        <div id="postBody" class="composer-visual prose" contenteditable="true" data-pane="visual"></div>
+
+        <div data-pane="html" hidden>
+          <p class="composer-hint">ブログ・CMSからエクスポートしたHTMLをそのまま貼り付けられます（&lt;script&gt;タグは安全のため保存時に除去されます）。</p>
+          <textarea id="postHtml" class="composer-html" placeholder="&lt;h2&gt;見出し&lt;/h2&gt;&#10;&lt;p&gt;本文…&lt;/p&gt;"></textarea>
+          <label class="composer-file">HTMLファイルから読み込み <input type="file" id="htmlFile" accept=".html,.htm,.txt" hidden></label>
+        </div>
+
+        <div class="composer-actions">
+          <button type="button" id="btnSave" class="btn btn--primary btn--sm">保存（公開）</button>
+          <button type="button" id="btnPreview" class="btn btn--navy btn--sm">プレビュー</button>
+          <button type="button" id="btnNew" class="composer-sub">新規作成</button>
+          <span class="composer-status" id="composerStatus"></span>
+        </div>
+
+        <article id="previewArea" class="prose composer-preview" hidden></article>
+
+        <h2 class="composer-list-title">投稿済みの記事</h2>
+        <div id="postList" class="composer-list"></div>
+
+        <div class="composer-io">
+          <button type="button" id="btnExport" class="composer-sub">JSONエクスポート</button>
+          <label class="composer-sub composer-file-btn">JSONインポート<input type="file" id="importFile" accept=".json" hidden></label>
+          <span class="muted">※記事はこのブラウザ（localStorage）に保存されます。別PCへはJSONで受け渡しできます。</span>
+        </div>
+      </div>
+    </div></section>
+    </div>
+    """
+    write_page(base / "post" / "index.html", page_html(depth=2,
+        title="記事の投稿｜コラム｜一般社団法人口コミ対策センター",
+        description="コラム記事の投稿・編集ページ。", body=body, active="コラム",
+        robots="noindex, nofollow", extra_scripts=admin_js2 + column_js2))
+
+    # /column/article/ 投稿記事ビューア（?id= で表示）
+    body = f"""
+    <section class="page-header">
+      <div class="container">
+        <span class="en">COLUMN</span>
+        <h1 data-article-title data-editor-skip>記事を読み込んでいます…</h1>
+        <p data-article-meta data-editor-skip></p>
+      </div>
+    </section>
+    <div class="container">
+      <p class="breadcrumb" data-editor-skip><a href="{rel(2,'/')}">ホーム</a><span>›</span><a href="{rel(2,'/column/')}">コラム</a><span>›</span><span data-article-crumb>記事</span></p>
+    </div>
+    <section class="section"><div class="container">
+      <div class="article-tags" data-article-tags data-editor-skip hidden></div>
+      <article class="prose" data-article-body data-editor-skip>
+        <p>記事を読み込んでいます…</p>
+      </article>
+      <p class="article-back" data-editor-skip><a href="{rel(2,'/column/')}">← コラム一覧へ戻る</a></p>
+      {cta_trio(2)}
+    </div></section>
+    """
+    write_page(base / "article" / "index.html", page_html(depth=2,
+        title="記事｜コラム｜一般社団法人口コミ対策センター",
+        description="投稿されたコラム記事。", body=body, active="コラム",
+        robots="noindex", extra_scripts=column_js2))
 
 def build_notices():
     base = ROOT / "notice"
@@ -2220,6 +2537,7 @@ if __name__ == "__main__":
     build_process_sub_pages()
     build_extra_methods()
     build_misc_pages()
+    build_admin()
     build_columns()
     build_notices()
     build_cities()

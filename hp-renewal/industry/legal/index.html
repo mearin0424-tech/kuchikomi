@@ -13,15 +13,18 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Old+Mincho:wght@500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/css/style.css?v=20260628b">
+<link rel="stylesheet" href="../../assets/css/style.css?v=20260703d">
 </head>
 <body>
 
 <div class="topbar">
   <div class="topbar__inner">
     <div class="topbar__left">
+      <a href="../../admin/" class="topbar__admin" title="運営管理者向けページ（現在はモック）">
+        <span class="topbar__admin-ico">&#128273;</span>管理ログイン<span class="topbar__admin-tag">MOCK</span>
+      </a>
       <span class="topbar__badge">本日も無料診断対応中</span>
-      <span>受付時間 10:00 - 20:00（年中無休）</span>
+      <span class="topbar__hours">受付時間 10:00 - 20:00（年中無休）</span>
     </div>
     <div class="topbar__right">
       <a href="../../news/">お知らせ</a>
@@ -33,8 +36,8 @@
 
 <header class="site-header">
   <div class="site-header__inner">
-    <a href="../../" class="site-logo" aria-label="Review Risk Management Center Home">
-      <img src="../../assets/img/brand/logo_header.png" alt="Review Risk Management Center" class="site-logo__image">
+    <a href="../../" class="site-logo" aria-label="一般社団法人 口コミ対策センター トップページ">
+      <img src="../../assets/img/brand/logo_header.png" alt="一般社団法人 口コミ対策センター" class="site-logo__image">
     </a>
     <div class="security-badges">
       <span class="security-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>ISMS準拠</span>
@@ -60,7 +63,7 @@
   </div>
 </header>
 
-<nav class="global-nav" aria-label="???????">
+<nav class="global-nav" aria-label="グローバルナビゲーション">
   <div class="global-nav__inner">
     <button class="nav-toggle" aria-expanded="false" aria-label="メニューを開く">
       <span></span><span></span><span></span>
@@ -68,9 +71,9 @@
     <div class="global-nav-list">
       <div class="global-nav-list__panel-head">
         <span>メニュー</span>
-        <button type="button" class="nav-close" aria-label="メニューを閉じる">?</button>
+        <button type="button" class="nav-close" aria-label="メニューを閉じる">×</button>
       </div>
-      <div class="global-nav-list__primary"><a href="../../">ホーム</a><a href="../../about/">当センターについて</a><a href="../../message/">代表者挨拶</a><a href="../../service/">サービス紹介</a><a href="../../process/">解決プロセス</a><a href="../../cases/">成功事例</a><a href="../../pricing/">料金</a><a href="../../area/">対応地域</a><a href="../../industry/">業種別</a><a href="../../platform/">媒体別</a><a href="../../faq/">FAQ</a><a href="../../recruit/">採用情報</a><a href="../../contact/">お問い合わせ</a></div>
+      <div class="global-nav-list__primary"><a href="../../">ホーム</a><a href="../../about/">当センターについて</a><a href="../../message/">代表者挨拶</a><a href="../../service/">サービス紹介</a><a href="../../process/">解決プロセス</a><a href="../../cases/">成功事例</a><a href="../../pricing/">料金</a><a href="../../area/">対応地域</a><a href="../../industry/">業種別</a><a href="../../platform/">媒体別</a><a href="../../column/">コラム</a><a href="../../faq/">FAQ</a><a href="../../recruit/">採用情報</a><a href="../../contact/">お問い合わせ</a></div>
       <div class="global-nav-list__cta"><a href="../../form/" class="btn btn--primary btn--sm">無料診断・お申し込み</a></div>
       <div class="global-nav-list__policies"><a href="../../privacypolicy/">プライバシーポリシー</a><a href="../../social-policy/">ソーシャルメディアポリシー</a><a href="../../security-policy/">情報セキュリティ基本方針</a><a href="../../regulation/">特定商取引法に基づく表記</a></div>
     </div>
@@ -122,6 +125,8 @@
                 士業事務所業界の事業者様についても、当センターの標準料金体系（初期費用・着手金0円／完全成功報酬制）が適用されます。
                 結果が出るまでご請求は発生しません。まずは無料診断から、お気軽にご相談ください。
               </p>
+
+              <p><a href="../../cases/legal/">士業事務所の成功事例を見る →</a></p>
             </div>
 
     <div class="cta-trio">
@@ -212,17 +217,22 @@
             <a href="../../regulation/">特商法表記</a>
             <a href="../../sitemap/">サイトマップ</a>
             <a href="../../contact/">お問い合わせ</a>
+            <a href="../../admin/" class="footer-admin-link">運営者ログイン</a>
           </span>
         </div>
       </div>
     </footer>
 
-    <div class="float-cta">
-      <a href="tel:0120000001" class="f-tel">電話相談</a>
-      <a href="../../contact/" class="f-mail">無料診断</a>
+    <div class="contact-band" role="complementary" aria-label="お問い合わせ">
+      <div class="contact-band__inner">
+        <span class="contact-band__text">ネットの風評・口コミにお困りですか？<strong>無料診断・ご相談を受付中です</strong></span>
+        <a href="tel:0120000001" class="contact-band__tel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.71 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.58 2.81.71A2 2 0 0 1 22 16.92z"/></svg><span>0120-000-001</span></a>
+        <a href="../../contact/" class="contact-band__btn">無料診断・お問い合わせ</a>
+      </div>
     </div>
 
-<script src="../../assets/js/main.js"></script>
-<script src="../../assets/js/editor.js?v=20260629a" data-editor-skip></script>
+<script src="../../assets/js/main.js?v=20260703d"></script>
+<script src="../../assets/js/editor.js?v=20260703d" data-editor-skip></script>
+
 </body>
 </html>
