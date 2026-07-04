@@ -26,6 +26,8 @@
   const historyKey = `${pageKey}:history`;
   const imagesKey = `${pageKey}:images`;
   const insertsKey = `${pageKey}:inserts`;
+  const changelogKey = `${pageKey}:changelog`;   // ページ単位の「変更内容」記述（全ページ横断レポート用）
+  const CHANGELOG_SUFFIX = ':changelog';
   const introSeenKey = `${APP}:intro-seen`;      // サイト共通: 説明ダイアログは初回のみ
   const toolbarOpenKey = `${APP}:toolbar-open`;  // サイト共通: ツールバー展開状態を記憶
 
@@ -140,7 +142,15 @@
       .editor-changes__head{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid #eef0f4}
       .editor-changes__head h2{margin:0;font-size:16px;color:#044072}
       .editor-changes__head .sub{color:#667085;font-size:11.5px;margin-top:2px}
+      .editor-changes__tabs{display:flex;gap:0;border-bottom:1px solid #eef0f4;padding:0 20px}
+      .editor-changes__tabs button{appearance:none;border:0;background:none;cursor:pointer;font:700 12.5px/1 system-ui,-apple-system,BlinkMacSystemFont,'Noto Sans JP',sans-serif;color:#667085;padding:11px 14px;border-bottom:2px solid transparent;margin-bottom:-1px}
+      .editor-changes__tabs button.is-active{color:#044072;border-bottom-color:#f59e0b}
       .editor-changes__body{overflow:auto;padding:14px 20px;flex:1}
+      .editor-changes__page{margin-bottom:22px;padding-bottom:16px;border-bottom:1px dashed #e5e7eb}
+      .editor-changes__page:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}
+      .editor-changes__pagehead{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+      .editor-changes__pagehead a{font-weight:900;color:#044072;font-size:13.5px;text-decoration:underline;text-underline-offset:2px}
+      .editor-changes__pagehead span{color:#98a2b3;font-size:11px}
       .editor-changes__section{margin:0 0 18px}
       .editor-changes__section h3{margin:0 0 8px;font-size:13px;color:#044072;border-left:4px solid #f59e0b;padding-left:8px}
       .editor-changes__empty{color:#98a2b3;font-size:12.5px;padding:6px 0}
@@ -354,13 +364,22 @@
   function save() {
     if (showingOriginal) setOriginalView(false);
     const data = collectText();
-    const history = storageGet(historyKey, []);
-    history.unshift({ at: new Date().toISOString(), label: nowLabel(), data, images: imgState, inserts: insState });
     const ok = storageSet(pageKey, data) &&
                storageSet(imagesKey, imgState) &&
-               storageSet(insertsKey, insState) &&
-               storageSet(historyKey, history.slice(0, 50));
+               storageSet(insertsKey, insState);
     if (!ok) return;
+    // 保存直後のDOM状態を元に「変更内容」の記述を作り、他ページからも参照できるよう保存する
+    const changeData = buildChangeData();
+    storageSet(changelogKey, {
+      at: new Date().toISOString(),
+      title: document.title,
+      texts: changeData.texts,
+      images: changeData.images,
+      inserts: changeData.inserts,
+    });
+    const history = storageGet(historyKey, []);
+    history.unshift({ at: new Date().toISOString(), label: nowLabel(), data, images: imgState, inserts: insState });
+    storageSet(historyKey, history.slice(0, 50));
     editables.forEach((el) => el.classList.toggle('is-edited', Object.prototype.hasOwnProperty.call(data, el.dataset.editId)));
     refreshHistory();
     const total = Object.keys(data).length + Object.keys(imgState).length + insState.length;
@@ -400,6 +419,7 @@
     localStorage.removeItem(pageKey);
     localStorage.removeItem(imagesKey);
     localStorage.removeItem(insertsKey);
+    localStorage.removeItem(changelogKey);
     editables.forEach((el) => {
       const html = textOriginals.get(el.dataset.editId);
       if (html.includes('<')) el.innerHTML = html; else el.textContent = html;
@@ -467,16 +487,9 @@
     return { texts, images, inserts };
   }
 
-  function buildMarkdownReport() {
-    const { texts, images, inserts } = buildChangeData();
-    const n = unsavedCount();
+  // テキスト/画像/挿入画像の変更点をMarkdown化（1ページ分）。全ページレポートでも各ページ毎に再利用する。
+  function changeMarkdown(texts, images, inserts) {
     const lines = [];
-    lines.push('# HP編集内容レポート');
-    lines.push('');
-    lines.push(`- ページ: ${location.pathname}`);
-    lines.push(`- 出力日時: ${nowLabel()}`);
-    lines.push(`- 保存状態: ${n > 0 ? `未保存の変更 ${n}箇所あり` : 'すべて保存済み'}`);
-    lines.push('');
     lines.push(`## テキスト変更（${texts.length}件）`);
     if (!texts.length) lines.push('（なし）');
     texts.forEach((t, i) => {
@@ -503,9 +516,68 @@
       lines.push(`- 画像: ${describeSrc(s.src)}`);
       if (s.alt) lines.push(`- altテキスト: ${s.alt}`);
     });
+    return lines.join('\n');
+  }
+
+  function buildMarkdownReport() {
+    const { texts, images, inserts } = buildChangeData();
+    const n = unsavedCount();
+    const lines = [];
+    lines.push('# HP編集内容レポート');
+    lines.push('');
+    lines.push(`- ページ: ${location.pathname}`);
+    lines.push(`- 出力日時: ${nowLabel()}`);
+    lines.push(`- 保存状態: ${n > 0 ? `未保存の変更 ${n}箇所あり` : 'すべて保存済み'}`);
+    lines.push('');
+    lines.push(changeMarkdown(texts, images, inserts));
     lines.push('');
     lines.push('---');
     lines.push('※このレポートを元に、該当ページのHTML/生成スクリプトへ変更を反映してください。');
+    return lines.join('\n');
+  }
+
+  // 「変更内容」を保存済みの全ページから収集する（localStorageは同一オリジンの全ページで共有されているため、
+  //  他ページを開かなくても、既に保存されたページの変更内容をこのページから横断的に確認できる）
+  function listAllChangelogs() {
+    const out = [];
+    for (const key of Object.keys(localStorage)) {
+      if (!key.startsWith(`${APP}:/`) || !key.endsWith(CHANGELOG_SUFFIX)) continue;
+      const path = key.slice(APP.length + 1, key.length - CHANGELOG_SUFFIX.length);
+      let entry;
+      try { entry = JSON.parse(localStorage.getItem(key) || 'null'); } catch { entry = null; }
+      if (!entry) continue;
+      const texts = entry.texts || [], images = entry.images || [], inserts = entry.inserts || [];
+      if (!texts.length && !images.length && !inserts.length) continue;
+      out.push({ path, at: entry.at, title: entry.title || '', texts, images, inserts });
+    }
+    out.sort((a, b) => a.path.localeCompare(b.path));
+    return out;
+  }
+
+  function buildSiteMarkdownReport() {
+    const pages = listAllChangelogs();
+    const lines = [];
+    lines.push('# HP編集内容レポート（全ページ）');
+    lines.push('');
+    lines.push(`- サイト: ${location.origin}`);
+    lines.push(`- 出力日時: ${nowLabel()}`);
+    lines.push(`- 保存済みの変更があるページ数: ${pages.length}`);
+    lines.push('');
+    if (!pages.length) {
+      lines.push('（保存済みの変更はまだありません。各ページで「保存」を押すとここに反映されます。）');
+      return lines.join('\n');
+    }
+    pages.forEach((p) => {
+      lines.push('---');
+      lines.push('');
+      lines.push(`# ページ: ${p.path === '/' ? '/' : `${p.path}/`}`);
+      lines.push(`- 最終保存: ${p.at ? new Date(p.at).toLocaleString('ja-JP', { hour12: false }) : '不明'}`);
+      lines.push('');
+      lines.push(changeMarkdown(p.texts, p.images, p.inserts));
+      lines.push('');
+    });
+    lines.push('---');
+    lines.push('※このレポートを元に、各ページのHTML/生成スクリプトへ変更を反映してください。');
     return lines.join('\n');
   }
 
@@ -521,11 +593,36 @@
     };
   }
 
+  // 保存済みの全ページ分をまとめて書き出す（ページごとに巡回してエクスポートする手間をなくす）
+  function siteExportPayload() {
+    const pages = listAllChangelogs().map((p) => {
+      const base = `${APP}:${p.path}`;
+      return {
+        path: p.path,
+        lastSavedAt: p.at,
+        changelog: { texts: p.texts, images: p.images, inserts: p.inserts },
+        current: storageGet(base, {}),
+        images: storageGet(`${base}:images`, {}),
+        inserts: storageGet(`${base}:inserts`, []),
+      };
+    });
+    return { exportedAt: new Date().toISOString(), origin: location.origin, pageCount: pages.length, pages };
+  }
+
   function exportJson() {
     const blob = new Blob([JSON.stringify(exportPayload(), null, 2)], { type: 'application/json' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
     a.download = `page-edits-${location.pathname.replace(/[^a-z0-9]+/gi, '-').replace(/^-|-$/g, '') || 'home'}.json`;
+    a.click();
+    URL.revokeObjectURL(a.href);
+  }
+
+  function exportSiteJson() {
+    const blob = new Blob([JSON.stringify(siteExportPayload(), null, 2)], { type: 'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `page-edits-all-pages-${new Date().toISOString().slice(0, 10)}.json`;
     a.click();
     URL.revokeObjectURL(a.href);
   }
@@ -584,10 +681,8 @@
     if (el) el.remove();
   }
 
-  function openChangesDialog() {
-    closeChangesDialog();
-    const { texts, images, inserts } = buildChangeData();
-    const n = unsavedCount();
+  // テキスト/画像/挿入画像の変更点をHTML化（1ページ分）。全ページ表示でもページ毎に再利用する。
+  function changeRowsHtml(texts, images, inserts) {
     const badge = (saved) => `<span class="editor-change__badge ${saved ? 'is-saved' : 'is-unsaved'}">${saved ? '保存済み' : '未保存'}</span>`;
     const textRows = texts.map((t) => `
       <div class="editor-change">
@@ -617,6 +712,24 @@
           </div>
         </div>
       </div>`).join('');
+    return `
+      <div class="editor-changes__section">
+        <h3>テキスト変更（${texts.length}件）</h3>
+        ${textRows || '<div class="editor-changes__empty">変更はありません</div>'}
+      </div>
+      <div class="editor-changes__section">
+        <h3>画像の差し替え（${images.length}件）</h3>
+        ${imageRows || '<div class="editor-changes__empty">変更はありません</div>'}
+      </div>
+      <div class="editor-changes__section">
+        <h3>挿入した画像（${inserts.length}件）</h3>
+        ${insertRows || '<div class="editor-changes__empty">変更はありません</div>'}
+      </div>`;
+  }
+
+  function openChangesDialog(initialMode) {
+    closeChangesDialog();
+    let mode = initialMode === 'site' ? 'site' : 'page';
     const overlay = document.createElement('div');
     overlay.className = 'editor-changes-overlay';
     overlay.dataset.editorSkip = 'true';
@@ -624,25 +737,16 @@
       <div class="editor-changes" role="dialog" aria-modal="true">
         <div class="editor-changes__head">
           <div>
-            <h2>このページの変更内容</h2>
-            <div class="sub">${esc(location.pathname)}｜${n > 0 ? `未保存の変更 ${n}箇所あり` : 'すべて保存済み'}</div>
+            <h2>変更内容</h2>
+            <div class="sub" data-sub></div>
           </div>
           <button type="button" class="editor-img-dialog__close" data-act="close" aria-label="閉じる">×</button>
         </div>
-        <div class="editor-changes__body">
-          <div class="editor-changes__section">
-            <h3>テキスト変更（${texts.length}件）</h3>
-            ${textRows || '<div class="editor-changes__empty">変更はありません</div>'}
-          </div>
-          <div class="editor-changes__section">
-            <h3>画像の差し替え（${images.length}件）</h3>
-            ${imageRows || '<div class="editor-changes__empty">変更はありません</div>'}
-          </div>
-          <div class="editor-changes__section">
-            <h3>挿入した画像（${inserts.length}件）</h3>
-            ${insertRows || '<div class="editor-changes__empty">変更はありません</div>'}
-          </div>
+        <div class="editor-changes__tabs" role="tablist">
+          <button type="button" data-tab="page">このページ</button>
+          <button type="button" data-tab="site">全ページ</button>
         </div>
+        <div class="editor-changes__body" data-body></div>
         <div class="editor-changes__foot">
           <button type="button" class="primary" data-act="copy-md">レポートをコピー（AI指示用）</button>
           <button type="button" data-act="copy-json">JSONをコピー</button>
@@ -651,16 +755,50 @@
         </div>
       </div>`;
     document.body.appendChild(overlay);
+
+    const bodyEl = $('[data-body]', overlay);
+    const subEl = $('[data-sub]', overlay);
+
+    function render() {
+      $$('.editor-changes__tabs button', overlay).forEach((b) => b.classList.toggle('is-active', b.dataset.tab === mode));
+      if (mode === 'page') {
+        const { texts, images, inserts } = buildChangeData();
+        const n = unsavedCount();
+        subEl.textContent = `${location.pathname}｜${n > 0 ? `未保存の変更 ${n}箇所あり` : 'すべて保存済み'}`;
+        bodyEl.innerHTML = changeRowsHtml(texts, images, inserts);
+      } else {
+        const pages = listAllChangelogs();
+        subEl.textContent = `保存済みの変更があるページ: ${pages.length}件（このブラウザに保存されている全ページ分）`;
+        bodyEl.innerHTML = pages.length
+          ? pages.map((p) => {
+              const label = p.path === '/' ? '/' : `${p.path}/`;
+              return `
+            <div class="editor-changes__page">
+              <div class="editor-changes__pagehead">
+                <a href="${esc(label)}">${esc(label)}</a>
+                <span>${p.at ? esc(new Date(p.at).toLocaleString('ja-JP', { hour12: false })) : ''}</span>
+              </div>
+              ${changeRowsHtml(p.texts, p.images, p.inserts)}
+            </div>`;
+            }).join('')
+          : '<div class="editor-changes__empty">保存済みの変更があるページはまだありません。各ページで「保存」すると、ここに一覧表示されます。</div>';
+      }
+    }
+
+    $$('.editor-changes__tabs button', overlay).forEach((b) => b.addEventListener('click', () => { mode = b.dataset.tab; render(); }));
+
     overlay.addEventListener('click', (event) => {
       if (event.target === overlay) { closeChangesDialog(); return; }
       const btn = event.target.closest('button[data-act]');
       if (!btn) return;
       const act = btn.dataset.act;
       if (act === 'close') closeChangesDialog();
-      else if (act === 'copy-md') copyText(buildMarkdownReport(), 'AI指示用レポート');
-      else if (act === 'copy-json') copyText(JSON.stringify(exportPayload(), null, 2), '編集データ（JSON）');
-      else if (act === 'download-json') exportJson();
+      else if (act === 'copy-md') copyText(mode === 'page' ? buildMarkdownReport() : buildSiteMarkdownReport(), mode === 'page' ? 'AI指示用レポート' : 'AI指示用レポート（全ページ）');
+      else if (act === 'copy-json') copyText(JSON.stringify(mode === 'page' ? exportPayload() : siteExportPayload(), null, 2), mode === 'page' ? '編集データ（JSON）' : '編集データ（全ページJSON）');
+      else if (act === 'download-json') (mode === 'page' ? exportJson() : exportSiteJson());
     });
+
+    render();
   }
 
   /* ---------------- 画像ダイアログ ---------------- */
@@ -861,6 +999,18 @@
     });
   }
 
+  /* ---------------- リンクの誤遷移防止 ---------------- */
+  // 編集モード中は<a>のクリックによるページ遷移を止める。これによりリンクで囲われた
+  // 文字（バナー・ボタン・ナビ等）もタップ/クリックしてそのまま編集できるようになる。
+  // ダイアログ・ツールバー等（SKIP_SELECTOR）内のリンクは対象外＝通常どおり遷移する。
+  function bindLinkGuard() {
+    document.addEventListener('click', (event) => {
+      if (!editMode) return;
+      const a = event.target.closest('a[href]');
+      if (a && !a.closest(SKIP_SELECTOR)) event.preventDefault();
+    }, true);
+  }
+
   /* ---------------- 画像クリック・挿入チップ ---------------- */
   function bindImageEvents() {
     // 編集モード中の画像クリックで差し替えダイアログ（リンク遷移より先に捕捉）
@@ -943,10 +1093,10 @@
         <div class="editor-intro-dialog__body">
           <ol>
             <li>ツールバーの<strong>「プレビュー / 編集」</strong>で表示モードを切り替えます。プレビューは訪問者と同じ見た目です。</li>
-            <li>編集モードでは、ページ内の<strong>文字をその場で書き換え</strong>られます。<strong>画像をクリック</strong>すると差し替え（ファイル・URL・alt）ができます。</li>
+            <li>編集モードでは、ページ内の<strong>文字をその場で書き換え</strong>られます。リンクの上の文字も<strong>タップ/クリックでそのまま編集</strong>でき、遷移はしません（リンク先に移動したいときはプレビューに戻ってください）。<strong>画像をクリック</strong>すると差し替え（ファイル・URL・alt）ができます。</li>
             <li>段落や見出しにマウスを重ねると<strong>「🖼 ＋画像」</strong>が表示され、直後に画像を挿入できます。</li>
             <li><strong>保存</strong>（Ctrl+S）で変更がこのページ専用に記録され、履歴から<strong>復元</strong>できます。<strong>「変更前を表示」</strong>で元の状態と見比べられます。</li>
-            <li><strong>「変更内容」</strong>ボタンで編集の記録を一覧できます。<strong>AI指示用レポート</strong>やJSONとしてコピー・出力し、HP本体への反映に活用できます。</li>
+            <li><strong>「変更内容」</strong>ボタンで編集の記録を一覧できます。<strong>「全ページ」タブ</strong>に切り替えると、保存済みの他ページの変更もまとめて確認・出力でき、ページごとにJSONを出す手間がありません。<strong>AI指示用レポート</strong>やJSONとしてコピー・出力し、HP本体への反映に活用できます。</li>
           </ol>
           <p class="editor-intro-dialog__note">※保存先は現在のブラウザの localStorage です。HTMLファイル自体は書き換えません。この説明は右下ツールバーの「?」からいつでも再表示できます。</p>
         </div>
@@ -1011,7 +1161,7 @@
     $('.editor-mode-preview').addEventListener('click', () => setMode(false));
     $('.editor-mode-edit').addEventListener('click', () => setMode(true));
     $('.editor-save').addEventListener('click', save);
-    $('.editor-changes-btn').addEventListener('click', openChangesDialog);
+    $('.editor-changes-btn').addEventListener('click', () => openChangesDialog('page'));
     $('.editor-orig').addEventListener('click', () => setOriginalView(!showingOriginal));
     $('.editor-restore').addEventListener('click', () => {
       const v = $('.editor-history').value;
@@ -1050,6 +1200,18 @@
     });
   }
 
+  // 既存ページ（旧バージョンで保存済み・changelog未生成）を初回訪問時に自動で補完する。
+  // これにより「全ページ」タブは、そのページを開かなくても以前の保存内容を拾える。
+  function backfillChangelog() {
+    if (storageGet(changelogKey, null)) return;
+    const hasText = Object.keys(storageGet(pageKey, {})).length > 0;
+    const hasImages = Object.keys(storageGet(imagesKey, {})).length > 0;
+    const hasInserts = storageGet(insertsKey, []).length > 0;
+    if (!hasText && !hasImages && !hasInserts) return;
+    const { texts, images, inserts } = buildChangeData();
+    storageSet(changelogKey, { at: new Date().toISOString(), title: document.title, texts, images, inserts });
+  }
+
   function init() {
     css();
     scan();
@@ -1059,8 +1221,10 @@
     applySavedText();
     applyAllImages();
     applyInserts();
+    backfillChangelog();
     toolbar();
     bindImageEvents();
+    bindLinkGuard();
     bindShortcuts();
     refreshStatus();
     // 使い方ダイアログは初回訪問時のみ自動表示（以降は「?」ボタンから）

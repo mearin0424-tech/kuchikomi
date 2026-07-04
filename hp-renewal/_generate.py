@@ -313,7 +313,7 @@ ICONS = {
 }
 
 # ----------- 共通テンプレート -----------
-ASSET_VER = "20260704a"  # CSS/JSキャッシュバスター（アセット更新時にここを上げる）
+ASSET_VER = "20260704c"  # CSS/JSキャッシュバスター（アセット更新時にここを上げる）
 
 GLOBAL_NAV = [
     ("ホーム", "/"),
@@ -357,7 +357,7 @@ def header(depth: int, active: str = "") -> str:
     nav_items = "".join(_item(l, p) for l, p in GLOBAL_NAV)
     root = rel(depth, "/")
     return dedent(f"""
-    <a href="{rel(depth,'/admin/')}" class="admin-entry" title="運営管理者向けページ（現在はモック）">&#128273; 管理<span class="admin-entry__tag">MOCK</span></a>
+    <a href="{rel(depth,'/admin/')}" class="admin-entry" data-editor-skip title="運営管理者向けページ（現在はモック）">&#128273; 管理<span class="admin-entry__tag">MOCK</span></a>
 
     <header class="hd2">
       <div class="hd2__inner">
