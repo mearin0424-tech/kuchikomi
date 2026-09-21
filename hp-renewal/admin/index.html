@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>記事エディタ｜一般社団法人口コミ対策センター</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Old+Mincho:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css?v=20260628b">
+<link rel="stylesheet" href="/admin/admin.css?v=20260921b">
+</head>
+<body class="ae">
+
+<header class="ae-top">
+  <div class="ae-top__brand">
+    <a href="/" class="ae-top__home" title="サイトトップへ">口コミ対策センター</a>
+    <span class="ae-top__title">記事エディタ</span>
+  </div>
+  <nav class="ae-tabs" aria-label="管理メニュー">
+    <a href="/admin/" aria-current="page">記事エディタ</a>
+    <a href="/admin/dashboard.html">アクセス解析</a>
+  </nav>
+  <label class="ae-top__select">
+    <span class="ae-sr">編集する記事</span>
+    <select id="articleSelect"><option value="">記事を選択してください</option></select>
+  </label>
+  <div class="ae-top__format" role="toolbar" aria-label="文字の書式">
+    <button type="button" data-cmd="bold" title="太字（Ctrl+B）"><b>B</b></button>
+    <button type="button" data-cmd="link" title="リンクを付ける">リンク</button>
+    <button type="button" data-cmd="unlink" title="リンクを外す">リンク解除</button>
+    <button type="button" data-cmd="clear" title="選択範囲の書式を消す">書式クリア</button>
+  </div>
+  <div class="ae-top__actions">
+    <select id="historySelect" aria-label="変更履歴"><option value="">変更履歴</option></select>
+    <button type="button" id="restoreBtn" class="ae-btn">復元</button>
+    <a id="viewLink" class="ae-btn" href="#" target="_blank" rel="noopener">公開ページを見る</a>
+    <button type="button" id="saveBtn" class="ae-btn ae-btn--primary" disabled>保存してHPに反映</button>
+  </div>
+  <div class="ae-top__status" id="status" aria-live="polite"></div>
+</header>
+
+<div class="ae-offline" id="offline" hidden>
+  <h2>編集サーバーに接続できません</h2>
+  <p>記事の編集・保存には、このフォルダで編集用サーバーを起動してください。</p>
+  <pre>cd hp-renewal
+node server.js</pre>
+  <p>起動後、<a href="http://localhost:8080/admin/">http://localhost:8080/admin/</a> を開きます。</p>
+</div>
+
+<div class="ae-layout" id="layout" hidden>
+  <aside class="ae-side">
+    <div class="ae-side__head">
+      <h2>構成（章立て）</h2>
+      <p>クリックで移動。▲▼で章ごと並べ替えできます。</p>
+    </div>
+    <ol class="ae-outline" id="outline"></ol>
+    <button type="button" class="ae-btn ae-btn--block" id="addChapterBtn">＋ 章を追加</button>
+  </aside>
+
+  <main class="ae-main">
+    <section class="ae-card" aria-labelledby="metaHead">
+      <h2 class="ae-card__title" id="metaHead">基本情報</h2>
+      <div class="ae-fields">
+        <label class="ae-field ae-field--wide">
+          <span>記事タイトル（ページ見出し）</span>
+          <input type="text" id="f-h1" autocomplete="off">
+          <small>変更すると、パンくず・一覧・フッターなどサイト内のリンク文字も自動で書き換わります。</small>
+        </label>
+        <label class="ae-field ae-field--wide">
+          <span>見出し下の説明文</span>
+          <textarea id="f-lead" rows="2"></textarea>
+        </label>
+        <label class="ae-field">
+          <span>見出し上の英字ラベル</span>
+          <input type="text" id="f-en" autocomplete="off">
+        </label>
+        <div class="ae-field" id="listingFields"></div>
+        <label class="ae-field ae-field--wide">
+          <span>SEOタイトル（ブラウザのタブ・検索結果）</span>
+          <input type="text" id="f-seoTitle" autocomplete="off">
+        </label>
+        <label class="ae-field ae-field--wide">
+          <span>メタディスクリプション <em class="ae-count" id="descCount"></em></span>
+          <textarea id="f-description" rows="2"></textarea>
+        </label>
+      </div>
+    </section>
+
+    <section class="ae-card" aria-labelledby="bodyHead">
+      <div class="ae-card__row">
+        <h2 class="ae-card__title" id="bodyHead">本文</h2>
+        <p class="ae-hint">ブロック左の「⋮⋮」をドラッグ、または ▲▼ で順番を入れ替えられます。種類のプルダウンで見出し⇔段落⇔箇条書きなどに変更できます。</p>
+      </div>
+      <div class="ae-blocks prose" id="blocks"></div>
+      <div class="ae-add" id="addBar"></div>
+    </section>
+  </main>
+</div>
+
+<div class="ae-toast" id="toast" hidden></div>
+
+<script src="/admin/admin.js?v=20260921a"></script>
+</body>
+</html>

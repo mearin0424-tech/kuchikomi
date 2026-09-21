@@ -1,0 +1,4 @@
+# 設定・共通処理・データは直接アクセスさせない
+<FilesMatch "^(lib|config|config\.sample)\.php$">
+  Require all denied
+</FilesMatch>

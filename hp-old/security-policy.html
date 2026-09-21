@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>情報セキュリティ基本方針 | 一般社団法人口コミ対策センター</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              navy: '#0B2240',
+              blue: '#00539C',
+              gold: '#E5A93C',
+              goldHover: '#CD932B',
+              lightBg: '#F8F9FA',
+              footerBg: '#F4F4F2'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* ドットテクスチャ背景の簡易再現用（画像がない場合のフォールバック） */
+    .dot-bg {
+      background-image: radial-gradient(#e2e8f0 1.5px, transparent 1.5px);
+      background-size: 16px 16px;
+    }
+  </style>
+</head>
+<body class="text-gray-800 bg-brand-lightBg antialiased font-sans leading-relaxed pb-20">
+
+  <header class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm">
+    <div class="container mx-auto px-4 md:px-8 py-3.5 flex justify-between items-center max-w-6xl">
+      <a href="#" class="flex items-center gap-2">
+        <img src="images/logo_header.png" alt="一般社団法人 口コミ対策センター" class="h-8 md:h-9 object-contain">
+        <div class="flex flex-col text-left">
+          <span class="text-xs md:text-sm font-extrabold text-brand-navy tracking-wider leading-none">一般社団法人</span>
+          <span class="text-sm md:text-base font-black text-brand-navy tracking-widest mt-0.5 leading-none">口コミ対策センター</span>
+          <span class="text-[8px] text-gray-400 font-medium tracking-wide mt-0.5 leading-none">Review Risk Management Center</span>
+        </div>
+      </a>
+      <button class="flex items-center gap-1.5 text-xs font-bold text-brand-navy group focus:outline-none" aria-label="メニューを開く">
+        <div class="flex flex-col gap-1 w-4">
+          <span class="h-0.5 w-full bg-brand-navy group-hover:bg-brand-blue transition"></span>
+          <span class="h-0.5 w-full bg-brand-navy group-hover:bg-brand-blue transition"></span>
+        </div>
+        <span class="tracking-wider text-[10px] md:text-xs">MENU</span>
+      </button>
+    </div>
+  </header>
+
+  <section class="relative bg-white pt-16 pb-20 md:pt-20 md:pb-24 overflow-hidden dot-bg" style="background-image: url('images/bg_security_hero.jpg');">
+    <div class="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-brand-lightBg"></div>
+    <div class="container mx-auto px-6 max-w-4xl relative z-10">
+      <h1 class="text-2xl md:text-4xl font-black text-brand-navy tracking-wide">
+        情報セキュリティ基本方針
+      </h1>
+    </div>
+  </section>
+
+  <main class="container mx-auto px-4 md:px-6 -mt-10 relative z-20 max-w-4xl mb-20">
+    <div class="bg-white rounded-[32px] md:rounded-[48px] shadow-sm border border-gray-100 p-6 md:p-14 space-y-10 text-xs md:text-sm text-gray-700 leading-loose font-normal tracking-wide">
+      
+      <div class="space-y-4 text-gray-600">
+        <p>
+          一般社団法人口コミ対策センター（以下「当センター」といいます。）は、日本の企業を不当な口コミの害悪から守り、健全な情報空間を維持することを至上命題としています。
+        </p>
+        <p>
+          ご相談者様およびお取引先様からお預かりする機密情報は、当センターの活動の根幹であり、これらをあらゆる脅威から守り抜くことは、組織の存立に関わる最優先事項であると深く認識しています。情報漏洩は、単なる事務的過失ではなく、お客様の成約率や社会的信用を直接的に破壊する重大なリスクです。
+        </p>
+        <p>
+          ここに「情報セキュリティ基本方針」を定め、当センターの全役職員が一丸となって、鉄壁の情報管理を実践することを宣言いたします。
+        </p>
+      </div>
+
+      <div class="space-y-2">
+        <h2 class="font-bold text-sm md:text-base text-brand-navy border-b border-gray-100 pb-1.5 flex items-baseline gap-1.5">
+          <span>1.</span> 組織的な管理体制の確立
+        </h2>
+        <p>当センターは、情報セキュリティを経営の最重要課題の一つと位置づけ、強固な内部管理体制を構築します。情報資産の「機密性」「完全性」「可用性」を維持するため、責任の所在を明確にし、組織的な防衛策を講じます。</p>
+      </div>
+
+      <div class="space-y-2">
+        <h2 class="font-bold text-sm md:text-base text-brand-navy border-b border-gray-100 pb-1.5 flex items-baseline gap-1.5">
+          <span>2.</span> 法令および社会的規範の遵守
+        </h2>
+        <p>個人情報保護法をはじめとする情報セキュリティ関連法令、国が定める指針、お取引先様との契約事項、および公序良俗を厳格に遵守します。法の精神を深く理解し、社会の範となる誠実な運営を徹底します。</p>
+      </div>
+
+      <div class="space-y-2">
+        <h2 class="font-bold text-sm md:text-base text-brand-navy border-b border-gray-100 pb-1.5 flex items-baseline gap-1.5">
+          <span>3.</span> 内部規程の整備と運用
+        </h2>
+        <p>本方針を具体化するため、情報管理に関する詳細な内部規程を策定し、全ての役職員（役員、正職員、契約職員、外部協力者等）に周知徹底します。例外のないルール運用により、判断のブレを排除し、一貫した管理体制を維持します。</p>
+      </div>
+
+      <div class="space-y-2">
+        <h2 class="font-bold text-sm md:text-base text-brand-navy border-b border-gray-100 pb-1.5 flex items-baseline gap-1.5">
+          <span>4.</span> 専門家としての教育・啓発活動
+        </h2>
+        <p>当センターに属するすべての者は、情報の重みを熟知した専門家でなければなりません。人的ミスが「お客様の経営実害」に直結することを深く刻み込むための教育を継続的に実施し、組織全体のリテラシーを最高水準に保ます。</p>
+      </div>
+
+      <div class="space-y-2">
+        <h2 class="font-bold text-sm md:text-base text-brand-navy border-b border-gray-100 pb-1.5 flex items-baseline gap-1.5">
+          <span>5.</span> 継続的な点検と改善
+        </h2>
+        <p>変化の激しいデジタル環境や高度化するサイバー脅威に対し、現在の対策が最適であるかを定期的に検証します。点検の結果に基づき、管理体制を絶え間なく改善し、常に最新かつ強固なセキュリティレベルを維持します。</p>
+      </div>
+
+      <div class="space-y-2">
+        <h2 class="font-bold text-sm md:text-base text-brand-navy border-b border-gray-100 pb-1.5 flex items-baseline gap-1.5">
+          <span>6.</span> 社会的信頼の担保と不退転の決意
+        </h2>
+        <p>当センターは、本方針の徹底こそが、お客様および社会全体から寄せられる信頼の基盤であると確信しています。万が一、本方針に反する事態が生じた場合には、速やかに事実を公表し、組織を挙げて原因究明と再発防止、および厳正な対処を行います。</p>
+      </div>
+
+      <div class="text-right pt-4 text-gray-500 font-medium">
+        <p>以上</p>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="bg-brand-footerBg text-gray-600 pt-16 pb-24 md:pb-16 text-xs border-t border-gray-200/60">
+    <div class="container mx-auto px-6 max-w-5xl">
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 items-start mb-12">
+        <div class="md:col-span-1 flex flex-col items-start gap-3">
+          <img src="images/logo_footer.png" alt="口コミ対策センターロゴ" class="h-10 object-contain">
+          <div class="text-left">
+            <p class="font-black text-sm text-brand-navy tracking-wider">一般社団法人</p>
+            <p class="font-black text-base text-brand-navy tracking-widest mt-0.5">口コミ対策センター</p>
+            <p class="text-[9px] text-gray-400 font-medium tracking-wide mt-1">Review Risk Management Center</p>
+          </div>
+        </div>
+
+        <div class="md:col-span-2 grid grid-cols-2 sm:grid-cols-2 gap-6 md:gap-4 text-left font-medium text-gray-600 text-[11px] md:text-xs">
+          <div class="space-y-3">
+            <a href="#" class="block hover:text-brand-blue hover:underline transition">ホーム</a>
+            <a href="#" class="block hover:text-brand-blue hover:underline transition">代表者挨拶</a>
+            <a href="#" class="block hover:text-brand-blue hover:underline transition">当センターについて</a>
+            <a href="#" class="block hover:text-brand-blue hover:underline transition">サービス内容</a>
+            <a href="#" class="block hover:text-brand-blue hover:underline transition">お問い合わせ</a>
+          </div>
+          <div class="space-y-3">
+            <a href="#" class="block hover:text-brand-blue hover:underline transition">プライバシーポリシー</a>
+            <a href="#" class="block hover:text-brand-blue hover:underline transition">ソーシャルメディアポリシー</a>
+            <a href="#" class="block hover:text-brand-blue hover:underline transition">情報セキュリティ基本方針</a>
+            <a href="#" class="block hover:text-brand-blue hover:underline transition">採用情報</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-t border-gray-300/60 pt-6 text-center text-[10px] text-gray-400 tracking-wide">
+        <p>©2025 一般社団法人口コミ対策センター</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <div class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-t border-gray-200 shadow-2xl px-4 py-3 flex justify-between items-center z-50 md:max-w-xl md:mx-auto md:rounded-t-2xl">
+    <div class="flex items-center gap-2 pl-1">
+      <img src="images/logo_fixed_bar.png" alt="ロゴ" class="h-5 w-auto object-contain">
+      <div class="flex flex-col text-left">
+        <span class="text-[8px] font-bold text-brand-navy leading-none">一般社団法人</span>
+        <span class="text-[10px] font-black text-brand-navy tracking-tight leading-none mt-0.5">口コミ対策センター</span>
+      </div>
+    </div>
+    <a href="#" class="bg-brand-gold hover:bg-brand-goldHover text-white font-bold text-xs md:text-sm px-5 py-2.5 rounded-lg shadow-md transition duration-200 tracking-wider flex items-center gap-2">
+      <span class="text-[9px] bg-white/20 px-1.5 py-0.5 rounded-sm">簡単1分で完了!</span>
+      <span>無料診断・お申し込み</span>
+      <span class="text-[10px] font-bold">&gt;</span>
+    </a>
+  </div>
+
+</body>
+</html>

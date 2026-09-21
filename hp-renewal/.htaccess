@@ -1,0 +1,5 @@
+# 公開サーバー（XServer）用：管理用・作業用のファイルは外から見えないようにする
+RedirectMatch 404 (^|/)(admin|_config|_backups|_source_dump)(/|$)
+<FilesMatch "^(server\.js|_generate\.py|README\.md|\.gitignore)$">
+  Require all denied
+</FilesMatch>

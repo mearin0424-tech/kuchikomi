@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>アクセス解析｜一般社団法人口コミ対策センター</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css?v=20260628b">
+<link rel="stylesheet" href="/admin/admin.css?v=20260921b">
+</head>
+<body class="ae">
+
+<header class="ae-top">
+  <div class="ae-top__brand">
+    <a href="/" class="ae-top__home" title="サイトトップへ">口コミ対策センター</a>
+    <span class="ae-top__title">アクセス解析</span>
+  </div>
+  <nav class="ae-tabs" aria-label="管理メニュー">
+    <a href="/admin/">記事エディタ</a>
+    <a href="/admin/dashboard.html" aria-current="page">アクセス解析</a>
+  </nav>
+  <div class="db-range" role="group" aria-label="集計期間">
+    <button type="button" data-days="7">7日</button>
+    <button type="button" data-days="30" aria-pressed="true">30日</button>
+    <button type="button" data-days="90">90日</button>
+    <label><span class="ae-sr">開始日</span><input type="date" id="fromDate"></label>
+    <span>〜</span>
+    <label><span class="ae-sr">終了日</span><input type="date" id="toDate"></label>
+  </div>
+  <div class="ae-top__actions">
+    <button type="button" class="ae-btn" id="reloadBtn">更新</button>
+    <button type="button" class="ae-btn" id="settingsBtn">接続設定</button>
+  </div>
+  <div class="ae-top__status" id="status" aria-live="polite"></div>
+</header>
+
+<div class="db-wrap">
+  <section class="ae-card db-setup" id="setup" hidden>
+    <h2 class="ae-card__title">集計サーバー（XServer）への接続設定</h2>
+    <p class="ae-hint">公開サイトの <code>backend/config.php</code> に設定した <code>stats_token</code> と同じ値を入力してください。設定はこのPCの <code>_config/analytics.json</code> にだけ保存されます。</p>
+    <form class="ae-fields" id="setupForm">
+      <label class="ae-field ae-field--wide">
+        <span>集計APIのURL</span>
+        <input type="url" id="endpoint" placeholder="https://kuchikomi-taisaku.com/backend/stats.php" required>
+      </label>
+      <label class="ae-field ae-field--wide">
+        <span>集計用トークン（stats_token）</span>
+        <input type="password" id="token" autocomplete="off" placeholder="保存済みのトークンを使う場合は空欄のまま">
+      </label>
+      <div class="ae-field ae-field--wide db-setup__actions">
+        <button type="submit" class="ae-btn ae-btn--primary">保存して接続</button>
+        <button type="button" class="ae-btn" id="setupCancel">閉じる</button>
+      </div>
+    </form>
+  </section>
+
+  <div class="db-message" id="message" hidden></div>
+
+  <div id="dashboard" hidden>
+    <section class="db-tiles" aria-label="主な数値" id="tiles"></section>
+
+    <div class="db-grid">
+      <section class="ae-card">
+        <div class="db-card-head">
+          <h2 class="ae-card__title">日別の推移</h2>
+          <div class="db-seg" role="group" aria-label="表示する指標" id="metricSwitch">
+            <button type="button" data-metric="views" aria-pressed="true">閲覧数</button>
+            <button type="button" data-metric="sessions">訪問数</button>
+            <button type="button" data-metric="cta">申込ボタン</button>
+            <button type="button" data-metric="submits">送信完了</button>
+          </div>
+        </div>
+        <div class="db-chart" id="dailyChart"></div>
+      </section>
+
+      <section class="ae-card">
+        <h2 class="ae-card__title">申し込みまでの流れ</h2>
+        <p class="ae-hint">期間中の訪問のうち、各段階まで進んだ訪問の数です。</p>
+        <div class="db-funnel" id="funnel"></div>
+      </section>
+    </div>
+
+    <section class="ae-card">
+      <div class="db-card-head">
+        <h2 class="ae-card__title">記事・ページ別</h2>
+        <div class="db-seg" role="group" aria-label="表示するページ" id="pageFilter">
+          <button type="button" data-filter="article" aria-pressed="true">記事・コラムのみ</button>
+          <button type="button" data-filter="all">すべてのページ</button>
+        </div>
+      </div>
+      <p class="ae-hint">「申込ボタン」「送信完了」は、そのページを見た訪問のうち、その後に申込ボタンを押した／フォーム送信まで至った数です。行をクリックすると流入元などの詳細を表示します。</p>
+      <div class="db-table-wrap"><table class="db-table" id="pagesTable"></table></div>
+    </section>
+
+    <div class="db-grid">
+      <section class="ae-card">
+        <h2 class="ae-card__title">流入元（サイトに来る前にいた場所）</h2>
+        <div class="db-table-wrap"><table class="db-table" id="refTable"></table></div>
+      </section>
+      <section class="ae-card">
+        <h2 class="ae-card__title">申込ボタンが押された場所</h2>
+        <div class="db-table-wrap"><table class="db-table" id="ctaTable"></table></div>
+      </section>
+    </div>
+
+    <section class="ae-card">
+      <h2 class="ae-card__title">最近の申し込み</h2>
+      <p class="ae-hint">入力内容（氏名・連絡先など）は通知メールで確認してください。ここには経路だけを表示します。</p>
+      <div class="db-table-wrap"><table class="db-table" id="recentTable"></table></div>
+    </section>
+  </div>
+</div>
+
+<div class="db-tooltip" id="tooltip" hidden></div>
+<div class="ae-toast" id="toast" hidden></div>
+
+<script src="/admin/dashboard.js?v=20260921a"></script>
+</body>
+</html>

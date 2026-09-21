@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>サービス内容 | 一般社団法人口コミ対策センター</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              navy: '#0B2240',
+              blue: '#00539C',
+              blueHover: '#00427D',
+              gold: '#E5A93C',
+              goldHover: '#CD932B',
+              lightBg: '#F8F9FA',
+              footerBg: '#F4F4F2'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* ドットテクスチャ背景の簡易再現用（画像がない場合のフォールバック） */
+    .dot-bg {
+      background-image: radial-gradient(#e2e8f0 1.5px, transparent 1.5px);
+      background-size: 16px 16px;
+    }
+  </style>
+</head>
+<body class="text-gray-800 bg-brand-lightBg antialiased font-sans leading-relaxed pb-20">
+
+  <header class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm">
+    <div class="container mx-auto px-4 md:px-8 py-3.5 flex justify-between items-center max-w-6xl">
+      <a href="#" class="flex items-center gap-2">
+        <img src="images/logo_header.png" alt="一般社団法人 口コミ対策センター" class="h-8 md:h-9 object-contain">
+        <div class="flex flex-col text-left">
+          <span class="text-xs md:text-sm font-extrabold text-brand-navy tracking-wider leading-none">一般社団法人</span>
+          <span class="text-sm md:text-base font-black text-brand-navy tracking-widest mt-0.5 leading-none">口コミ対策センター</span>
+          <span class="text-[8px] text-gray-400 font-medium tracking-wide mt-0.5 leading-none">Review Risk Management Center</span>
+        </div>
+      </a>
+      <button class="flex items-center gap-1.5 text-xs font-bold text-brand-navy group focus:outline-none" aria-label="メニューを開く">
+        <div class="flex flex-col gap-1 w-4">
+          <span class="h-0.5 w-full bg-brand-navy group-hover:bg-brand-blue transition"></span>
+          <span class="h-0.5 w-full bg-brand-navy group-hover:bg-brand-blue transition"></span>
+        </div>
+        <span class="tracking-wider text-[10px] md:text-xs">MENU</span>
+      </button>
+    </div>
+  </header>
+
+  <section class="relative bg-white pt-16 pb-20 md:pt-20 md:pb-24 overflow-hidden dot-bg" style="background-image: url('images/bg_services_hero.jpg');">
+    <div class="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-brand-lightBg"></div>
+    <div class="container mx-auto px-6 max-w-4xl relative z-10">
+      <h1 class="text-2xl md:text-4xl font-black text-brand-navy tracking-wide">
+        サービス内容
+      </h1>
+      <p class="text-sm md:text-base font-bold text-brand-blue mt-2 tracking-widest font-serif italic">
+        Services
+      </p>
+    </div>
+  </section>
+
+  <main class="container mx-auto px-4 md:px-6 -mt-10 relative z-20 max-w-4xl mb-16">
+    <div class="bg-white rounded-[32px] md:rounded-[48px] shadow-sm border border-gray-100 p-6 md:p-12 space-y-16 md:space-y-24">
+      
+      <section class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+        <div class="md:col-span-7 space-y-4">
+          <h2 class="text-lg md:text-2xl font-bold text-brand-navy tracking-wide">評判調査・リスク分析</h2>
+          <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
+            現在、ネット上にどのようなネガティブな情報が存在するのか、主要なSNSや検索エンジン、口コミサイトを徹底的に調査し、経営リスクを可視化します。
+          </p>
+          <div class="flex flex-wrap gap-x-4 gap-y-2 text-xs font-bold text-brand-blue pt-1">
+            <span class="flex items-center gap-1">⏱ 定期モニタリング</span>
+            <span class="flex items-center gap-1">📋 リスク調査報告書の作成</span>
+            <span class="flex items-center gap-1">💡 具体的な対策プランの立案</span>
+          </div>
+          <ul class="text-xs text-gray-500 space-y-1.5 pt-2 pl-1 border-t border-gray-100">
+            <li class="flex items-start gap-2">
+              <span class="text-brand-blue">・</span>具体的な被害状況を正確に把握し、効果的な対策を打ちたい。
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-brand-blue">・</span>炎上の兆候を早期に発見し、実害が出る前に対処したい。
+            </li>
+          </ul>
+        </div>
+        <div class="md:col-span-5">
+          <img src="images/service_analysis.jpg" alt="評判調査・リスク分析" class="w-full h-auto rounded-xl shadow-sm object-cover aspect-[4/3]">
+        </div>
+      </section>
+
+      <section class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start border-t border-gray-100 pt-12 md:pt-16">
+        <div class="md:col-span-7 space-y-4 md:order-1">
+          <h2 class="text-lg md:text-2xl font-bold text-brand-navy tracking-wide">Google口コミ対策</h2>
+          <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
+            Googleビジネスプロフィールに投稿された、事実無根の低評価や嫌がらせによる口コミトラブルを、実務面から解決いたします。
+          </p>
+          <ul class="text-xs text-gray-500 space-y-1.5 pt-2 pl-1">
+            <li class="flex items-start gap-2">
+              <span class="text-brand-blue">・</span>不当な低評価が目立つことで、新規顧客の獲得に支障が出ている。
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-brand-blue">・</span>ガイドラインに違反するような悪質な嫌がらせを受けている。
+            </li>
+          </ul>
+          <div class="pt-2">
+            <a href="#" class="inline-flex items-center gap-2 bg-brand-blue hover:bg-brand-blueHover text-white text-xs font-bold px-5 py-2.5 rounded shadow transition">
+              <span>サービス詳細はこちら</span>
+              <span class="text-[10px]">↗</span>
+            </a>
+          </div>
+        </div>
+        <div class="md:col-span-5 md:order-2">
+          <img src="images/service_google.jpg" alt="Google口コミ対策" class="w-full h-auto rounded-xl shadow-sm object-cover aspect-[4/3]">
+        </div>
+      </section>
+
+      <section class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start border-t border-gray-100 pt-12 md:pt-16">
+        <div class="md:col-span-7 space-y-4">
+          <h2 class="text-lg md:text-2xl font-bold text-brand-navy tracking-wide">サジェスト対策</h2>
+          <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
+            各種検索エンジンにおいて、検索窓に表示されるネガティブな検索候補（サジェスト）を整理し、正しい情報が届くよう支援します。
+          </p>
+          <div class="flex flex-wrap gap-x-4 gap-y-2 text-xs font-bold text-brand-blue pt-1">
+            <span class="flex items-center gap-1">✓ Google</span>
+            <span class="flex items-center gap-1">✓ Yahoo!</span>
+            <span class="flex items-center gap-1">✓ Bing</span>
+          </div>
+          <ul class="text-xs text-gray-500 space-y-1.5 pt-2 pl-1 border-t border-gray-100">
+            <li class="flex items-start gap-2">
+              <span class="text-brand-blue">・</span>検索窓に「ブラック」「事件」等のネガティブなワードが表示され、困っている。
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-brand-blue">・</span>風評被害によるブランドイメージの低下や、採用への悪影響を食い止めたい。
+            </li>
+          </ul>
+        </div>
+        <div class="md:col-span-5">
+          <img src="images/service_suggest.jpg" alt="サジェスト対策" class="w-full h-auto rounded-xl shadow-sm object-cover aspect-[4/3]">
+        </div>
+      </section>
+
+      <section class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start border-t border-gray-100 pt-12 md:pt-16">
+        <div class="md:col-span-7 space-y-4 md:order-1">
+          <h2 class="text-lg md:text-2xl font-bold text-brand-navy tracking-wide">掲示板対策</h2>
+          <p class="text-xs md:text-sm text-gray-600 leading-relaxed">
+            5ちゃんねる、爆サイ、マンションコミュニティ等、匿名掲示板における書き込みに対し、法的・技術的アプローチによる非表示化をサポートします。
+          </p>
+          <div class="flex flex-wrap gap-x-4 gap-y-2 text-xs font-bold text-brand-blue pt-1">
+            <span class="flex items-center gap-1">✓ 5ちゃんねる</span>
+            <span class="flex items-center gap-1">✓ 爆サイ.com</span>
+            <span class="flex items-center gap-1">✓ マンションコミュニティ</span>
+          </div>
+          <ul class="text-xs text-gray-500 space-y-1.5 pt-2 pl-1 border-t border-gray-100">
+            <li class="flex items-start gap-2">
+              <span class="text-brand-blue">・</span>匿名掲示板での誹謗中傷が、従業員の士気や個人の生活にまで悪影響を及ぼしている。
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-brand-blue">・</span>自身で削除依頼を出したが対応してもらえず、専門家の力を借りたい。
+            </li>
+          </ul>
+        </div>
+        <div class="md:col-span-5 md:order-2">
+          <img src="images/service_board.jpg" alt="掲示板対策" class="w-full h-auto rounded-xl shadow-sm object-cover aspect-[4/3]">
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <section class="container mx-auto px-4 max-w-4xl text-center mb-20">
+    <div class="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-gray-100">
+      <h2 class="text-xl md:text-2xl font-extrabold text-brand-navy tracking-wide mb-4">
+        ご相談・お見積もりはすべて無料です
+      </h2>
+      <p class="text-xs md:text-sm text-gray-600 max-w-xl mx-auto leading-relaxed">
+        現在の被害状況を伺った上で、最適な解決策をご提案します。お一人で悩まず、まずは当センターへご相談ください。
+      </p>
+    </div>
+  </section>
+
+  <footer class="bg-brand-footerBg text-gray-600 pt-16 pb-24 md:pb-16 text-xs border-t border-gray-200/60">
+    <div class="container mx-auto px-6 max-w-5xl">
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 items-start mb-12">
+        <div class="md:col-span-1 flex flex-col items-start gap-3">
+          <img src="images/logo_footer.png" alt="口コミ対策センターロゴ" class="h-10 object-contain">
+          <div class="text-left">
+            <p class="font-black text-sm text-brand-navy tracking-wider">一般社団法人</p>
+            <p class="font-black text-base text-brand-navy tracking-widest mt-0.5">口コミ対策センター</p>
+            <p class="text-[9px] text-gray-400 font-medium tracking-wide mt-1">Review Risk Management Center</p>
+          </div>
+        </div>
+
+        <div class="md:col-span-2 grid grid-cols-2 sm:grid-cols-2 gap-6 md:gap-4 text-left font-medium text-gray-600 text-[11px] md:text-xs">
+          <div class="space-y-3">
+            <a href="#" class="block hover:text-brand-blue hover:underline transition">ホーム</a>
+            <a href="#" class="block hover:text-brand-blue hover:underline transition">代表者挨拶</a>
+            <a href="#" class="block hover:text-brand-blue hover:underline transition">当センターについて</a>
+            <a href="#" class="block hover:text-brand-blue hover:underline transition">サービス内容</a>
+            <a href="#" class="block hover:text-brand-blue hover:underline transition">お問い合わせ</a>
+          </div>
+          <div class="space-y-3">
+            <a href="#" class="block hover:text-brand-blue hover:underline transition">プライバシーポリシー</a>
+            <a href="#" class="block hover:text-brand-blue hover:underline transition">ソーシャルメディアポリシー</a>
+            <a href="#" class="block hover:text-brand-blue hover:underline transition">情報セキュリティ基本方針</a>
+            <a href="#" class="block hover:text-brand-blue hover:underline transition">採用情報</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-t border-gray-300/60 pt-6 text-center text-[10px] text-gray-400 tracking-wide">
+        <p>©2025 一般社団法人口コミ対策センター</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <div class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-t border-gray-200 shadow-2xl px-4 py-3 flex justify-between items-center z-50 md:max-w-xl md:mx-auto md:rounded-t-2xl">
+    <div class="flex items-center gap-2 pl-1">
+      <img src="images/logo_fixed_bar.png" alt="ロゴ" class="h-5 w-auto object-contain">
+      <div class="flex flex-col text-left">
+        <span class="text-[8px] font-bold text-brand-navy leading-none">一般社団法人</span>
+        <span class="text-[10px] font-black text-brand-navy tracking-tight leading-none mt-0.5">口コミ対策センター</span>
+      </div>
+    </div>
+    <a href="#" class="bg-brand-gold hover:bg-brand-goldHover text-white font-bold text-xs md:text-sm px-5 py-2.5 rounded-lg shadow-md transition duration-200 tracking-wider flex items-center gap-2">
+      <span class="text-[9px] bg-white/20 px-1.5 py-0.5 rounded-sm">簡単1分で完了!</span>
+      <span>無料診断・お申し込み</span>
+      <span class="text-[10px] font-bold">&gt;</span>
+    </a>
+  </div>
+
+</body>
+</html>

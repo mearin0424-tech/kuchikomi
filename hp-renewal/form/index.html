@@ -25,6 +25,10 @@
       }
     }
   </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/lp-form.css?v=20260922a">
 </head>
 <body class="text-gray-800 bg-brand-lightBg antialiased font-sans leading-relaxed pb-20">
 
@@ -48,178 +52,51 @@
     </div>
   </header>
 
-  <section class="pt-14 pb-8 text-center max-w-3xl mx-auto px-4">
-    <h1 class="text-xl md:text-3xl font-bold text-brand-navy tracking-wide">
-      お問い合わせ
-    </h1>
-    <div class="mt-4 text-xs text-gray-500 leading-relaxed max-w-xl mx-auto">
-      <p>※ご回答内容を確認後、</p>
-      <p>担当の専門スタッフより最短で即日中にご連絡を差し上げます。</p>
+  <main>
+  <h1 class="lpf-sr">無料診断・お申し込み</h1>
+  <section class="lpf-section" id="diagnostic">
+    <div class="lpf-card">
+      <h2 class="lpf-title">今すぐ無料診断</h2>
+      <p class="lpf-sub">あなたの企業の評価レベルをチェック！</p>
+      <form class="lpf-form" action="#" method="POST" data-form="form" data-thanks="thanks/" data-steps>
+        <div class="lpf-step1" data-field>
+          <label class="lpf-sr" for="form-url">貴社HPのURL</label>
+          <input class="lpf-input" id="form-url" type="text" name="url" inputmode="url" autocomplete="url" placeholder="貴社HPのURLを貼り付け" required>
+          <button class="lpf-btn" type="button" data-step-next>診断開始</button>
+        </div>
+        <div class="lpf-step2" data-step2>
+          <div class="lpf-step2__inner">
+            <p class="lpf-lead">診断結果の送信先を入力してください。<br>専門スタッフが解析し、1営業日以内に結果をご連絡します。</p>
+            <p class="lpf-ssl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15.5" r="1.2" fill="currentColor" stroke="none"/></svg>SSL暗号化通信採用 / 秘密厳守 / 強引な営業活動は一切行いません。</p>
+            <div class="lpf-fields">
+              <div class="lpf-field" data-field>
+                <label class="lpf-label" for="form-company">会社名 / 屋号<span class="lpf-badge">必須</span></label>
+                <input class="lpf-input" id="form-company" type="text" name="company" autocomplete="organization" placeholder="〇〇株式会社" required>
+              </div>
+              <div class="lpf-field" data-field>
+                <label class="lpf-label" for="form-name">ご担当者名<span class="lpf-badge">必須</span></label>
+                <input class="lpf-input" id="form-name" type="text" name="name" autocomplete="name" placeholder="山田 太郎" required>
+              </div>
+              <div class="lpf-field" data-field>
+                <label class="lpf-label" for="form-email">メールアドレス<span class="lpf-badge">いずれか必須</span></label>
+                <input class="lpf-input" id="form-email" type="email" name="email" autocomplete="email" placeholder="example@mail.com" data-either>
+              </div>
+              <div class="lpf-field" data-field>
+                <label class="lpf-label" for="form-tel">電話番号<span class="lpf-badge">いずれか必須</span></label>
+                <input class="lpf-input" id="form-tel" type="tel" name="tel" autocomplete="tel" placeholder="090-1234-5678" data-either>
+              </div>
+              <div class="lpf-field" data-field>
+                <label class="lpf-label" for="form-message">お悩み・ご相談事項など</label>
+                <textarea class="lpf-textarea" id="form-message" name="message" placeholder="例：悪質な口コミをなんとかしたい、まずは対策可能か知りたい"></textarea>
+              </div>
+            </div>
+            <button class="lpf-btn lpf-btn--submit" type="submit">診断結果をもらう</button>
+          </div>
+        </div>
+        <p class="lpf-note">※まずは可能性の診断のみを行います。費用は一切かかりません。</p>
+      </form>
     </div>
   </section>
-
-  <main class="container mx-auto px-4 md:px-6 relative z-20 max-w-2xl mb-20">
-    <div class="bg-white rounded-[24px] md:rounded-[32px] p-6 sm:p-10 md:p-12 border border-gray-100 shadow-sm">
-      
-      <form action="#" method="POST" class="space-y-8 text-xs md:text-sm">
-        
-        <div class="space-y-2">
-          <label class="block font-bold text-gray-700">会社・屋号名</label>
-          <input type="text" placeholder="会社名"
-                 class="w-full bg-white border border-gray-200 rounded-md px-4 py-3 text-gray-800 placeholder-gray-300 focus:outline-none focus:border-brand-blue transition text-xs">
-        </div>
-
-        <div class="space-y-3">
-          <label class="block font-bold text-gray-700">
-            現在お悩みの内容<span class="text-red-500 ml-1">*</span>
-          </label>
-          <div class="space-y-2.5 pl-1">
-            <label class="flex items-start gap-2.5 cursor-pointer text-gray-600 font-medium leading-normal">
-              <input type="checkbox" name="trouble" class="mt-0.5 rounded border-gray-300 text-brand-blue focus:ring-0 w-3.5 h-3.5">
-              <span>Googleマップの低評価や悪質な口コミを何とかしたい</span>
-            </label>
-            <label class="flex items-start gap-2.5 cursor-pointer text-gray-600 font-medium leading-normal">
-              <input type="checkbox" name="trouble" class="mt-0.5 rounded border-gray-300 text-brand-blue focus:ring-0 w-3.5 h-3.5">
-              <span>掲示板や口コミサイトに気になる書き込みがある</span>
-            </label>
-            <label class="flex items-start gap-2.5 cursor-pointer text-gray-600 font-medium leading-normal">
-              <input type="checkbox" name="trouble" class="mt-0.5 rounded border-gray-300 text-brand-blue focus:ring-0 w-3.5 h-3.5">
-              <span>投稿した人物を特定したい（発信者情報開示）</span>
-            </label>
-            <label class="flex items-start gap-2.5 cursor-pointer text-gray-600 font-medium leading-normal">
-              <input type="checkbox" name="trouble" class="mt-0.5 rounded border-gray-300 text-brand-blue focus:ring-0 w-3.5 h-3.5">
-              <span>検索結果・検索サジェストにネガティブな情報が表示される</span>
-            </label>
-            <label class="flex items-start gap-2.5 cursor-pointer text-gray-600 font-medium leading-normal">
-              <input type="checkbox" name="trouble" class="mt-0.5 rounded border-gray-300 text-brand-blue focus:ring-0 w-3.5 h-3.5">
-              <span>風評被害で、問い合わせや採用応募が減っている気がする</span>
-            </label>
-            <label class="flex items-start gap-2.5 cursor-pointer text-gray-600 font-medium leading-normal">
-              <input type="checkbox" name="trouble" class="mt-0.5 rounded border-gray-300 text-brand-blue focus:ring-0 w-3.5 h-3.5">
-              <span>とにかく急いで対応してほしい</span>
-            </label>
-            <label class="flex items-start gap-2.5 cursor-pointer text-gray-600 font-medium leading-normal">
-              <input type="checkbox" name="trouble" class="mt-0.5 rounded border-gray-300 text-brand-blue focus:ring-0 w-3.5 h-3.5">
-              <span>まず何から相談すべきか分からず、専門家の意見が聞きたい</span>
-            </label>
-            <label class="flex items-start gap-2.5 cursor-pointer text-gray-600 font-medium leading-normal">
-              <input type="checkbox" name="trouble" class="mt-0.5 rounded border-gray-300 text-brand-blue focus:ring-0 w-3.5 h-3.5">
-              <span>まずは現状のネット上の評価状況とリスクを知りたい</span>
-            </label>
-            <label class="flex items-start gap-2.5 cursor-pointer text-gray-600 font-medium leading-normal">
-              <input type="checkbox" name="trouble" class="mt-0.5 rounded border-gray-300 text-brand-blue focus:ring-0 w-3.5 h-3.5">
-              <span>その他</span>
-            </label>
-          </div>
-          <input type="text" placeholder="特定の具体的な内容"
-                 class="w-full bg-white border border-gray-200 rounded-md px-4 py-3 text-gray-800 placeholder-gray-300 focus:outline-none focus:border-brand-blue transition text-xs mt-1">
-        </div>
-
-        <div class="space-y-2">
-          <label class="block font-bold text-gray-700">
-            ご担当者名<span class="text-red-500 ml-1">*</span>
-          </label>
-          <input type="text" placeholder="ご担当者名" required
-                 class="w-full bg-white border border-gray-200 rounded-md px-4 py-3 text-gray-800 placeholder-gray-300 focus:outline-none focus:border-brand-blue transition text-xs">
-        </div>
-
-        <div class="space-y-2">
-          <label class="block font-bold text-gray-700">
-            ご担当者様メールアドレス<span class="text-red-500 ml-1">*</span>
-          </label>
-          <input type="email" placeholder="メールアドレス" required
-                 class="w-full bg-white border border-gray-200 rounded-md px-4 py-3 text-gray-800 placeholder-gray-300 focus:outline-none focus:border-brand-blue transition text-xs">
-        </div>
-
-        <div class="space-y-2">
-          <label class="block font-bold text-gray-700">
-            ご担当者様電話番号<span class="text-red-500 ml-1">*</span>
-          </label>
-          <input type="tel" placeholder="電話番号" required
-                 class="w-full bg-white border border-gray-200 rounded-md px-4 py-3 text-gray-800 placeholder-gray-300 focus:outline-none focus:border-brand-blue transition text-xs">
-        </div>
-
-        <div class="space-y-4">
-          <label class="block font-bold text-gray-700">
-            連絡希望日時<span class="text-red-500 ml-1">*</span>
-          </label>
-          <div class="flex flex-col sm:flex-row gap-3 sm:gap-6 pl-1">
-            <label class="flex items-center gap-2 cursor-pointer text-gray-600 font-medium">
-              <input type="radio" name="contact_time" checked class="border-gray-300 text-brand-blue focus:ring-0 w-3.5 h-3.5">
-              <span>なるべく早く折り返し希望</span>
-            </label>
-            <label class="flex items-center gap-2 cursor-pointer text-gray-600 font-medium">
-              <input type="radio" name="contact_time" class="border-gray-300 text-brand-blue focus:ring-0 w-3.5 h-3.5">
-              <span>資料請求希望</span>
-            </label>
-            <label class="flex items-center gap-2 cursor-pointer text-gray-600 font-medium">
-              <input type="radio" name="contact_time" class="border-gray-300 text-brand-blue focus:ring-0 w-3.5 h-3.5">
-              <span>日時を指定したい</span>
-            </label>
-          </div>
-          
-          <p class="text-[11px] text-brand-blue font-medium pl-1">
-            「日時を指定したい」を選んだ場合は、ご希望の日時を最大3つご入力ください。
-          </p>
-
-          <div class="space-y-4 bg-gray-50/60 p-4 rounded-xl border border-gray-100 text-xs">
-            <div class="space-y-1.5">
-              <span class="font-bold text-gray-700 block">第一希望</span>
-              <div class="flex flex-wrap items-center gap-2">
-                <input type="date" class="bg-white border border-gray-200 rounded px-2 py-2 text-gray-600 w-full sm:w-auto">
-                <input type="time" placeholder="10:00" class="bg-white border border-gray-200 rounded px-2 py-2 text-gray-500 w-[45%] sm:w-28 text-center">
-                <span class="text-gray-400">～</span>
-                <input type="time" placeholder="12:00" class="bg-white border border-gray-200 rounded px-2 py-2 text-gray-500 w-[45%] sm:w-28 text-center">
-              </div>
-            </div>
-            <div class="space-y-1.5">
-              <span class="font-bold text-gray-700 block">第二希望</span>
-              <div class="flex flex-wrap items-center gap-2">
-                <input type="date" class="bg-white border border-gray-200 rounded px-2 py-2 text-gray-600 w-full sm:w-auto">
-                <input type="time" placeholder="10:00" class="bg-white border border-gray-200 rounded px-2 py-2 text-gray-500 w-[45%] sm:w-28 text-center">
-                <span class="text-gray-400">～</span>
-                <input type="time" placeholder="12:00" class="bg-white border border-gray-200 rounded px-2 py-2 text-gray-500 w-[45%] sm:w-28 text-center">
-              </div>
-            </div>
-            <div class="space-y-1.5">
-              <span class="font-bold text-gray-700 block">第三希望</span>
-              <div class="flex flex-wrap items-center gap-2">
-                <input type="date" class="bg-white border border-gray-200 rounded px-2 py-2 text-gray-600 w-full sm:w-auto">
-                <input type="time" placeholder="10:00" class="bg-white border border-gray-200 rounded px-2 py-2 text-gray-500 w-[45%] sm:w-28 text-center">
-                <span class="text-gray-400">～</span>
-                <input type="time" placeholder="12:00" class="bg-white border border-gray-200 rounded px-2 py-2 text-gray-500 w-[45%] sm:w-28 text-center">
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="space-y-2">
-          <label class="block font-bold text-gray-700">
-            当社のサービスをどこで知りましたか<span class="text-red-500 ml-1">*</span>
-          </label>
-          <input type="text" placeholder="はがき、インターネット検索、知人の紹介 等" required
-                 class="w-full bg-white border border-gray-200 rounded-md px-4 py-3 text-gray-800 placeholder-gray-300 focus:outline-none focus:border-brand-blue transition text-xs">
-        </div>
-
-        <div class="flex items-center justify-center pt-2">
-          <label class="flex items-center gap-2 cursor-pointer select-none text-xs text-gray-600 font-medium">
-            <input type="checkbox" required class="w-3.5 h-3.5 rounded border-gray-300 text-brand-blue focus:ring-0">
-            <span>
-              <a href="../contact/" class="text-brand-blue underline hover:text-brand-navy transition">プライバシーポリシー</a> に同意する
-            </span>
-          </label>
-        </div>
-
-        <div class="flex justify-center pt-2">
-          <button type="submit" 
-                  class="w-full bg-brand-blue hover:bg-brand-blueHover text-white font-bold py-3.5 rounded transition duration-200 tracking-wider shadow text-center">
-            送信する
-          </button>
-        </div>
-
-      </form>
-
-    </div>
   </main>
 
   <footer class="bg-brand-footerBg text-gray-600 pt-16 pb-24 md:pb-16 text-xs border-t border-gray-200/60">
@@ -274,6 +151,7 @@
     </a>
   </div>
 
+<script src="../assets/js/track.js?v=20260921a"></script>
 <script src="../assets/js/editor.js?v=20260629a" data-editor-skip></script>
 </body>
 </html>

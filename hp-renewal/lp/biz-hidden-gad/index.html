@@ -23,6 +23,10 @@
       }
     }
   </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/lp-form.css?v=20260922a">
 </head>
 <body class="text-gray-800 bg-white antialiased font-sans leading-relaxed">
 
@@ -52,19 +56,50 @@
         </p>
       </div>
 
-      <div id="diagnostic" class="bg-white text-gray-800 p-6 rounded-2xl shadow-2xl border border-gray-100 max-w-md mx-auto md:ml-auto w-full">
-        <div class="text-center mb-4">
-          <span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">費用0円</span>
-          <h2 class="text-base md:text-lg font-bold text-brand-navy mt-1">今すぐ無料診断</h2>
-          <p class="text-xs text-brand-blue font-semibold mt-0.5">あなたの企業の評価レベルをチェック！</p>
+    </div>
+  </section>
+
+  <section class="lpf-section" id="diagnostic">
+    <div class="lpf-card">
+      <h2 class="lpf-title">今すぐ無料診断</h2>
+      <p class="lpf-sub">あなたの企業の評価レベルをチェック！</p>
+      <form class="lpf-form" action="#" method="POST" data-form="lp" data-thanks="thanks-diagnosis/" data-steps>
+        <div class="lpf-step1" data-field>
+          <label class="lpf-sr" for="lp-url">貴社HPのURL</label>
+          <input class="lpf-input" id="lp-url" type="text" name="url" inputmode="url" autocomplete="url" placeholder="貴社HPのURLを貼り付け" required>
+          <button class="lpf-btn" type="button" data-step-next>診断開始</button>
         </div>
-        <button class="w-full bg-brand-gold hover:bg-brand-goldHover text-white font-bold text-center py-3 rounded-xl transition duration-200 shadow-md tracking-wider">
-          診断開始
-        </button>
-        <p class="text-[10px] text-gray-400 text-center mt-3 leading-relaxed">
-          ※まずは可能性の診断のみを行います。費用は一切かかりません。
-        </p>
-      </div>
+        <div class="lpf-step2" data-step2>
+          <div class="lpf-step2__inner">
+            <p class="lpf-lead">診断結果の送信先を入力してください。<br>専門スタッフが解析し、1営業日以内に結果をご連絡します。</p>
+            <p class="lpf-ssl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15.5" r="1.2" fill="currentColor" stroke="none"/></svg>SSL暗号化通信採用 / 秘密厳守 / 強引な営業活動は一切行いません。</p>
+            <div class="lpf-fields">
+              <div class="lpf-field" data-field>
+                <label class="lpf-label" for="lp-company">会社名 / 屋号<span class="lpf-badge">必須</span></label>
+                <input class="lpf-input" id="lp-company" type="text" name="company" autocomplete="organization" placeholder="〇〇株式会社" required>
+              </div>
+              <div class="lpf-field" data-field>
+                <label class="lpf-label" for="lp-name">ご担当者名<span class="lpf-badge">必須</span></label>
+                <input class="lpf-input" id="lp-name" type="text" name="name" autocomplete="name" placeholder="山田 太郎" required>
+              </div>
+              <div class="lpf-field" data-field>
+                <label class="lpf-label" for="lp-email">メールアドレス<span class="lpf-badge">いずれか必須</span></label>
+                <input class="lpf-input" id="lp-email" type="email" name="email" autocomplete="email" placeholder="example@mail.com" data-either>
+              </div>
+              <div class="lpf-field" data-field>
+                <label class="lpf-label" for="lp-tel">電話番号<span class="lpf-badge">いずれか必須</span></label>
+                <input class="lpf-input" id="lp-tel" type="tel" name="tel" autocomplete="tel" placeholder="090-1234-5678" data-either>
+              </div>
+              <div class="lpf-field" data-field>
+                <label class="lpf-label" for="lp-message">お悩み・ご相談事項など</label>
+                <textarea class="lpf-textarea" id="lp-message" name="message" placeholder="例：悪質な口コミをなんとかしたい、まずは対策可能か知りたい"></textarea>
+              </div>
+            </div>
+            <button class="lpf-btn lpf-btn--submit" type="submit">診断結果をもらう</button>
+          </div>
+        </div>
+        <p class="lpf-note">※まずは可能性の診断のみを行います。費用は一切かかりません。</p>
+      </form>
     </div>
   </section>
 
@@ -448,6 +483,7 @@
     </a>
   </div>
 
+<script src="../../assets/js/track.js?v=20260921a"></script>
 <script src="../../assets/js/editor.js?v=20260629a" data-editor-skip></script>
 </body>
 </html>

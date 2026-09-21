@@ -1,0 +1,5 @@
+_backups/
+_config/
+backend/config.php
+backend/data/*
+!backend/data/.htaccess
