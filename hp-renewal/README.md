@@ -42,8 +42,7 @@ hp-renewal/
 ├── backend/                     フォーム受付・計測・集計（PHP、XServerで動作）
 ├── server.js                    ローカル用のプレビュー＆編集サーバー（Node.js）
 ├── _backups/                    編集前のHTMLの控え（自動作成・git管理外）
-├── _config/                     アクセス解析の接続設定（自動作成・git管理外）
-└── _source_dump/                旧サイトHTML（取得した参考用、削除可）
+└── _config/                     アクセス解析の接続設定（自動作成・git管理外）
 ```
 
 ## ローカルでの起動方法

@@ -3,3 +3,5 @@ _config/
 backend/config.php
 backend/data/*
 !backend/data/.htaccess
+__pycache__/
+*.pyc
