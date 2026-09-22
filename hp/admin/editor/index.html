@@ -8,8 +8,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Old+Mincho:wght@500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/style.css?v=20260628b">
-<link rel="stylesheet" href="/admin/admin.css?v=20260921b">
+<link rel="stylesheet" href="/assets/css/style.css?v=20260922a">
+<link rel="stylesheet" href="/assets/css/article.css?v=20260923b">
+<link rel="stylesheet" href="/admin/admin.css?v=20260923c">
 </head>
 <body class="ae">
 
@@ -23,21 +24,15 @@
     <a href="/admin/editor/" aria-current="page">記事エディタ</a>
     <a href="/admin/dashboard.html">アクセス解析</a>
   </nav>
-  <label class="ae-top__select">
-    <span class="ae-sr">編集する記事</span>
-    <select id="articleSelect"><option value="">記事を選択してください</option></select>
-  </label>
-  <div class="ae-top__format" role="toolbar" aria-label="文字の書式">
-    <button type="button" data-cmd="bold" title="太字（Ctrl+B）"><b>B</b></button>
-    <button type="button" data-cmd="link" title="リンクを付ける">リンク</button>
-    <button type="button" data-cmd="unlink" title="リンクを外す">リンク解除</button>
-    <button type="button" data-cmd="clear" title="選択範囲の書式を消す">書式クリア</button>
+  <div class="ae-top__doc">
+    <span class="ae-state" id="stateBadge" hidden></span>
+    <span class="ae-top__doctitle" id="docTitle"></span>
   </div>
   <div class="ae-top__actions">
-    <select id="historySelect" aria-label="変更履歴"><option value="">変更履歴</option></select>
-    <button type="button" id="restoreBtn" class="ae-btn">復元</button>
-    <a id="viewLink" class="ae-btn" href="#" target="_blank" rel="noopener">公開ページを見る</a>
-    <button type="button" id="saveBtn" class="ae-btn ae-btn--primary" disabled>保存してHPに反映</button>
+    <button type="button" id="historyBtn" class="ae-btn" disabled>変更履歴</button>
+    <button type="button" id="previewBtn" class="ae-btn" disabled title="保存する前に、公開されたときの見た目を別タブで確認します">プレビュー</button>
+    <a id="viewLink" class="ae-btn" href="#" target="_blank" rel="noopener" hidden>公開ページ</a>
+    <button type="button" id="saveBtn" class="ae-btn ae-btn--primary" disabled>保存してHPに反映 <kbd>Ctrl+S</kbd></button>
   </div>
   <div class="ae-top__status" id="status" aria-live="polite"></div>
 </header>
@@ -51,57 +46,168 @@ node server.js</pre>
 </div>
 
 <div class="ae-layout" id="layout" hidden>
+  <!-- 左：記事一覧／構成 -->
   <aside class="ae-side">
-    <div class="ae-side__head">
-      <h2>構成（章立て）</h2>
-      <p>クリックで移動。▲▼で章ごと並べ替えできます。</p>
+    <div class="ae-side__tabs" role="tablist">
+      <button type="button" role="tab" id="tabList" aria-selected="true" aria-controls="panelList">記事一覧</button>
+      <button type="button" role="tab" id="tabOutline" aria-selected="false" aria-controls="panelOutline">構成（章立て）</button>
     </div>
-    <ol class="ae-outline" id="outline"></ol>
-    <button type="button" class="ae-btn ae-btn--block" id="addChapterBtn">＋ 章を追加</button>
+
+    <div class="ae-side__panel" id="panelList" role="tabpanel" aria-labelledby="tabList">
+      <button type="button" class="ae-btn ae-btn--accent ae-btn--block" id="newBtn">＋ 新しい記事を作る</button>
+      <input type="search" class="ae-search" id="listSearch" placeholder="タイトル・URL名で検索" autocomplete="off">
+      <div class="ae-chips" id="listFilter" role="group" aria-label="カテゴリで絞り込み"></div>
+      <ul class="ae-list" id="articleList"></ul>
+    </div>
+
+    <div class="ae-side__panel" id="panelOutline" role="tabpanel" aria-labelledby="tabOutline" hidden>
+      <p class="ae-side__hint">クリックでその章へ移動。▲▼で章ごと並べ替えできます。</p>
+      <ol class="ae-outline" id="outline"></ol>
+      <button type="button" class="ae-btn ae-btn--block" id="addChapterBtn">＋ 章を追加</button>
+      <dl class="ae-stats" id="stats"></dl>
+    </div>
   </aside>
 
+  <!-- 中央：編集 -->
   <main class="ae-main">
-    <section class="ae-card" aria-labelledby="metaHead">
-      <h2 class="ae-card__title" id="metaHead">基本情報</h2>
-      <div class="ae-fields">
-        <label class="ae-field ae-field--wide">
-          <span>記事タイトル（ページ見出し）</span>
-          <input type="text" id="f-h1" autocomplete="off">
-          <small>変更すると、パンくず・一覧・フッターなどサイト内のリンク文字も自動で書き換わります。</small>
-        </label>
-        <label class="ae-field ae-field--wide">
-          <span>見出し下の説明文</span>
-          <textarea id="f-lead" rows="2"></textarea>
-        </label>
-        <label class="ae-field">
-          <span>見出し上の英字ラベル</span>
-          <input type="text" id="f-en" autocomplete="off">
-        </label>
-        <div class="ae-field" id="listingFields"></div>
-        <label class="ae-field ae-field--wide">
-          <span>SEOタイトル（ブラウザのタブ・検索結果）</span>
-          <input type="text" id="f-seoTitle" autocomplete="off">
-        </label>
-        <label class="ae-field ae-field--wide">
-          <span>メタディスクリプション <em class="ae-count" id="descCount"></em></span>
-          <textarea id="f-description" rows="2"></textarea>
-        </label>
-      </div>
+    <div class="ae-recover" id="recover" hidden>
+      <p><strong>保存されていない編集内容が残っています</strong><span id="recoverTime"></span></p>
+      <div><button type="button" class="ae-btn ae-btn--accent" id="recoverYes">その内容に戻す</button><button type="button" class="ae-btn" id="recoverNo">破棄する</button></div>
+    </div>
+
+    <section class="ae-card ae-card--head" aria-label="タイトルと説明">
+      <p class="ae-url" id="pageUrl"></p>
+      <input type="text" id="f-h1" class="ae-h1" placeholder="記事タイトル" autocomplete="off" aria-label="記事タイトル（ページの見出し）">
+      <textarea id="f-lead" class="ae-leadinput" rows="1" placeholder="見出しの下に出る短い説明文（任意）" aria-label="見出し下の説明文"></textarea>
+      <p class="ae-note">タイトルを変えると、パンくず・一覧などサイト内のリンク文字も自動で書き換わります。</p>
     </section>
 
     <section class="ae-card" aria-labelledby="bodyHead">
       <div class="ae-card__row">
         <h2 class="ae-card__title" id="bodyHead">本文</h2>
-        <p class="ae-hint">ブロック左の「⋮⋮」をドラッグ、または ▲▼ で順番を入れ替えられます。種類のプルダウンで見出し⇔段落⇔箇条書きなどに変更できます。</p>
+        <p class="ae-hint">文字を選ぶと書式ボタンが出ます（太字 Ctrl+B・リンク Ctrl+K）。ブロックの間にマウスを置くと「＋」で追加できます。</p>
       </div>
       <div class="ae-blocks prose" id="blocks"></div>
       <div class="ae-add" id="addBar"></div>
     </section>
+
+    <section class="ae-card" aria-labelledby="pubHead">
+      <h2 class="ae-card__title" id="pubHead">公開設定</h2>
+      <div class="ae-fields">
+        <label class="ae-field ae-field--wide ae-switch">
+          <input type="checkbox" id="f-public">
+          <span class="ae-switch__ui" aria-hidden="true"></span>
+          <span class="ae-switch__text"><strong id="publicLabel">公開する</strong><small>オフにして保存すると下書きになり、公開中のページは取り下げられます（一覧・サイトマップからも外れます）。</small></span>
+        </label>
+        <label class="ae-field">
+          <span>公開日</span>
+          <input type="date" id="f-published">
+        </label>
+        <label class="ae-field">
+          <span>タグ（カンマ区切り）</span>
+          <input type="text" id="f-tags" placeholder="例：Googleマップ, 削除請求" autocomplete="off">
+          <small>同じタグの記事が「関連記事」として表示されます。</small>
+        </label>
+        <div class="ae-field" id="listingFields"></div>
+        <label class="ae-field">
+          <span>見出し上の英字ラベル</span>
+          <input type="text" id="f-en" autocomplete="off">
+        </label>
+      </div>
+    </section>
+
+    <section class="ae-card" aria-labelledby="seoHead">
+      <h2 class="ae-card__title" id="seoHead">検索結果・SNSでの見え方</h2>
+      <div class="ae-serp" aria-label="Google検索結果での表示イメージ">
+        <span class="ae-serp__site">一般社団法人口コミ対策センター</span>
+        <span class="ae-serp__url" id="serpUrl"></span>
+        <span class="ae-serp__title" id="serpTitle"></span>
+        <span class="ae-serp__desc" id="serpDesc"></span>
+      </div>
+      <div class="ae-fields">
+        <label class="ae-field ae-field--wide">
+          <span>SEOタイトル（ブラウザのタブ・検索結果） <em class="ae-count" id="titleCount"></em></span>
+          <input type="text" id="f-seoTitle" autocomplete="off">
+        </label>
+        <label class="ae-field ae-field--wide">
+          <span>メタディスクリプション（検索結果の説明文） <em class="ae-count" id="descCount"></em></span>
+          <textarea id="f-description" rows="3"></textarea>
+        </label>
+        <div class="ae-field ae-field--wide">
+          <span>アイキャッチ画像（SNSで共有したときの画像）</span>
+          <div class="ae-eyecatch">
+            <div class="ae-eyecatch__img" id="eyecatchPreview"><span>未設定（共通の画像が使われます）</span></div>
+            <div class="ae-eyecatch__btns">
+              <button type="button" class="ae-btn" id="eyecatchUpload">画像を選ぶ</button>
+              <button type="button" class="ae-btn ae-btn--danger" id="eyecatchClear" hidden>外す</button>
+              <small>横長（1200×630px 程度）がおすすめです。</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 </div>
 
+<!-- 文字の書式（選択したときだけ出る） -->
+<div class="ae-bubble" id="bubble" hidden role="toolbar" aria-label="文字の書式">
+  <button type="button" data-cmd="bold" title="太字（Ctrl+B）"><b>B</b></button>
+  <button type="button" data-cmd="link" title="リンク（Ctrl+K）">リンク</button>
+  <button type="button" data-cmd="unlink" title="リンクを外す">リンク解除</button>
+  <button type="button" data-cmd="clear" title="書式を消す">書式クリア</button>
+</div>
+
+<input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp,image/gif" hidden>
+
+<!-- 新規作成 -->
+<dialog class="ae-dialog" id="newDialog">
+  <form method="dialog" id="newForm">
+    <h2>新しい記事を作る</h2>
+    <label class="ae-field"><span>カテゴリ</span><select id="n-category"></select></label>
+    <label class="ae-field" id="n-parentField" hidden><span>どの業種の事例か</span><select id="n-parent"></select></label>
+    <label class="ae-field"><span>記事タイトル</span><input type="text" id="n-title" autocomplete="off" required></label>
+    <label class="ae-field">
+      <span>URL名（半角の英小文字・数字・ハイフン）</span>
+      <span class="ae-slug"><span id="n-prefix"></span><input type="text" id="n-slug" autocomplete="off" required pattern="[a-z0-9]+(-[a-z0-9]+)*" placeholder="google-review-guide"><span>/</span></span>
+      <small>公開後は変えないでください（検索エンジンの評価が引き継がれなくなります）。</small>
+    </label>
+    <p class="ae-dialog__error" id="n-error" hidden></p>
+    <div class="ae-dialog__actions">
+      <button type="button" class="ae-btn" value="cancel" data-close>やめる</button>
+      <button type="submit" class="ae-btn ae-btn--primary" id="n-submit">下書きとして作成</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- リンク -->
+<dialog class="ae-dialog" id="linkDialog">
+  <form method="dialog" id="linkForm">
+    <h2>リンクを付ける</h2>
+    <label class="ae-field"><span>サイト内のページを探す</span><input type="search" id="l-search" placeholder="記事タイトルやページ名で検索" autocomplete="off"></label>
+    <ul class="ae-picker" id="l-results"></ul>
+    <label class="ae-field"><span>リンク先（URL・パス）</span><input type="text" id="l-url" placeholder="https://… または上の一覧から選ぶ" autocomplete="off" required></label>
+    <label class="ae-field ae-field--check"><input type="checkbox" id="l-blank"><span>新しいタブで開く</span></label>
+    <div class="ae-dialog__actions">
+      <button type="button" class="ae-btn ae-btn--danger" id="l-remove" hidden>リンクを外す</button>
+      <span class="spacer"></span>
+      <button type="button" class="ae-btn" data-close>やめる</button>
+      <button type="submit" class="ae-btn ae-btn--primary">リンクを付ける</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- 変更履歴 -->
+<dialog class="ae-dialog" id="historyDialog">
+  <form method="dialog">
+    <h2>変更履歴</h2>
+    <p class="ae-note">保存するたびに、保存前の状態がここに残ります。戻すと、今の状態も履歴に残ります。</p>
+    <ul class="ae-history" id="historyList"></ul>
+    <div class="ae-dialog__actions"><button type="button" class="ae-btn" data-close>閉じる</button></div>
+  </form>
+</dialog>
+
 <div class="ae-toast" id="toast" hidden></div>
 
-<script src="/admin/admin.js?v=20260921a"></script>
+<script src="/admin/admin.js?v=20260923b"></script>
 </body>
 </html>

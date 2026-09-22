@@ -15,6 +15,9 @@
   const legacyKey = `${APP}:${pagePath.replace(/\/$/, '') || '/'}`;
   const introKey = `${APP}:intro-seen`;
   const articleMatch = /^\/(column|knowledge|notice)\/([a-z0-9-]+)\/?(?:index\.html)?$/i.exec(pagePath);
+  // 記事ページとカテゴリ一覧は、記事データ（content/articles/*.md）から自動生成されるページ
+  // （column/post・column/article は旧来の投稿モックなので対象外）
+  const generatedPage = Boolean(articleMatch && !['post', 'article'].includes(articleMatch[2])) || /^\/(column|knowledge|notice)\/?(?:index\.html)?$/i.test(pagePath);
   let editMode = false;
   let editables = [];
   let roots = [];
@@ -297,6 +300,19 @@
     });
   }
 
+  function generatedToolbar() {
+    const bar = document.createElement('div');
+    bar.className = 'editor-toolbar';
+    bar.dataset.editorSkip = 'true';
+    const href = articleMatch ? `/admin/editor/?path=${articleMatch[1]}/${articleMatch[2]}` : '/admin/editor/';
+    bar.innerHTML = `
+      <strong>ページ編集</strong>
+      <span class="status">このページは記事データから自動生成されます。文章や章立ては記事エディタで編集してください。</span>
+      <a class="primary" href="${href}">${articleMatch ? 'この記事を記事エディタで開く' : '記事エディタを開く'}</a>
+    `;
+    document.body.appendChild(bar);
+  }
+
   function toolbar() {
     const bar = document.createElement('div');
     bar.className = 'editor-toolbar';
@@ -370,6 +386,11 @@
       return;
     }
     css();
+    // 記事ページ・カテゴリ一覧は記事データ（Markdown）から自動生成されるため、ここでは直接編集しない
+    if (generatedPage) {
+      generatedToolbar();
+      return;
+    }
     scan();
     toolbar();
     bindEditing();

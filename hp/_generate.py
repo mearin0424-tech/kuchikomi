@@ -307,13 +307,14 @@ ICONS = {
     "medical": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>',
     "map": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>',
     "chart": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 17l4-4 4 4 6-6"/></svg>',
+    "diagnosis": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/><path d="m8 11 2 2 4-4"/></svg>',
     "menu": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>',
     "external": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>',
     "arrow": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>',
 }
 
 # ----------- 共通テンプレート -----------
-ASSET_VER = "20260704c"  # CSS/JSキャッシュバスター（アセット更新時にここを上げる）
+ASSET_VER = "20260922a"  # CSS/JSキャッシュバスター（アセット更新時にここを上げる）
 
 GLOBAL_NAV = [
     ("ホーム", "/"),
@@ -347,6 +348,7 @@ HEADER_NAV = [
     ("当センターについて", "/about/"),
     ("サービス内容", "/service/"),
     ("採用情報", "/recruit/"),
+    ("お問い合わせ", "/contact/"),
 ]
 
 def header(depth: int, active: str = "") -> str:
@@ -365,7 +367,7 @@ def header(depth: int, active: str = "") -> str:
           <img src="{rel(depth, '/assets/img/top/logo.webp')}" alt="一般社団法人 口コミ対策センター">
         </a>
         <nav class="hd2__nav" aria-label="グローバルナビゲーション">{hd_items}</nav>
-        <a href="{rel(depth,'/contact/')}" class="hd2__contact">{ICONS['mail']}<span>お問い合わせ</span></a>
+        <a href="{rel(depth,'/form/')}" class="hd2__contact">{ICONS['diagnosis']}<span>無料で診断</span></a>
         <button class="nav-toggle hd2__menu" aria-expanded="false" aria-label="メニューを開く">{ICONS['menu']}<span>MENU</span></button>
       </div>
       <div class="global-nav-list">
@@ -374,7 +376,7 @@ def header(depth: int, active: str = "") -> str:
           <button type="button" class="nav-close" aria-label="メニューを閉じる">×</button>
         </div>
         <div class="global-nav-list__primary">{nav_items}</div>
-        <div class="global-nav-list__cta"><a href="{rel(depth,'/form/')}" class="btn btn--primary btn--sm">無料診断・お申し込み</a></div>
+        <div class="global-nav-list__cta"><a href="{rel(depth,'/form/')}" class="btn btn--primary btn--sm">無料診断・お申し込み</a><a href="https://lin.ee/gVRUtOl" class="btn btn--line btn--sm" target="_blank" rel="noopener">LINEで相談</a></div>
         <div class="global-nav-list__policies"><a href="{rel(depth,'/privacypolicy/')}">プライバシーポリシー</a><a href="{rel(depth,'/social-policy/')}">ソーシャルメディアポリシー</a><a href="{rel(depth,'/security-policy/')}">情報セキュリティ基本方針</a><a href="{rel(depth,'/regulation/')}">特定商取引法に基づく表記</a></div>
       </div>
     </header>
@@ -433,22 +435,23 @@ def platform_banners(depth: int) -> str:
     return f'<div class="banner-grid">{"".join(items)}</div>'
 
 def cta_trio(depth: int) -> str:
+    # 申込の窓口は「無料診断・LINE・お問い合わせフォーム」の3つ（電話・メールでの受付はしない）
     return f"""
     <div class="cta-trio">
-      <a class="cta-trio__item is-tel" href="tel:0120000001">
-        <span class="label">お電話で相談</span>
-        <span class="main">0120-000-001</span>
-        <span class="sub">受付 10:00-20:00 年中無休</span>
+      <a class="cta-trio__item is-diagnosis" href="{rel(depth,'/form/')}">
+        <span class="label">URLを入れるだけ・費用0円</span>
+        <span class="main">無料で診断</span>
+        <span class="sub">1営業日以内に結果をご連絡</span>
       </a>
-      <a class="cta-trio__item is-mail" href="{rel(depth,'/contact/')}">
-        <span class="label">メールで無料診断</span>
-        <span class="main">無料診断フォーム</span>
-        <span class="sub">1営業日以内に返信</span>
+      <a class="cta-trio__item is-line" href="https://lin.ee/gVRUtOl" target="_blank" rel="noopener">
+        <span class="label">スマホから気軽に</span>
+        <span class="main">LINEで相談</span>
+        <span class="sub">友だち追加してメッセージを送るだけ</span>
       </a>
-      <a class="cta-trio__item is-meet" href="{rel(depth,'/contact/')}">
-        <span class="label">直接相談したい方へ</span>
-        <span class="main">面談予約</span>
-        <span class="sub">対面／オンライン可</span>
+      <a class="cta-trio__item is-contact" href="{rel(depth,'/contact/')}">
+        <span class="label">ご質問・ご相談はこちら</span>
+        <span class="main">お問い合わせ</span>
+        <span class="sub">フォームで受付・秘密厳守</span>
       </a>
     </div>
     """
@@ -484,11 +487,19 @@ def mega_footer(depth: int) -> str:
     <div class="contact-band" role="complementary" aria-label="お問い合わせ">
       <div class="contact-band__inner">
         <span class="contact-band__text">ネットの風評・口コミにお困りですか？<strong>無料診断・ご相談を受付中です</strong></span>
-        <a href="tel:0120000001" class="contact-band__tel">{ICONS['phone']}<span>0120-000-001</span></a>
-        <a href="{rel(depth,'/contact/')}" class="contact-band__btn">無料診断・お問い合わせ</a>
+        <a href="https://lin.ee/gVRUtOl" class="contact-band__line" target="_blank" rel="noopener"><img src="{rel(depth,'/assets/img/icon-line.webp')}" alt="" width="20" height="19">LINEで相談</a>
+        <a href="{rel(depth,'/form/')}" class="contact-band__btn">無料で診断</a>
       </div>
     </div>
     """
+
+# 手作業で内容を差し替えた固定ページ（2026-09 の原稿反映分）。再生成で古い文面に戻さないよう、既存ファイルは上書きしない
+MANUAL_PAGES = {"about", "message", "process", "pricing", "service", "faq", "contact"}
+class _SkipWrite:
+    def write_text(self, *args, **kwargs):
+        return 0
+def manual_guard(path: Path):
+    return _SkipWrite() if path.exists() and path.parent.name in MANUAL_PAGES else path
 
 def write_page(path: Path, html: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -499,7 +510,7 @@ def page_html(*, depth: int, title: str, description: str, body: str, active: st
     css = rel(depth, "/assets/css/style.css") + f"?v={ASSET_VER}"
     js = rel(depth, "/assets/js/main.js") + f"?v={ASSET_VER}"
     editor_js = rel(depth, "/assets/js/editor.js") + f"?v={ASSET_VER}"
-    track_js = rel(depth, "/assets/js/track.js") + "?v=20260921a"  # アクセス計測・フォーム送信
+    track_js = rel(depth, "/assets/js/track.js") + "?v=20260922a"  # アクセス計測・フォーム送信
     return dedent(f"""<!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -538,7 +549,7 @@ def strengths_block() -> str:
         ("check",  "追加料金なし",   "完全成功報酬"),
         ("globe",  "全国・海外対応", "海外サーバーも"),
         ("eye",    "再発防止監視",   "24時間モニタリング"),
-        ("lock",   "秘密厳守 NDA",   "ISMS準拠運用"),
+        ("lock",   "秘密厳守 NDA",   "厳格な情報管理"),
     ]
     cards = "".join(
         f'<div class="strength"><div class="strength__icon">{ICONS[i]}</div>'
@@ -808,7 +819,7 @@ def build_prefecture_pages():
               <p>
                 {name}所在のお客様も、すべてオンラインで完結します。
                 ご相談から無料診断・ご契約・対策実行・結果報告までを、専任担当が一貫して伴走します。
-                対面でのご相談をご希望の場合は、面談予約からお申し込みください。状況に応じてオンライン面談にも対応します。
+                ご相談は、無料診断・お問い合わせフォーム、またはLINEで受け付けています。
               </p>
 
               <h2>{name}内エリア対応について</h2>
@@ -1109,11 +1120,10 @@ def build_other_pages():
           ・社会動向データ・アナリティクス事業
         </td></tr>
         <tr><th>対応エリア</th><td>全国47都道府県および海外サーバー</td></tr>
-        <tr><th>連絡先</th><td>法人窓口 0120-000-001／個人窓口 0120-000-002</td></tr>
       </tbody></table>
     </div>{cta_trio(1)}</div></section>
     """
-    (ROOT / "about/index.html").write_text(
+    manual_guard(ROOT / "about/index.html").write_text(
         page_html(depth=1, title="当センターについて｜一般社団法人 口コミ対策センター",
                   description="一般社団法人 口コミ対策センターの概要・理念・体制についてご紹介します。事業者の信用を、適法かつ持続可能な方法で守る専門機関です。",
                   body=body, active="対策とは"),
@@ -1180,7 +1190,7 @@ def build_other_pages():
       </div>
     </section>
     """
-    (ROOT / "service/index.html").write_text(
+    manual_guard(ROOT / "service/index.html").write_text(
         page_html(depth=1, title="サービス内容｜一般社団法人 口コミ対策センター",
                   description="Google口コミ対策／非表示・抑止対策／逆SEO・サジェスト浄化／風評モニタリング／ポジティブブランディング／危機管理。",
                   body=body, active=""),
@@ -1231,7 +1241,7 @@ def build_other_pages():
       </p>
     </div>{cta_trio(1)}</div></section>
     """
-    (ROOT / "message/index.html").write_text(
+    manual_guard(ROOT / "message/index.html").write_text(
         page_html(depth=1, title="代表挨拶｜一般社団法人 口コミ対策センター",
                   description="代表メッセージ。口コミ対策の専門家がビジネスの信頼を守ります。経営者様の心強い味方に。",
                   body=body, active=""),
@@ -1249,14 +1259,13 @@ def build_other_pages():
           <select name="segment"><option>法人としてのご相談</option><option>個人としてのご相談</option><option>上場企業 / IR関連</option><option>エグゼクティブ・経営者個人</option></select>
         </div>
         <div class="form-field"><label>メールアドレス<span class="req">必須</span></label><input type="email" name="email" required placeholder="example@example.com"></div>
-        <div class="form-field"><label>お電話番号</label><input type="tel" name="tel" placeholder="03-0000-0000"></div>
         <div class="form-field"><label>対象URL（Googleマップ等）</label><input type="url" name="target_url" placeholder="https://maps.google.com/..."></div>
         <div class="form-field"><label>ご相談内容</label><textarea name="message" placeholder="現状や気になる口コミ等、わかる範囲でお書きください。"></textarea></div>
         <div class="form-actions"><button type="submit" class="btn btn--primary btn--lg">無料診断を送信する</button><p class="form-note">SSL暗号化通信採用 / 秘密厳守 / 営業電話は致しません</p></div>
       </form>
     </div></section>
     """
-    (ROOT / "contact/index.html").write_text(
+    manual_guard(ROOT / "contact/index.html").write_text(
         page_html(depth=1, title="お問い合わせ・無料診断｜一般社団法人 口コミ対策センター",
                   description="法人・個人どちらの窓口にも対応。1営業日以内に専門スタッフよりご返信いたします。秘密厳守・しつこい営業は一切いたしません。",
                   body=body, active="無料相談"),
@@ -1267,7 +1276,7 @@ def build_other_pages():
     {page_header_block("PROCESS", "解決プロセス", "ご相談から再発防止まで、5ステップ。", 1)}
     <section class="section"><div class="container container--wide">
       <div class="flow">
-        <div class="flow__step"><div class="flow__num">STEP 01</div><h3>無料相談</h3><p>フォーム・電話・LINEから状況をお知らせください。秘密厳守。</p></div>
+        <div class="flow__step"><div class="flow__num">STEP 01</div><h3>無料相談</h3><p>フォーム・LINEから状況をお知らせください。秘密厳守。</p></div>
         <div class="flow__step"><div class="flow__num">STEP 02</div><h3>無料診断</h3><p>1営業日以内に対策可否・想定難易度をご回答します。</p></div>
         <div class="flow__step"><div class="flow__num">STEP 03</div><h3>ご提案・契約</h3><p>方針と料金をご確認のうえ、完全成功報酬で契約。</p></div>
         <div class="flow__step"><div class="flow__num">STEP 04</div><h3>対策実行</h3><p>専門チームが規約準拠で対策を実行。継続的に進捗報告。</p></div>
@@ -1276,7 +1285,7 @@ def build_other_pages():
       <div class="prose mt-48">
         <h2>各ステップの詳細</h2>
         <h3>STEP 01 ｜ 無料相談</h3>
-        <p>お問い合わせフォーム、電話、LINE等から状況をお知らせください。対象URLや背景、これまで試した対応内容を教えていただけると、診断がスムーズです。</p>
+        <p>お問い合わせフォーム・LINEから状況をお知らせください。対象URLや背景、これまで試した対応内容を教えていただけると、診断がスムーズです。</p>
         <h3>STEP 02 ｜ 無料診断</h3>
         <p>専門スタッフが内容を確認し、対策可否、想定難易度、推奨アプローチを1営業日以内にご返信します。診断結果のみのご利用も可能です。</p>
         <h3>STEP 03 ｜ ご提案・契約</h3>
@@ -1290,7 +1299,7 @@ def build_other_pages():
     </div></section>
     """
     (ROOT / "process").mkdir(exist_ok=True)
-    (ROOT / "process/index.html").write_text(
+    manual_guard(ROOT / "process/index.html").write_text(
         page_html(depth=1, title="解決プロセス｜一般社団法人 口コミ対策センター",
                   description="ご相談から再発防止まで、5ステップで解決まで伴走します。各ステップで何を行い、何を確認するのかを明確にご案内します。",
                   body=body, active="解決プロセス"),
@@ -1315,7 +1324,8 @@ def build_other_pages():
         encoding="utf-8")
 
     # /cases/{slug}/ （業種ごとの成功事例ページ）
-    for slug, name, sub in INDUSTRIES:
+    # → content/articles/cases/*.md から build/articles.js で生成するため、ここでは作らない
+    for slug, name, sub in []:
         cards = "".join(
             f'<div class="card"><div class="card__icon">{ICONS[icon]}</div>'
             f'<h3>{name} — {title}</h3><p>{desc}</p></div>'
@@ -1365,7 +1375,7 @@ def build_other_pages():
     <section class="section"><div class="container"><div class="faq">{faq_html}</div>{cta_trio(1)}</div></section>
     """
     (ROOT / "faq").mkdir(exist_ok=True)
-    (ROOT / "faq/index.html").write_text(
+    manual_guard(ROOT / "faq/index.html").write_text(
         page_html(depth=1, title="よくあるご質問｜一般社団法人 口コミ対策センター",
                   description="一般社団法人 口コミ対策センターへのよくあるご質問。料金・期間・対応範囲・秘密保持等についてお答えしています。",
                   body=body, active="FAQ"),
@@ -1399,7 +1409,7 @@ def build_other_pages():
     </div>{cta_trio(1)}</div></section>
     """
     (ROOT / "pricing").mkdir(exist_ok=True)
-    (ROOT / "pricing/index.html").write_text(
+    manual_guard(ROOT / "pricing/index.html").write_text(
         page_html(depth=1, title="料金｜一般社団法人 口コミ対策センター",
                   description="完全成功報酬制／初期費用・着手金0円。結果が出るまでご請求は発生しません。料金体系・お見積り・支払いについてご案内します。",
                   body=body, active="料金"),
@@ -1419,8 +1429,8 @@ def build_other_pages():
         <p>地域・国境に関わらず、オンラインで完結対応します。海外案件にも英語対応で対応可能です。</p>
         <h2>4. 再発防止モニタリング</h2>
         <p>是正後の再発防止のため、継続モニタリングオプションをご用意。再発の兆候を早期に検知し、即時対応します。</p>
-        <h2>5. 秘密厳守 NDA・ISMS準拠運用</h2>
-        <p>ご相談の事実、対象媒体、社内情報のすべてを厳格に秘匿管理。NDA締結、ISMS準拠の運用体制で対応します。</p>
+        <h2>5. 秘密厳守 NDA・厳格な情報管理</h2>
+        <p>ご相談の事実、対象媒体、社内情報のすべてを厳格に秘匿管理。NDA締結と厳格な情報管理体制で対応します。</p>
       </div>
       {cta_trio(1)}
     </div></section>
@@ -1746,7 +1756,7 @@ def build_extra_methods():
           <p>本サービスは、診断から実行、再発防止のモニタリングまで一貫して提供します。
           進め方は案件ごとに調整し、業種特性・媒体特性・規模・予算に応じた最適解をご提案します。</p>
           <h2>料金</h2>
-          <p>標準料金体系（初期費用0円・完全成功報酬制）を適用します。継続モニタリングなど月額制のオプションも別途ご用意しています。</p>
+          <p>標準料金体系（初期費用0円・完全成功報酬制）を適用します。継続モニタリングなどのオプションも個別にご提案します。</p>
         </div>{cta_trio(2)}</div></section>
         """
         write_page(d / "index.html", page_html(depth=2,
@@ -1764,13 +1774,10 @@ def build_misc_pages():
                 <tr><th>法人名</th><td>一般社団法人口コミ対策センター</td></tr>
                 <tr><th>所在地</th><td>〒104-0053 東京都中央区晴海3-16-1</td></tr>
                 <tr><th>最寄駅</th><td>都営大江戸線「勝どき」駅／東京メトロ有楽町線「月島」駅 ほか</td></tr>
-                <tr><th>受付時間</th><td>10:00 - 20:00（年中無休）</td></tr>
-                <tr><th>法人窓口</th><td>0120-000-001</td></tr>
-                <tr><th>個人窓口</th><td>0120-000-002</td></tr>
+                <tr><th>受付時間</th><td>24時間受付（無料診断・お問い合わせフォーム・LINE）</td></tr>
               </tbody></table>
-              <h2>ご来訪について</h2>
-              <p>対面でのご相談をご希望の場合は、事前に<a href="../contact/">面談予約</a>からお申し込みください。
-              オンライン面談（Zoom／Google Meet 等）にも対応しております。</p>
+              <h2>ご相談の受付について</h2>
+              <p>ご相談は、<a href="../form/">無料診断</a>・<a href="../contact/">お問い合わせフォーム</a>、または<a href="https://lin.ee/gVRUtOl" target="_blank" rel="noopener">LINE</a>で受け付けております。お電話・メールでのご相談は承っておりません。</p>
             """
         elif slug == "trademark":
             inner = """
@@ -1819,7 +1826,7 @@ def build_misc_pages():
                 <li>詳細ヒアリング → 本契約・着手</li>
               </ol>
               <h2>情報管理体制</h2>
-              <p>ISMSに準拠した情報管理体制を運用しています。アクセス権限の最小化、ログ取得・監視、
+              <p>厳格な情報管理体制を運用しています。アクセス権限の最小化、ログ取得・監視、
               業務委託先への適切な監督などにより、お預かりした情報を厳格に保護します。</p>
             """
         else:
@@ -2162,7 +2169,7 @@ def build_cities():
           </ul>
 
           <h2>対応方法</h2>
-          <p>{name}所在のお客様もオンラインで完結。対面ご希望の場合は<a href="../../contact/">面談予約</a>から。
+          <p>{name}所在のお客様もオンラインで完結。ご相談は<a href="../../form/">無料診断</a>・<a href="../../contact/">お問い合わせフォーム</a>・<a href="https://lin.ee/gVRUtOl" target="_blank" rel="noopener">LINE</a>で受け付けています。
           費用は完全成功報酬・初期費用0円です。</p>
 
           <h2>関連ページ</h2>
@@ -2341,13 +2348,15 @@ if __name__ == "__main__":
     build_industry_pages()
     build_platform_pages()
     build_other_pages()
-    build_knowledge_pages()
+    # 記事ページとカテゴリ一覧（knowledge / column / notice）は、content/articles/*.md から
+    # build/articles.js（node build/articles.js、または記事エディタの保存）で生成するため、ここでは作らない。
+    # build_knowledge_pages()
     build_process_sub_pages()
     build_extra_methods()
     build_misc_pages()
     build_admin()
-    build_columns()
-    build_notices()
+    # build_columns()
+    # build_notices()
     build_cities()
     build_cross_pages()
     build_sitemap_extended()

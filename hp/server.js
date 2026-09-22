@@ -12,18 +12,6 @@ const maxBackupsPerFile = 100;
 // アクセス解析の接続設定（XServer の stats.php のURLとトークン）。git・公開対象外
 const analyticsConfigFile = path.join(rootDir, '_config', 'analytics.json');
 
-// 記事エディタの対象カテゴリ（/<category>/<slug>/index.html が記事本体）
-const articleCategories = {
-  column: 'コラム・ノウハウ',
-  knowledge: '基礎知識',
-  notice: 'お知らせ・注意喚起'
-};
-const newsTags = [
-  { label: 'お知らせ', className: 'tag ' },
-  { label: '注意喚起', className: 'tag tag--alert' },
-  { label: 'コラム', className: 'tag tag--column' }
-];
-
 const mimeTypes = {
   '.html': 'text/html; charset=utf-8',
   '.css': 'text/css; charset=utf-8',
@@ -145,23 +133,14 @@ function pageFile(pagePath) {
   if (!rel || rel.startsWith('..') || path.isAbsolute(rel)) throw new ApiError(400, '不正なパスです');
   if (path.extname(abs).toLowerCase() !== '.html') throw new ApiError(400, 'HTMLページ以外は編集できません');
   const top = rel.split(path.sep)[0];
-  if (base === rootDir && (top.startsWith('_') || top === 'admin' || top === 'node_modules')) throw new ApiError(403, 'このページは編集対象外です');
+  if (base === rootDir && (top.startsWith('_') || ['admin', 'build', 'backend', 'node_modules'].includes(top))) throw new ApiError(403, 'このページは編集対象外です');
   if (!fs.existsSync(abs)) throw new ApiError(404, 'ページが見つかりません');
   return abs;
 }
 
-function articleInfo(articlePath) {
-  const m = /^\/?([a-z0-9-]+)\/([a-z0-9-]+)\/?(?:index\.html)?$/i.exec(String(articlePath || ''));
-  if (!m || !articleCategories[m[1]]) throw new ApiError(400, '記事のパスが正しくありません');
-  const [, category, slug] = m;
-  const file = path.join(rootDir, category, slug, 'index.html');
-  if (!fs.existsSync(file)) throw new ApiError(404, '記事が見つかりません');
-  return { category, slug, file, dir: path.dirname(file), indexFile: path.join(rootDir, category, 'index.html') };
-}
-
 function listHtmlFiles(dir = rootDir, out = []) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    if (entry.name.startsWith('.') || entry.name.startsWith('_') || entry.name === 'node_modules' || entry.name === 'admin') continue;
+    if (entry.name.startsWith('.') || entry.name.startsWith('_') || ['node_modules', 'admin', 'build', 'backend'].includes(entry.name)) continue;
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) listHtmlFiles(full, out);
     else if (entry.name.endsWith('.html')) out.push(full);
@@ -175,7 +154,10 @@ function listHtmlFiles(dir = rootDir, out = []) {
 
 function backupFolder(file) {
   // LP（lp/ フォルダ）の控えは「lp__〜」という名前でまとめる
-  const rel = file.startsWith(lpDir) ? `lp/${toPosix(path.relative(lpDir, file))}` : toPosix(path.relative(rootDir, file));
+  const contentDir = path.join(rootDir, '..', 'content');
+  const rel = file.startsWith(lpDir) ? `lp/${toPosix(path.relative(lpDir, file))}`
+    : file.startsWith(contentDir) ? `content/${toPosix(path.relative(contentDir, file))}`
+    : toPosix(path.relative(rootDir, file));
   return path.join(backupDir, rel.replace(/\//g, '__'));
 }
 
@@ -228,94 +210,121 @@ function readBackup(file, id) {
 }
 
 /* ------------------------------------------------------------------ */
-/* 記事HTMLの読み書き                                                  */
+/* 記事（元データ：../content/articles/<カテゴリ>/<スラッグ>.md）        */
+/* 保存すると build/articles.js で記事ページ・一覧・sitemap を作り直す  */
 /* ------------------------------------------------------------------ */
 
-// 開始タグ直後の位置から、対応する閉じタグの位置を探す（入れ子対応）
-function findMatchingClose(html, from, tag) {
-  const re = new RegExp(`<(/?)${tag}\\b[^>]*>`, 'gi');
-  re.lastIndex = from;
-  let depth = 1;
-  let m;
-  while ((m = re.exec(html))) {
-    if (m[1]) {
-      depth -= 1;
-      if (depth === 0) return m.index;
-    } else if (!m[0].endsWith('/>')) {
-      depth += 1;
-    }
-  }
-  return -1;
+const articlesBuild = require('./build/articles.js');
+const { htmlToMd, mdToHtml } = require('./build/markdown.js');
+const NEWS_TAGS = ['お知らせ', '注意喚起', 'コラム'];
+
+function articleRef(articlePath) {
+  const m = /^\/?([a-z0-9-]+)\/([a-z0-9-]+)\/?(?:index\.html)?$/i.exec(String(articlePath || ''));
+  if (!m || !articlesBuild.CATEGORIES[m[1]]) throw new ApiError(400, '記事のパスが正しくありません');
+  const file = articlesBuild.articleFile(m[1], m[2]);
+  if (!fs.existsSync(file)) throw new ApiError(404, '記事が見つかりません');
+  return { category: m[1], slug: m[2], file };
 }
 
-function proseRange(html) {
-  const m = /<div class="prose">/.exec(html);
+// 記事ページ・カテゴリ一覧（元データから自動生成されるHTML）なら、そのカテゴリとスラッグを返す
+function generatedPage(file) {
+  const rel = toPosix(path.relative(rootDir, file));
+  const m = /^(column|knowledge|notice)\/(?:([a-z0-9-]+)\/)?index\.html$/.exec(rel);
   if (!m) return null;
-  const start = m.index + m[0].length;
-  const end = findMatchingClose(html, start, 'div');
-  return end < 0 ? null : { start, end };
+  if (!m[2]) return { category: m[1] };
+  return fs.existsSync(articlesBuild.articleFile(m[1], m[2])) ? { category: m[1], slug: m[2] } : null;
 }
 
-function pageHeaderRange(html) {
-  const m = /<section class="page-header[^"]*">/.exec(html);
-  if (!m) return null;
-  const start = m.index + m[0].length;
-  const end = html.indexOf('</section>', start);
-  return end < 0 ? null : { start, end };
+// 変更履歴の対象ファイル（記事ページなら元データの .md、一覧ページは履歴なし）
+function historySource(pagePath) {
+  const file = pageFile(pagePath);
+  const gen = generatedPage(file);
+  if (!gen) return file;
+  return gen.slug ? articlesBuild.articleFile(gen.category, gen.slug) : null;
 }
 
-function parseArticleHtml(html) {
-  const pick = (re, src = html) => { const m = re.exec(src); return m ? m[1] : ''; };
-  const headerRange = pageHeaderRange(html);
-  const header = headerRange ? html.slice(headerRange.start, headerRange.end) : '';
-  const prose = proseRange(html);
-  if (!prose) throw new ApiError(422, '記事本文（.prose）が見つかりません');
+function categoryNames() {
+  return Object.fromEntries(Object.keys(articlesBuild.CATEGORIES).map((c) => [c, articlesBuild.categoryInfo(c).name]));
+}
+
+function articleResponse(a) {
+  const names = categoryNames();
   return {
-    seoTitle: decodeText(pick(/<title>([\s\S]*?)<\/title>/)),
-    description: decodeText(pick(/<meta name="description" content="([^"]*)"/)),
-    en: decodeText(pick(/<span class="en">([\s\S]*?)<\/span>/, header)),
-    h1: decodeText(pick(/<h1[^>]*>([\s\S]*?)<\/h1>/, header)),
-    lead: decodeText(pick(/<p[^>]*>([\s\S]*?)<\/p>/, header)),
-    bodyHtml: html.slice(prose.start, prose.end).replace(/^\s*\n/, '').replace(/\s+$/, '')
+    path: `${a.category}/${a.slug}`,
+    url: a.url,
+    category: a.category,
+    categoryLabel: names[a.category],
+    h1: a.title,
+    lead: a.lead,
+    en: a.label,
+    seoTitle: a.seoTitle,
+    description: a.description,
+    bodyHtml: mdToHtml(a.body),
+    tags: a.tags,
+    published: a.published,
+    updated: a.updated,
+    draft: a.draft,
+    image: a.image,
+    parent: a.parent,
+    listing: articlesBuild.CATEGORIES[a.category].list === 'news'
+      ? { kind: 'news', tag: a.noticeType, tags: NEWS_TAGS }
+      : { kind: 'banner', sub: a.summary }
   };
 }
 
-function readListing(info) {
-  if (!fs.existsSync(info.indexFile)) return null;
-  const html = fs.readFileSync(info.indexFile, 'utf8');
-  const href = escapeRegExp(`${info.slug}/`);
-  const banner = new RegExp(`<a href="${href}" class="banner">([\\s\\S]*?)</a>`).exec(html);
-  if (banner) {
-    const sub = /<div class="banner__sub">([\s\S]*?)<\/div>/.exec(banner[1]);
-    return { kind: 'banner', sub: sub ? decodeText(sub[1]) : '' };
-  }
-  const news = new RegExp(`<div class="news-item"><time>([^<]*)</time><span class="([^"]*)">([^<]*)</span><a href="${href}">`).exec(html);
-  if (news) {
-    return { kind: 'news', date: decodeText(news[1]), tag: decodeText(news[3]), tags: newsTags.map((t) => t.label) };
-  }
-  return null;
+// 記事エディタから送られた内容を、記事データに当てはめる（保存とプレビューで共通）
+function applyEdits(before, data) {
+  const next = { ...before };
+  const str = (v) => (typeof v === 'string' ? v.trim() : undefined);
+  if (str(data.h1) !== undefined) next.title = str(data.h1) || before.title;
+  if (before.navTitle === before.title) next.navTitle = next.title; // パンくず用の短い名前を別に決めていなければタイトルに合わせる
+  if (str(data.lead) !== undefined) next.lead = str(data.lead);
+  if (str(data.en) !== undefined) next.label = str(data.en) || before.label;
+  if (str(data.seoTitle) !== undefined) next.seoTitle = str(data.seoTitle) || before.seoTitle;
+  if (str(data.description) !== undefined) next.description = str(data.description);
+  if (typeof data.bodyHtml === 'string') next.body = htmlToMd(data.bodyHtml);
+  if (data.listing && data.listing.kind === 'banner' && typeof data.listing.sub === 'string') next.summary = data.listing.sub.trim();
+  if (data.listing && data.listing.kind === 'news' && NEWS_TAGS.includes(data.listing.tag)) next.noticeType = data.listing.tag;
+  if (data.tags !== undefined) next.tags = cleanTags(data.tags);
+  if (isDate(data.published)) next.published = data.published;
+  if (typeof data.draft === 'boolean') next.draft = data.draft;
+  if (str(data.image) !== undefined) next.image = /^\/assets\/img\/[\w\-./]+$/.test(str(data.image)) ? str(data.image) : '';
+  next.updated = articlesBuild.today();
+  if (next.published > next.updated) next.updated = next.published;
+  return next;
 }
 
-function writeListing(info, listing) {
-  if (!listing || !fs.existsSync(info.indexFile)) return false;
-  const html = fs.readFileSync(info.indexFile, 'utf8');
-  const href = escapeRegExp(`${info.slug}/`);
-  let next = html;
+// 保存前のプレビュー（メモリに置くだけ。ファイルは書き換えない）
+const previews = new Map();
 
-  if (listing.kind === 'banner' && typeof listing.sub === 'string') {
-    next = html.replace(new RegExp(`(<a href="${href}" class="banner">[\\s\\S]*?<div class="banner__sub">)[\\s\\S]*?(</div>)`),
-      (_, a, b) => `${a}${escapeText(listing.sub.trim())}${b}`);
-  } else if (listing.kind === 'news') {
-    const tag = newsTags.find((t) => t.label === listing.tag);
-    next = html.replace(new RegExp(`<div class="news-item"><time>([^<]*)</time><span class="([^"]*)">([^<]*)</span>(<a href="${href}">)`),
-      (_, date, cls, label, a) => `<div class="news-item"><time>${escapeText(listing.date ?? date)}</time><span class="${tag ? tag.className : cls}">${tag ? escapeText(tag.label) : label}</span>${a}`);
-  }
-
-  if (next === html) return false;
-  backupFile(info.indexFile, '記事エディタによる一覧更新');
-  fs.writeFileSync(info.indexFile, next, 'utf8');
-  return true;
+// 記事の画像：hp/assets/img/articles/<カテゴリ>-<URL名>/ に置く
+const IMAGE_TYPES = { 'image/jpeg': '.jpg', 'image/png': '.png', 'image/webp': '.webp', 'image/gif': '.gif' };
+function saveUploadedImage(ref, name, mime, base64) {
+  const ext = IMAGE_TYPES[mime];
+  if (!ext) throw new ApiError(400, '画像は JPG・PNG・WebP・GIF のいずれかにしてください');
+  const buf = Buffer.from(String(base64 || ''), 'base64');
+  if (!buf.length) throw new ApiError(400, '画像が空です');
+  if (buf.length > 5 * 1024 * 1024) throw new ApiError(413, '画像は5MB以下にしてください（大きい写真は縮小してからお使いください）');
+  const dir = path.join(rootDir, 'assets', 'img', 'articles', `${ref.category}-${ref.slug}`);
+  fs.mkdirSync(dir, { recursive: true });
+  const base = String(name || 'image').replace(/\.[^.]+$/, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40) || 'image';
+  let file = `${base}${ext}`;
+  for (let i = 2; fs.existsSync(path.join(dir, file)); i += 1) file = `${base}-${i}${ext}`;
+  fs.writeFileSync(path.join(dir, file), buf);
+  return `/assets/img/articles/${ref.category}-${ref.slug}/${file}`;
 }
+
+function runBuild() {
+  try {
+    return articlesBuild.buildAll();
+  } catch (err) {
+    console.error(err);
+    throw new ApiError(500, `ページの生成に失敗しました：${err.message}`);
+  }
+}
+
+const cleanTags = (v) => [...new Set((Array.isArray(v) ? v : String(v || '').split(/[,、，]/)).map((t) => String(t).trim()).filter(Boolean))].slice(0, 20);
+const isDate = (v) => /^\d{4}-\d{2}-\d{2}$/.test(String(v || ''));
 
 // サイト内の、指定ディレクトリ（記事）へのリンク文字列を新しいタイトルに置き換える
 function syncLinkTitles(targetDir, oldTitle, newTitle) {
@@ -347,66 +356,6 @@ function syncLinkTitles(targetDir, oldTitle, newTitle) {
     }
   }
   return changed;
-}
-
-function applyArticle(html, data) {
-  let next = html;
-  const replaceOnce = (re, fn) => { next = next.replace(re, fn); };
-
-  if (typeof data.seoTitle === 'string') {
-    replaceOnce(/<title>[\s\S]*?<\/title>/, () => `<title>${escapeText(data.seoTitle.trim())}</title>`);
-    replaceOnce(/(<meta property="og:title" content=")[^"]*(")/, (_, a, b) => `${a}${escapeAttr(data.seoTitle.trim())}${b}`);
-  }
-  if (typeof data.description === 'string') {
-    const d = data.description.trim();
-    replaceOnce(/(<meta name="description" content=")[^"]*(")/, (_, a, b) => `${a}${escapeAttr(d)}${b}`);
-    replaceOnce(/(<meta property="og:description" content=")[^"]*(")/, (_, a, b) => `${a}${escapeAttr(d)}${b}`);
-  }
-
-  const headerRange = pageHeaderRange(next);
-  if (headerRange) {
-    let header = next.slice(headerRange.start, headerRange.end);
-    if (typeof data.en === 'string') header = header.replace(/(<span class="en">)[\s\S]*?(<\/span>)/, (_, a, b) => `${a}${escapeText(data.en.trim())}${b}`);
-    if (typeof data.h1 === 'string') header = header.replace(/(<h1[^>]*>)[\s\S]*?(<\/h1>)/, (_, a, b) => `${a}${escapeText(data.h1.trim())}${b}`);
-    if (typeof data.lead === 'string') header = header.replace(/(<p[^>]*>)[\s\S]*?(<\/p>)/, (_, a, b) => `${a}${escapeText(data.lead.trim())}${b}`);
-    next = next.slice(0, headerRange.start) + header + next.slice(headerRange.end);
-  }
-
-  if (typeof data.h1 === 'string') {
-    replaceOnce(/(<p class="breadcrumb">[\s\S]*?<span>›<\/span>)([^<]*)(<\/p>)/, (_, a, _old, b) => `${a}${escapeText(data.h1.trim())}${b}`);
-  }
-
-  if (typeof data.bodyHtml === 'string') {
-    const range = proseRange(next);
-    if (!range) throw new ApiError(422, '記事本文（.prose）が見つかりません');
-    next = next.slice(0, range.start) + matchEol(html, `\n${data.bodyHtml.replace(/\s+$/, '')}\n        `) + next.slice(range.end);
-  }
-  return next;
-}
-
-function listArticles() {
-  const result = [];
-  for (const [category, label] of Object.entries(articleCategories)) {
-    const dir = path.join(rootDir, category);
-    if (!fs.existsSync(dir)) continue;
-    const indexHtml = fs.existsSync(path.join(dir, 'index.html')) ? fs.readFileSync(path.join(dir, 'index.html'), 'utf8') : '';
-    const order = [...indexHtml.matchAll(/<a href="([a-z0-9-]+)\/"/gi)].map((m) => m[1]);
-    const slugs = fs.readdirSync(dir, { withFileTypes: true })
-      .filter((e) => e.isDirectory() && fs.existsSync(path.join(dir, e.name, 'index.html')))
-      .map((e) => e.name)
-      .sort((a, b) => {
-        const ia = order.indexOf(a); const ib = order.indexOf(b);
-        return (ia < 0 ? 1e9 : ia) - (ib < 0 ? 1e9 : ib) || a.localeCompare(b);
-      });
-    for (const slug of slugs) {
-      const html = fs.readFileSync(path.join(dir, slug, 'index.html'), 'utf8');
-      if (!proseRange(html)) continue;
-      const h1 = /<section class="page-header[^"]*">[\s\S]*?<h1[^>]*>([\s\S]*?)<\/h1>/.exec(html);
-      const stat = fs.statSync(path.join(dir, slug, 'index.html'));
-      result.push({ path: `${category}/${slug}`, category, categoryLabel: label, slug, title: h1 ? decodeText(h1[1]) : slug, updatedAt: stat.mtime.toISOString() });
-    }
-  }
-  return result;
 }
 
 function readAnalyticsConfig() {
@@ -459,33 +408,86 @@ async function handleApi(req, res, url) {
       return sendJson(res, upstream.status, body);
     }
 
-    case 'GET /api/articles':
-      return sendJson(res, 200, { categories: articleCategories, articles: listArticles() });
+    case 'GET /api/articles': {
+      const names = categoryNames();
+      const order = Object.keys(articlesBuild.CATEGORIES);
+      const articles = articlesBuild.loadArticles()
+        .sort((a, b) => (order.indexOf(a.category) - order.indexOf(b.category)) || b.published.localeCompare(a.published) || (a.order - b.order))
+        .map((a) => ({ path: `${a.category}/${a.slug}`, url: a.url, category: a.category, categoryLabel: names[a.category], slug: a.slug, title: a.title, navTitle: a.navTitle, parent: a.parent, order: a.order, draft: a.draft, published: a.published, updatedAt: a.updated }));
+      return sendJson(res, 200, { categories: names, articles });
+    }
 
     case 'GET /api/article': {
-      const info = articleInfo(url.searchParams.get('path'));
-      const article = parseArticleHtml(fs.readFileSync(info.file, 'utf8'));
-      return sendJson(res, 200, {
-        path: `${info.category}/${info.slug}`,
-        url: `/${info.category}/${info.slug}/`,
-        category: info.category,
-        categoryLabel: articleCategories[info.category],
-        ...article,
-        listing: readListing(info)
-      });
+      const ref = articleRef(url.searchParams.get('path'));
+      return sendJson(res, 200, articleResponse(articlesBuild.readArticle(ref.category, ref.slug)));
     }
 
     case 'POST /api/article': {
       const data = await readJsonBody(req);
-      const info = articleInfo(data.path);
-      const html = fs.readFileSync(info.file, 'utf8');
-      const before = parseArticleHtml(html);
-      const next = applyArticle(html, data);
-      const backupId = next !== html ? backupFile(info.file, `記事エディタで保存（${before.h1}）`) : null;
-      if (next !== html) fs.writeFileSync(info.file, next, 'utf8');
-      const listingUpdated = writeListing(info, data.listing);
-      const linkedFiles = syncLinkTitles(info.dir, before.h1, typeof data.h1 === 'string' ? data.h1.trim() : before.h1);
-      return sendJson(res, 200, { ok: true, changed: next !== html, backupId, listingUpdated, linkedFiles });
+      const ref = articleRef(data.path);
+      const before = articlesBuild.readArticle(ref.category, ref.slug);
+      const next = applyEdits(before, data);
+
+      const backupId = backupFile(ref.file, `記事エディタで保存（${before.title}）`);
+      articlesBuild.saveArticle(next);
+      const build = runBuild();
+      const linkedFiles = !next.draft && before.title !== next.title
+        ? syncLinkTitles(path.join(rootDir, ref.category, ref.slug), before.title, next.title)
+        : [];
+      return sendJson(res, 200, { ok: true, backupId, changed: build.changed, removed: build.removed, linkedFiles, url: next.url, draft: next.draft });
+    }
+
+    case 'POST /api/article/new': {
+      const data = await readJsonBody(req);
+      const category = String(data.category || '');
+      const slug = String(data.slug || '').trim().toLowerCase();
+      const title = String(data.title || '').trim();
+      if (!articlesBuild.CATEGORIES[category]) throw new ApiError(400, 'カテゴリを選んでください');
+      if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(slug) || slug.length > 60) throw new ApiError(400, 'URL名は半角の英小文字・数字・ハイフンで入力してください（例：google-review-guide）');
+      if (!title) throw new ApiError(400, 'タイトルを入力してください');
+      if (fs.existsSync(articlesBuild.articleFile(category, slug)) || fs.existsSync(path.join(rootDir, category, slug))) throw new ApiError(409, `「${category}/${slug}」はすでに使われています`);
+      const parent = String(data.parent || '').trim();
+      if (parent && !fs.existsSync(articlesBuild.articleFile(category, parent))) throw new ApiError(400, '親ページが見つかりません');
+      const siblings = parent ? articlesBuild.loadArticles().filter((a) => a.category === category && a.parent === parent) : [];
+      const today = articlesBuild.today();
+      articlesBuild.saveArticle({
+        parent, order: parent ? siblings.reduce((m, a) => Math.max(m, a.order === 9999 ? 0 : a.order), 0) + 1 : 9999,
+        category, slug, title, description: '', lead: '', summary: '',
+        seoTitle: `${title}｜${articlesBuild.CATEGORIES[category].titleSuffix}｜一般社団法人口コミ対策センター`,
+        label: articlesBuild.CATEGORIES[category].en, published: today, updated: today, tags: [],
+        noticeType: 'お知らせ', image: '', author: '', draft: true,
+        body: '## 見出し\n\nここに本文を書きます。'
+      });
+      runBuild();
+      return sendJson(res, 200, { ok: true, path: `${category}/${slug}` });
+    }
+
+    case 'POST /api/preview': {
+      const data = await readJsonBody(req);
+      const ref = articleRef(data.path);
+      const next = applyEdits(articlesBuild.readArticle(ref.category, ref.slug), data);
+      const key = `${ref.category}/${ref.slug}`;
+      previews.set(key, { html: articlesBuild.renderPreview(next), url: next.url });
+      return sendJson(res, 200, { ok: true, url: `/api/preview?path=${encodeURIComponent(key)}` });
+    }
+
+    case 'GET /api/preview': {
+      const item = previews.get(String(url.searchParams.get('path') || ''));
+      if (!item) throw new ApiError(404, 'プレビューがありません。エディタの「プレビュー」を押し直してください');
+      const banner = '<div data-editor-skip style="position:sticky;top:0;z-index:9999;padding:8px 16px;background:#b45309;color:#fff;font:700 13px/1.6 sans-serif;text-align:center;">プレビュー（まだ保存されていません）— このタブを閉じてエディタに戻り、「保存してHPに反映」を押すと公開されます</div>';
+      const html = item.html
+        .replace(/<script[^>]*(?:editor|track)\.js[^>]*><\/script>\s*/g, '') // プレビューでは編集ツール・アクセス計測を読み込まない
+        .replace(/<head>/i, (m) => `${m}\n<base href="${item.url}">`)
+        .replace(/<body([^>]*)>/i, (m) => `${m}${banner}`);
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' });
+      res.end(html);
+      return undefined;
+    }
+
+    case 'POST /api/upload': {
+      const data = await readJsonBody(req);
+      const ref = articleRef(data.path);
+      return sendJson(res, 200, { ok: true, src: saveUploadedImage(ref, data.name, data.type, data.data) });
     }
 
     case 'GET /api/page': {
@@ -496,6 +498,7 @@ async function handleApi(req, res, url) {
     case 'POST /api/page': {
       const data = await readJsonBody(req);
       const file = pageFile(data.path);
+      if (generatedPage(file)) throw new ApiError(409, 'このページは記事データから自動生成されます。記事エディタ（/admin/editor/）で編集してください。');
       if (typeof data.bodyHtml !== 'string' || !data.bodyHtml.trim()) throw new ApiError(400, '本文が空です');
       const html = fs.readFileSync(file, 'utf8');
       const open = /<body[^>]*>/i.exec(html);
@@ -509,26 +512,29 @@ async function handleApi(req, res, url) {
     }
 
     case 'GET /api/history': {
-      const file = pageFile(url.searchParams.get('path'));
-      return sendJson(res, 200, { history: listBackups(file) });
+      const src = historySource(url.searchParams.get('path'));
+      return sendJson(res, 200, { history: src ? listBackups(src) : [] });
     }
 
     case 'POST /api/restore': {
       const data = await readJsonBody(req);
-      const file = pageFile(data.path);
-      const restored = readBackup(file, data.id);
-      const current = fs.readFileSync(file, 'utf8');
-      backupFile(file, `履歴 ${labelFromId(data.id)} を復元する前の状態`);
-      fs.writeFileSync(file, restored, 'utf8');
+      const src = historySource(data.path);
+      if (!src) throw new ApiError(400, 'このページには変更履歴がありません');
+      const restored = readBackup(src, data.id);
+      backupFile(src, `履歴 ${labelFromId(data.id)} を復元する前の状態`);
 
-      // 記事ならタイトル変更に合わせてサイト内リンクも戻す
-      let linkedFiles = [];
-      try {
-        const rel = toPosix(path.relative(rootDir, path.dirname(file)));
-        articleInfo(rel);
-        linkedFiles = syncLinkTitles(path.dirname(file), parseArticleHtml(current).h1, parseArticleHtml(restored).h1);
-      } catch { /* 記事以外のページ */ }
-      return sendJson(res, 200, { ok: true, linkedFiles });
+      // 記事（元データ）なら、復元後にページを作り直し、タイトルが変わっていればサイト内リンクも戻す
+      if (src.endsWith('.md')) {
+        const ref = articleRef(toPosix(path.relative(articlesBuild.CONTENT_DIR, src)).replace(/\.md$/, ''));
+        const before = articlesBuild.readArticle(ref.category, ref.slug);
+        fs.writeFileSync(src, restored, 'utf8');
+        const after = articlesBuild.readArticle(ref.category, ref.slug);
+        const build = runBuild();
+        const linkedFiles = before.title !== after.title ? syncLinkTitles(path.join(rootDir, ref.category, ref.slug), before.title, after.title) : [];
+        return sendJson(res, 200, { ok: true, changed: build.changed, linkedFiles });
+      }
+      fs.writeFileSync(src, restored, 'utf8');
+      return sendJson(res, 200, { ok: true });
     }
 
     default:

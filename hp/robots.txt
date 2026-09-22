@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /backend/
+Disallow: /build/
+
+Sitemap: https://kuchikomi-taisaku.com/sitemap.xml

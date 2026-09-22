@@ -218,7 +218,7 @@
         if (!res.ok || !data.ok) throw new Error(data.error || '送信に失敗しました。');
         location.href = new URL(form.dataset.thanks || 'thanks/', root).href;
       } catch (err) {
-        showFormMessage(form, `${err.message} 時間をおいて再度お試しいただくか、お電話（0120-000-001）でご連絡ください。`);
+        showFormMessage(form, `${err.message} 時間をおいて再度お試しいただくか、LINE（https://lin.ee/gVRUtOl）からご連絡ください。`);
         if (button) { button.disabled = false; button.innerHTML = original; }
       }
     });

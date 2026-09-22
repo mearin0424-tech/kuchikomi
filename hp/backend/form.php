@@ -60,7 +60,7 @@ try {
     $id = (int) $db->lastInsertId();
 } catch (Throwable $e) {
     error_log('[kcc form] ' . $e->getMessage());
-    kcc_json(500, ['ok' => false, 'error' => '送信を保存できませんでした。お手数ですがお電話でご連絡ください。']);
+    kcc_json(500, ['ok' => false, 'error' => '送信を保存できませんでした。お手数ですがLINE（https://lin.ee/gVRUtOl）からご連絡ください。']);
 }
 
 // ---- メール通知 ----

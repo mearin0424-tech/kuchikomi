@@ -1429,3 +1429,23 @@ body { padding-top: 80px; }
 .contact-band__btn:hover { background: linear-gradient(180deg, #f5a623, #e08e1b); color: #fff; }
 .contact-band__text strong { color: #ffe2b0; }
 
+
+/* ============================================================
+   申込導線（2026-09）：無料診断・LINE・お問い合わせフォームの3つに統一（電話・メール受付なし）
+   ============================================================ */
+.cta-trio .is-diagnosis { border-color: var(--c-accent); background: var(--c-accent); color: #fff; }
+.cta-trio .is-line { border-color: var(--c-line); background: var(--c-line); color: #fff; }
+.cta-trio .is-contact { border-color: var(--c-navy); background: #fff; color: var(--c-navy); }
+.contact-band__line {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--c-line); color: #fff; font-weight: 800; font-size: 13.5px;
+    padding: 9px 20px; border-radius: 999px; white-space: nowrap;
+    box-shadow: 0 4px 14px rgba(0,0,0,.2);
+}
+.contact-band__line img { width: 20px; height: auto; }
+.contact-band__line:hover { filter: brightness(1.05); color: #fff; opacity: 1; }
+.global-nav-list__cta .btn + .btn, .hd2 .global-nav-list__cta .btn + .btn { margin-top: 10px; }
+@media (max-width: 720px) {
+    .contact-band__line { flex: 1; justify-content: center; padding: 11px 14px; }
+}
+.contact-channels-note { max-width: 880px; margin: 0 auto; }
