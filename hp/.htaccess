@@ -1,0 +1,9 @@
+# 公開サーバー（XServer）用：管理用・作業用のファイルは外から見えないようにする
+RedirectMatch 404 (^|/)(admin|_config|_backups|_source_dump)(/|$)
+<FilesMatch "^(server\.js|_generate\.py|README\.md|\.gitignore)$">
+  Require all denied
+</FilesMatch>
+
+# Studio時代のURLを新しいページへ転送（広告のURLに付いた ?utm_... などのパラメータは引き継がれる）
+RedirectMatch 301 ^/biz-hidden-gad/?$ /lp/google-maps-review-free-diagnosis/
+RedirectMatch 301 ^/thanks-2/?$ /thanks-diagnosis/

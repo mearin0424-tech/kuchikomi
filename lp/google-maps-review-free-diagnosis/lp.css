@@ -1,0 +1,287 @@
+/* Googleマップ口コミ対策・無料診断LP（旧 https://kuchikomi-taisaku.com/biz-hidden-gad をStudioから移植）
+   ブレークポイントは Studio と同じ：1140px / 768px（タブレット） / 480px（スマホ） */
+:root {
+  --lp-navy: #1a365d;
+  --lp-accent: #f59e0b;
+  --lp-text: #333;
+  --lp-blue: #1d5ab0;
+  --lp-line: #06c755;
+  --lp-gray-bg: #f3f4f6;
+  --lp-font: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+  --lp-font-hira: 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN', 'Noto Sans JP', 'Hiragino Sans', Meiryo, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: #fff; color: var(--lp-text); font-family: var(--lp-font); font-size: 16px; line-height: 27px; -webkit-font-smoothing: antialiased; }
+img { display: block; max-width: 100%; height: auto; }
+p, h1, h2, h3, ul, li { margin: 0; padding: 0; }
+ul { list-style: none; }
+a { color: inherit; }
+.lp-sr { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.lp-inner { width: 100%; max-width: 960px; margin: 0 auto; }
+.lp-sp-only { display: none; }
+
+/* ---- 見出し（英字ラベル＋H2＋オレンジの線） ---- */
+.lp-head { display: flex; flex-direction: column; align-items: center; padding-bottom: 16px; text-align: center; }
+.lp-head__en { margin-bottom: 7px; color: var(--lp-accent); font-size: 14px; font-weight: 700; letter-spacing: 1px; line-height: 26px; }
+.lp-h2 { color: var(--lp-navy); font-size: 40px; font-weight: 700; line-height: 56px; text-align: center; }
+.lp-head__bar { display: block; width: 60px; height: 3px; margin: 10px auto 0; border-radius: 3px; background: var(--lp-accent); }
+.lp-h3 { color: var(--lp-navy); font-size: 26px; font-weight: 700; line-height: 38px; }
+
+/* ---- ヒーロー ---- */
+.lp-hero { position: relative; isolation: isolate; display: flex; flex-direction: column; align-items: center; padding: 108px 0; overflow: hidden; }
+.lp-hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: url('images/hero-bg.webp') center / cover no-repeat; filter: brightness(122%); }
+.lp-hero__body { width: 726px; max-width: 100%; display: flex; flex-direction: column; align-items: flex-start; }
+.lp-hero__logo { width: 170px; }
+.lp-hero__title { width: 472px; }
+.lp-hero__text { margin: 19px 0 0 20px; color: #fff; font-size: 20px; font-weight: 700; line-height: 1.8; text-shadow: 0 0 10px rgba(0, 0, 0, .5); }
+.lp-hero__badges { display: flex; gap: 30px; width: 400px; margin-top: 30px; }
+.lp-hero__badges img { width: calc((100% - 60px) / 3); }
+.lp-hero-sp { display: none; width: 100%; }
+
+/* ---- 放置のリスク（PROBLEM） ---- */
+.lp-problem { padding: 79px 40px 122px; overflow: hidden; }
+.lp-problem .lp-inner { display: flex; flex-direction: column; align-items: center; gap: 64px; }
+.lp-problem__row { display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; width: 100%; }
+.lp-problem__col { width: 50%; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.lp-problem__lead { align-self: flex-start; margin-left: 1px; color: #000; font-size: 30px; font-weight: 700; line-height: 56px; }
+.lp-checklist { display: flex; flex-direction: column; gap: 20px; width: 100%; padding: 20px 40px; border: 4px solid #eee; }
+.lp-checklist li { display: flex; align-items: flex-start; gap: 10px; color: var(--lp-text); font-size: 21px; font-weight: 500; line-height: 32px; }
+.lp-checklist strong { color: var(--lp-blue); font-weight: 700; }
+.lp-check { flex: none; width: 30px; height: 30px; margin-top: 1px; color: var(--lp-accent); }
+.lp-problem__photo { width: 50%; height: 334px; border-radius: 8px; overflow: hidden; }
+.lp-problem__photo img { width: 100%; height: 100%; object-fit: cover; }
+.lp-problem__conclusion { display: flex; flex-direction: column; align-items: center; gap: 32px; }
+.lp-problem__caption { width: 255px; }
+.lp-problem__message { width: 600px; max-width: 100%; margin: 10px 0; color: var(--lp-navy); font-size: 26px; font-weight: 700; line-height: 1.6; text-align: center; }
+.lp-problem__message u { color: var(--lp-text); text-decoration: none; background: linear-gradient(#fff 62%, rgba(245, 158, 11, .4) 60%); }
+
+/* ---- こんな方に（TARGET USERS） ---- */
+.lp-target { padding: 80px 24px; background: var(--lp-gray-bg); }
+.lp-target .lp-inner { display: flex; flex-direction: column; align-items: center; gap: 64px; }
+.lp-target__cards { display: flex; justify-content: center; gap: 30px; width: 1280px; max-width: calc(100vw - 48px); }
+.lp-card { flex: 1; display: flex; flex-direction: column; align-items: center; min-width: 0; background: #fff; border: 1px solid #eee; border-radius: 12px; box-shadow: 0 5px 20px rgba(0, 0, 0, .05); overflow: hidden; }
+.lp-target .lp-card { height: 400px; }
+.lp-card > img { width: 100%; }
+.lp-card__body { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; padding: 20px 20px 40px; text-align: center; }
+
+/* ---- 比較（解決策はないと諦めていた方へ） ---- */
+.lp-compare { padding: 80px 24px; }
+.lp-compare .lp-inner { display: flex; flex-direction: column; align-items: center; gap: 50px; }
+.lp-compare__intro { display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%; }
+.lp-compare__title { width: 100%; margin-bottom: 26px; padding: 0 6px 10px; border-bottom: 3px solid var(--lp-navy); }
+.lp-compare__lead { color: var(--lp-accent); font-size: 27px; font-weight: 700; line-height: 1.8; text-align: center; }
+.lp-compare__text { text-align: center; }
+.lp-table-wrap { width: 100%; padding-bottom: 8px; overflow: hidden; display: flex; justify-content: center; }
+.lp-table { width: 70%; border-collapse: collapse; table-layout: fixed; }
+.lp-table th, .lp-table td { border: 1px solid #b3b3b3; text-align: center; vertical-align: middle; }
+.lp-table thead th { height: 62px; padding: 0 8px; background: #d0cecf; color: var(--lp-text); font-size: 16px; font-weight: 700; line-height: 1.4; vertical-align: bottom; }
+.lp-table thead th span { display: block; font-size: 12px; }
+.lp-table thead th.lp-table__corner { width: 100px; background: none; border: 0; }
+.lp-table thead th.is-ours { height: 71px; background: var(--lp-navy); border-color: var(--lp-navy); border-radius: 6px 6px 0 0; color: #fff; vertical-align: middle; }
+.lp-table thead th:not(.is-ours):not(.lp-table__corner) { height: 62px; vertical-align: middle; }
+.lp-table tbody th { width: 100px; height: 143px; padding: 10px; background: #fff; color: #000; font-size: 14px; font-weight: 700; }
+.lp-table tbody td { height: 143px; padding: 17px; background: #f5f5f5; color: #000; font-family: var(--lp-font-hira); font-size: 14px; font-weight: 600; line-height: 1.4; }
+.lp-table tbody td.is-ours { background: rgba(255, 233, 190, .3); }
+.lp-table td img { width: 42px; margin: 0 auto 12px; }
+.lp-table td img.is-circle { width: 37px; }
+.lp-table td small { display: block; font-size: 10px; }
+.lp-table td strong { display: block; margin-bottom: 5px; font-size: 14px; font-weight: 600; }
+.lp-why { display: flex; flex-direction: column; gap: 15px; width: 100%; padding: 43px 42px 66px; background: #fff; border: 2px solid var(--lp-navy); border-radius: 12px; box-shadow: 0 5px 20px rgba(0, 0, 0, .05); }
+.lp-why__title { display: flex; align-items: center; min-height: 59px; }
+.lp-why__title svg { flex: none; width: 32px; height: 32px; margin-right: 12px; color: var(--lp-accent); }
+.lp-why__body { font-size: 16px; line-height: 29px; }
+.lp-why__body p { margin: 10px 0; }
+.lp-why__body strong { color: var(--lp-navy); font-weight: 700; }
+
+/* ---- 3つのお約束（ADVANTAGES） ---- */
+.lp-advantages { padding: 100px 40px; background: var(--lp-gray-bg); }
+.lp-advantages .lp-inner { display: flex; flex-direction: column; align-items: center; gap: 64px; }
+.lp-advantages__list { display: flex; gap: 20px; width: 100%; padding: 10px; }
+.lp-advantages .lp-card { height: 440px; gap: 20px; padding: 30px 16px; }
+.lp-advantages .lp-card > img { width: 80%; }
+.lp-advantages .lp-card p { text-align: center; }
+
+/* ---- 当社実績（CASE STUDIES） ---- */
+.lp-cases { padding: 100px 100px 150px; border-bottom: 1px solid rgba(36, 37, 40, .1); overflow: hidden; }
+.lp-cases .lp-inner { display: flex; flex-direction: column; align-items: center; gap: 80px; }
+.lp-cases__intro { display: flex; flex-direction: column; gap: 64px; width: 100%; }
+.lp-cases__note { text-align: center; }
+.lp-carousel { position: relative; width: 100%; }
+.lp-carousel__viewport { overflow: visible; }
+.lp-carousel__track { display: flex; transition: transform .6s cubic-bezier(.22, 1, .36, 1); will-change: transform; }
+.lp-case { flex: none; width: 500px; padding: 0 20px; }
+.lp-case__card { display: flex; flex-direction: column; height: 620px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0, 0, 0, .05); background: #fff; overflow: hidden; }
+.lp-case__banner { display: none; }
+.lp-case__no { display: flex; align-items: center; gap: 10px; padding: 20px 20px 10px; }
+.lp-case__no img { width: 50px; }
+.lp-case__no span { color: var(--lp-accent); font-family: var(--lp-font-hira); font-size: 22px; font-weight: 600; line-height: 1.5; }
+.lp-case__body { padding: 0 20px 20px; }
+.lp-case dl { display: flex; flex-direction: column; margin: 0; padding: 0; }
+.lp-case__client { padding: 10px; border-bottom: 1px dashed #c6c3a5; color: var(--lp-text); font-family: var(--lp-font-hira); font-size: 22px; font-weight: 600; line-height: 1.5; }
+.lp-case__row { display: flex; align-items: flex-start; gap: 10px; padding: 14px 10px; border-bottom: 1px dashed #c6c3a5; }
+.lp-case__row:last-child { border-bottom: 0; }
+.lp-case__row dt { flex: none; width: 100px; color: var(--lp-navy); font-size: 18px; font-weight: 500; line-height: 27px; }
+.lp-case__row dd { flex: 1; margin: 0; }
+.lp-case__result { display: block; margin-bottom: 4px; color: var(--lp-navy); font-size: 21px; font-weight: 700; line-height: 24px; }
+.lp-carousel__nav { position: absolute; right: 0; top: 621px; z-index: 3; display: flex; }
+.lp-carousel__nav button { display: flex; align-items: center; justify-content: center; width: 90px; height: 90px; border: 0; background: var(--lp-navy); color: #fff; cursor: pointer; transition: background .2s; }
+.lp-carousel__nav button:hover { background: #000; }
+.lp-carousel__nav button:first-child { border-radius: 30px 0 0 30px; }
+.lp-carousel__nav button:last-child { border-radius: 0 30px 30px 0; }
+.lp-carousel__nav svg { width: 48px; height: 48px; }
+
+/* ---- よくあるご質問（FAQ） ---- */
+.lp-faq { display: flex; flex-direction: column; align-items: center; gap: 60px; padding: 80px 0; background: #f5f5f5; }
+.lp-faq__list { display: flex; flex-direction: column; gap: 30px; width: 800px; max-width: calc(100% - 64px); padding: 10px; }
+.lp-faq__item { background: #fff; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, .2); }
+.lp-faq__q { display: flex; align-items: center; gap: 20px; width: 100%; padding: 24px 32px; border: 0; background: none; color: #222; font: inherit; text-align: left; cursor: pointer; transition: opacity .2s; }
+.lp-faq__q:hover { opacity: .7; }
+.lp-faq__mark { flex: none; width: 16px; color: var(--lp-accent); font-family: var(--lp-font-hira); font-size: 20px; font-weight: 700; line-height: 1.5; font-feature-settings: 'palt' 1; }
+.lp-faq__question { flex: 1; font-family: var(--lp-font-hira); font-size: 20px; font-weight: 700; line-height: 1.5; font-feature-settings: 'palt' 1; }
+.lp-faq__toggle { flex: none; position: relative; width: 38px; height: 38px; border: 1px solid #e6e6e6; border-radius: 50%; }
+.lp-faq__toggle::before, .lp-faq__toggle::after { content: ""; position: absolute; left: 50%; top: 50%; width: 14px; height: 2px; background: #222; transform: translate(-50%, -50%); transition: transform .3s; }
+.lp-faq__toggle::after { transform: translate(-50%, -50%) rotate(90deg); }
+.lp-faq__item.is-open .lp-faq__toggle::after { transform: translate(-50%, -50%) rotate(0deg); }
+.lp-faq__a { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .3s cubic-bezier(.4, .4, 0, 1); }
+.lp-faq__item.is-open .lp-faq__a { grid-template-rows: 1fr; }
+.lp-faq__a > div { min-height: 0; overflow: hidden; margin: 0 32px; }
+.lp-faq__a p { margin-left: 36px; padding: 16px 0 32px; border-top: 1px solid #e6e6e6; color: #222; font-feature-settings: 'palt' 1; }
+
+/* ---- 締め（下のフォームの上） ---- */
+.lpf-intro { position: relative; display: flex; flex-direction: column; align-items: center; gap: 24px; margin: 0 auto 50px; color: #fff; text-align: center; }
+.lpf-intro h2 { color: #fff; font-size: 26px; font-weight: 700; line-height: 38px; }
+
+/* ---- フッター ---- */
+.lp-footer { display: flex; flex-direction: column; align-items: center; padding: 96px 0 176px; background: #f8f7f6; font-family: var(--lp-font-hira); }
+.lp-footer__inner { display: flex; width: 1280px; max-width: 100%; margin-bottom: 112px; padding: 0 48px; }
+.lp-footer__logo { height: 80px; width: auto; margin-right: 24px; }
+.lp-footer__info { display: flex; flex-direction: column; gap: 16px; margin: 0 0 0 100px; }
+.lp-footer__info div { display: flex; align-items: center; gap: 20px; }
+.lp-footer__info dt { width: 100px; flex: none; color: var(--lp-text); font-size: 16px; font-weight: 600; line-height: 16px; }
+.lp-footer__info dd { margin: 0; color: var(--lp-text); font-size: 16px; line-height: 28px; letter-spacing: .1em; }
+.lp-footer__info div:last-child { align-items: flex-start; }
+.lp-footer__links { display: flex; gap: 0 50px; margin-bottom: 50px; }
+.lp-footer__links a { color: var(--lp-text); font-size: 16px; line-height: 1.75; letter-spacing: .1em; font-feature-settings: 'palt' 1; }
+.lp-footer__copy { color: #111; font-size: 10px; font-weight: 500; line-height: 1.4; letter-spacing: .05em; }
+
+/* ---- 画面下の固定ボタン ---- */
+.lp-cta { position: fixed; left: 0; bottom: 0; z-index: 50; width: 100%; padding: 17px 40px 15px; background: rgba(255, 255, 255, .95); border-top: 2px solid var(--lp-accent); box-shadow: 0 -2px 10px rgba(0, 0, 0, .05); backdrop-filter: blur(5px); }
+.lp-cta__inner { display: flex; justify-content: center; gap: 15px; width: 930px; max-width: 100%; margin: 0 auto; padding: 0 15px; }
+.lp-cta a { display: flex; align-items: center; justify-content: center; width: 50%; padding: 12px; border-radius: 50px; box-shadow: 0 4px 10px rgba(0, 0, 0, .1); color: #fff; font-size: 16px; font-weight: 700; line-height: 29px; text-decoration: none; transition: filter .2s, transform .2s; }
+.lp-cta a:hover { filter: brightness(1.05); transform: translateY(-1px); }
+.lp-cta a img { width: 24px; margin-right: 10px; }
+.lp-cta__line { background: var(--lp-line); }
+.lp-cta__form { background: var(--lp-accent); }
+
+/* ================= レスポンシブ ================= */
+@media (max-width: 1140px) {
+  .lp-hero__badges { gap: 20px; width: 500px; }
+  .lp-hero__badges img { width: calc((100% - 40px) / 3); }
+  .lp-cases { padding: 100px 60px; }
+  .lp-faq__list { max-width: calc(100% - 64px); }
+}
+
+@media (max-width: 768px) {
+  .lp-h2 { font-size: 32px; }
+  .lp-head__en { font-size: 13px; }
+  .lp-hero { display: none; }
+  .lp-hero-sp { display: block; }
+  .lp-problem { padding: 100px 40px; }
+  .lp-problem__row { flex-wrap: wrap; gap: 40px 0; }
+  .lp-problem__col, .lp-problem__photo { width: 100%; }
+  .lp-problem__lead { font-size: 24px; }
+  .lp-checklist li { font-size: 18px; }
+  .lp-target { padding: 100px 40px; }
+  .lp-target__cards { flex-direction: column; max-width: 100%; }
+  .lp-target .lp-card { height: auto; }
+  .lp-card .lp-h3 { font-size: 20px; }
+  .lp-compare { padding: 100px 40px; }
+  .lp-table { width: 100%; }
+  .lp-table thead th, .lp-table tbody th, .lp-table tbody td { font-size: 13px; }
+  .lp-table thead th span { font-size: 14px; }
+  .lp-table td small { font-size: 13px; }
+  .lp-table td strong { font-size: 13px; }
+  .lp-why__body { font-size: 14px; }
+  .lp-advantages__list { flex-direction: column; }
+  .lp-advantages .lp-card { height: auto; }
+  .lp-advantages .lp-card > img { width: 60%; }
+  .lp-cases { padding: 100px 40px; }
+  /* 1140px未満は横スクロールのカード一覧 */
+  .lp-carousel__viewport { overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; background: #fff; padding: 10px; }
+  .lp-carousel__track { transform: none !important; transition: none; }
+  .lp-case { width: 600px; max-width: 86vw; padding: 0 20px 0 0; scroll-snap-align: start; }
+  .lp-case__card { height: auto; overflow: visible; }
+  .lp-case__banner { display: block; width: 40%; margin: 0 0 20px; }
+  .lp-case__no span, .lp-case__client, .lp-case__result { font-size: 18px; }
+  .lp-case__row { flex-direction: column; gap: 10px; }
+  .lp-carousel__nav { position: static; justify-content: flex-end; margin-top: 16px; }
+  .lp-carousel__nav button { width: 60px; height: 60px; }
+  .lp-carousel__nav svg { width: 28px; height: 28px; }
+  .lp-footer__inner { flex-direction: column; gap: 30px; margin-bottom: 80px; }
+  .lp-footer__logo { margin: 0; }
+  .lp-footer__info { margin: 0; gap: 24px; width: 100%; }
+  .lp-footer__info div { flex-direction: column; align-items: flex-start; gap: 4px; }
+  .lp-footer__bottom { flex-direction: column-reverse; gap: 24px; }
+  .lp-cta__inner { flex-wrap: wrap; gap: 15px 0; }
+  .lp-cta a { width: 100%; font-size: 14px; }
+}
+
+@media (max-width: 480px) {
+  .lp-h2 { font-size: 36px; }
+  .lp-h3, .lp-card .lp-h3 { font-size: 24px; }
+  .lp-head { padding-bottom: 6px; }
+  .lp-head__en { margin-bottom: 2px; }
+  .lp-problem { padding: 100px 20px; }
+  .lp-problem .lp-inner { gap: 50px; }
+  .lp-problem__row { flex-direction: column-reverse; flex-wrap: nowrap; gap: 16px; }
+  .lp-problem__col { gap: 2px; }
+  .lp-checklist { gap: 10px; padding: 20px 10px; }
+  .lp-checklist li { padding-left: 14px; font-size: 18px; }
+  .lp-problem__conclusion { gap: 20px; }
+  .lp-target { padding: 100px 20px; }
+  .lp-target .lp-inner, .lp-advantages .lp-inner { gap: 28px; }
+  .lp-target__cards { gap: 16px; }
+  .lp-compare { padding: 100px 20px; }
+  .lp-compare__lead { font-size: 24px; }
+  .lp-compare__title { padding: 0 2px 10px; }
+  .lp-table thead th.lp-table__corner, .lp-table tbody th { width: 18%; }
+  .lp-table tbody td { padding: 8px 4px; }
+  .lp-table thead th { padding: 0 4px; }
+  .lp-table td img { margin-bottom: 6px; }
+  .lp-why { padding: 40px 20px; }
+  .lp-why__title { min-height: 0; }
+  .lp-why__body { font-size: 16px; }
+  .lp-advantages { padding: 100px 20px; }
+  .lp-advantages__list { gap: 40px; padding: 0; }
+  .lp-advantages .lp-card { padding: 30px 20px; }
+  .lp-cases { padding: 100px 0; border-bottom: 0; }
+  .lp-cases .lp-inner { padding: 0 10px; }
+  .lp-cases__intro { gap: 28px; }
+  .lp-case { width: 100%; max-width: 100%; padding: 0; }
+  .lp-case__client { font-size: 20px; }
+  .lp-case__result { font-size: 20px; }
+  .lp-faq__list { gap: 30px; max-width: calc(100% - 20px); padding: 0; }
+  .lp-faq__item { border-radius: 6px; }
+  .lp-faq__q { gap: 15px; padding: 16px 20px; }
+  .lp-faq__mark, .lp-faq__question { font-size: 16px; }
+  .lp-faq__toggle { width: 28px; height: 28px; }
+  .lp-faq__toggle::before, .lp-faq__toggle::after { width: 12px; }
+  .lp-faq__a > div { margin: 0 20px; }
+  .lp-faq__a p { margin-left: 30px; padding: 20px 0; }
+  .lpf-intro p { font-weight: 500; }
+  .lpf-intro h2 { font-size: 24px; }
+  .lp-footer { padding: 64px 0 176px; }
+  .lp-footer__inner { gap: 24px; padding: 0 24px; }
+  .lp-footer__info div { gap: 8px; }
+  .lp-footer__info dd { font-size: 14px; line-height: 24.5px; }
+  .lp-footer__links a { font-size: 14px; }
+  .lp-cta { padding: 10px 16px; }
+  .lp-cta__inner { flex-wrap: nowrap; gap: 16px; height: 50px; padding: 0 6px; }
+  .lp-cta a { width: 50%; padding: 4px; font-size: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .lp-carousel__track, .lp-faq__a, .lp-faq__toggle::before, .lp-faq__toggle::after { transition: none; }
+}
