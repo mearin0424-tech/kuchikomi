@@ -9,6 +9,7 @@
 | [`content/`](content/) | HPの記事（コラム・基礎知識・お知らせ）の元データ（Markdown）。`hp/build/` で静的HTMLに変換 | アップロード不要 |
 | [`lp-design-mock/`](lp-design-mock/) | 以前のLP試作（参考用） | — |
 
+- **本番公開の手順・チェックリスト: [`DEPLOY.md`](DEPLOY.md)**
 - 起動方法・編集機能・アクセス解析: [`hp/README.md`](hp/README.md)
 - LPの作り方・命名ルール・公開手順: [`lp/README.md`](lp/README.md)
 

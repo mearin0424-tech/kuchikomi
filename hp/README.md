@@ -219,14 +219,9 @@ tags: [Googleマップ, 削除請求]
 
 ## 未対応・要差し替え
 
-ローンチ前に置き換えてください：
+公開前に必要な作業（`backend/config.php` の作成、XServer の設定、アップロード、ドメインの切り替え、送信テスト、見本のお知らせの差し替えなど）は、リポジトリ直下の [`DEPLOY.md`](../DEPLOY.md) にチェックリストとしてまとめています。
 
-- （電話窓口は設けません。申込の窓口は「無料診断 `/form/`・LINE `https://lin.ee/gVRUtOl`・お問い合わせフォーム `/contact/`」の3つで、全ページ共通のCTA・画面下の固定バー・ヘッダーに入っています。LINEのURLを変えるときは `_generate.py`・`build/articles.js` と生成済みHTMLを一括置換してください）
-- フォームの通知先メールアドレス（`backend/config.php` の `mail_to` / `mail_from`）
-- 特商法表記の所在地・代表者名・支払期日（`regulation/index.html`）
-- お知らせ（`news/index.html` のサンプル4件を実データに差し替え）
-- 旧サイトのCMS依存部分（`/column/:slug`, `/news/:slug` の動的記事）は、microCMS等の導入かMarkdown静的化を別途検討
-- 旧サイトの画像 — 今は旧Studio配信URL（`storage.googleapis.com/production-os-assets/...`）をそのまま参照しています。Studio側で公開停止すると404になるため、`assets/img/` に保存し直すのが安全です。
+- 申込の窓口は「無料診断 `/form/`・LINE `https://lin.ee/gVRUtOl`・お問い合わせフォーム `/contact/`」の3つです（電話・メールでの受付はしません）。LINEのURLを変えるときは `_generate.py`・`build/articles.js` と生成済みHTMLを一括置換してください。
 
 ## LP（ランディングページ）
 
