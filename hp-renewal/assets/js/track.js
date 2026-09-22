@@ -92,7 +92,8 @@
       if (!controls.length) return;
       const heading = [...group.querySelectorAll('label')].find((l) => !l.querySelector('input, textarea, select'));
       const labelEl = heading && heading.cloneNode(true);
-      labelEl?.querySelectorAll('.lpf-badge').forEach((b) => b.remove()); // 「必須」バッジは項目名に含めない
+      // 「必須」「任意」などのバッジは項目名に含めない
+      labelEl?.querySelectorAll('.lpf-badge, span').forEach((b) => { if (b.classList.contains('lpf-badge') || /^(必須|任意|いずれか必須)$/.test(b.textContent.trim())) b.remove(); });
       const label = labelEl ? labelEl.textContent.replace(/\*/g, '').replace(/\s+/g, ' ').trim() : '';
       if (!label) {
         // 見出しのないグループ＝プライバシーポリシー同意欄

@@ -301,7 +301,7 @@
     const bar = document.createElement('div');
     bar.className = 'editor-toolbar';
     bar.dataset.editorSkip = 'true';
-    const articleLink = articleMatch ? `<a class="accent" href="/admin/?path=${articleMatch[1]}/${articleMatch[2]}">記事を構成ごと編集</a>` : '<a href="/admin/">記事エディタ</a>';
+    const articleLink = articleMatch ? `<a class="accent" href="/admin/editor/?path=${articleMatch[1]}/${articleMatch[2]}">記事を構成ごと編集</a>` : '<a href="/admin/editor/">記事エディタ</a>';
     const hasLegacy = Object.keys(legacyEdits()).length > 0;
     bar.innerHTML = `
       <strong>ページ編集</strong>

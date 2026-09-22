@@ -85,6 +85,60 @@ INDUSTRIES = [
     ("bridal", "ブライダル", "結婚式場・フォト・プランナー"),
 ]
 
+# 業種別の成功事例（守秘義務の範囲内・icon, タイトル, 概要）
+CASES = {
+    "restaurant": [
+        ("store", "Googleマップ★1レビューの是正", "事実無根の名指し中傷★1レビュー6件のうち4件が削除。検索流入が施策前比+38%まで回復。"),
+        ("map", "食べログ低評価クチコミへの対応", "来店実態のない不自然な低評価投稿について、媒体規約に基づく申請で複数件を是正。予約数が回復基調に。"),
+        ("alert", "元従業員によると見られる連続投稿の沈静化", "退職者と見られる誹謗投稿の拡散を早期検知し、初動対応で炎上を未然に回避。"),
+    ],
+    "medical": [
+        ("medical", "医師個人名サジェストの浄化", "医師個人名＋ネガティブワードのサジェスト固定化を、3か月で実質非表示化。"),
+        ("shield", "医療広告規制に配慮した口コミ是正", "医療広告ガイドラインに抵触しない範囲で、事実誤認レビューの訂正・削除申請を実施。"),
+        ("eye", "再発防止モニタリングの導入", "是正後の再投稿を24時間監視。兆候検知から即時対応する体制を構築。"),
+    ],
+    "beauty": [
+        ("map", "競合と疑われる連続投稿への対応", "短期間に集中投稿された不審レビュー群について、規約準拠の申請で大半が削除。"),
+        ("store", "ホットペッパービューティー低評価対策", "施術実態と乖離した低評価クチコミへの是正申請で、店舗評価スコアが改善。"),
+        ("chart", "サロン名サジェストの改善", "サロン名＋ネガティブサジェストを中長期施策で押し下げ、新規予約の離脱を抑制。"),
+    ],
+    "realestate": [
+        ("shield", "会社名＋ネガティブサジェスト対策", "会社名に付随するネガティブな検索候補を段階的に浄化。問い合わせ数の低下に歯止め。"),
+        ("store", "Googleマップの入居者トラブル投稿対応", "事実確認の取れない一方的な投稿について、規約に基づき是正申請。"),
+        ("alert", "地域掲示板の風評スレッド監視", "地域掲示板上の名指し投稿を継続監視し、拡散を抑止。"),
+    ],
+    "legal": [
+        ("shield", "巨大掲示板の名指しスレッド対策", "巨大掲示板上の名指しスレッドについて、運営規約に基づく申請で削除に成功。"),
+        ("medical", "代表弁護士名サジェストの浄化", "代表弁護士名＋ネガティブワードの検索候補を、3か月で実質非表示化。"),
+        ("eye", "相談検討者が見る検索面の健全化", "依頼検討者が目にする検索結果を健全化し、受任機会の損失を防止。"),
+    ],
+    "retail": [
+        ("store", "ECモール低評価レビューへの対応", "競合や愉快犯によると見られる不自然な低評価について、媒体規約に基づき是正申請。"),
+        ("chart", "ブランド名サジェストの改善", "ブランド名＋ネガティブな関連キーワードを中長期施策で押し下げ。"),
+        ("globe", "海外ミラーサイトの転載対応", "海外サーバー上に転載された誹謗コンテンツへ、現地規約準拠で対応。"),
+    ],
+    "school": [
+        ("shield", "講師個人名の中傷投稿対策", "講師個人を名指しする投稿について、規約に基づく申請で是正。"),
+        ("store", "塾名の口コミサイト対策", "在籍実態の不明な低評価クチコミへの是正申請で、体験申込の離脱を抑制。"),
+        ("eye", "入塾シーズン前のモニタリング", "繁忙期前に検索面を監視し、風評の固定化を予防。"),
+    ],
+    "auto": [
+        ("store", "Googleマップの整備クレーム投稿対応", "事実確認の取れない一方的なクレーム投稿について、規約に基づき是正申請。"),
+        ("chart", "店舗名サジェストの改善", "店舗名＋ネガティブサジェストを中長期施策で押し下げ、来店機会の損失を抑制。"),
+        ("alert", "掲示板の名指し投稿監視", "車種・店舗を名指しする投稿を継続監視し、拡散を抑止。"),
+    ],
+    "hotel": [
+        ("globe", "海外レビューサイト対策", "英語圏レビューでの事実誤認に対し、現地規約準拠の申請で訂正反映。"),
+        ("store", "予約サイトの不当レビュー対応", "宿泊実態と乖離したレビューについて、媒体規約に基づき是正申請。評価スコアが改善。"),
+        ("eye", "繁忙期前の風評監視", "予約シーズン前に検索・レビュー面を監視し、初動対応の体制を構築。"),
+    ],
+    "bridal": [
+        ("shield", "式場名の中傷投稿対策", "式場を名指しする一方的な投稿について、規約に基づく申請で是正。"),
+        ("map", "口コミサイトの低評価対応", "挙式実態の不明な低評価クチコミへの是正申請で、見学予約の離脱を抑制。"),
+        ("chart", "会社名サジェストの改善", "会社名＋ネガティブサジェストを中長期施策で押し下げ。"),
+    ],
+}
+
 PLATFORMS = [
     ("google-maps", "Googleマップ口コミ対策", "Googleビジネスプロフィール（MEO）"),
     ("5ch", "5ch（旧2ch）スレッド対策", "5ちゃんねる/ピンクちゃんねる/コピーサイト"),
@@ -196,6 +250,9 @@ COLUMNS = [
      "経営課題としてのWEBリスクの位置づけと、推奨されるガバナンス整備。"),
 ]
 
+# 投稿記事の4分類（コラム）
+COLUMN_CATEGORIES = ["お役立ち記事", "用語解説", "事例紹介", "コラム・その他"]
+
 # 追加: 注意喚起・お知らせ
 NOTICES = [
     ("law-update", "改正プロバイダ責任制限法（発信者情報開示請求）について",
@@ -250,12 +307,19 @@ ICONS = {
     "medical": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>',
     "map": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>',
     "chart": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 17l4-4 4 4 6-6"/></svg>',
+    "menu": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>',
+    "external": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>',
+    "arrow": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>',
 }
 
 # ----------- 共通テンプレート -----------
+ASSET_VER = "20260704c"  # CSS/JSキャッシュバスター（アセット更新時にここを上げる）
+
 GLOBAL_NAV = [
-    ("対策とは", "/knowledge/"),
-    ("無料相談", "/contact/"),
+    ("ホーム", "/"),
+    ("当センターについて", "/about/"),
+    ("代表者挨拶", "/message/"),
+    ("サービス紹介", "/service/"),
     ("解決プロセス", "/process/"),
     ("成功事例", "/cases/"),
     ("料金", "/pricing/"),
@@ -263,7 +327,9 @@ GLOBAL_NAV = [
     ("業種別", "/industry/"),
     ("媒体別", "/platform/"),
     ("コラム", "/column/"),
-    ("組織概要", "/about/"),
+    ("FAQ", "/faq/"),
+    ("採用情報", "/recruit/"),
+    ("お問い合わせ", "/contact/"),
 ]
 
 def rel(prefix_depth: int, path: str) -> str:
@@ -274,70 +340,44 @@ def rel(prefix_depth: int, path: str) -> str:
         return "../" * prefix_depth + path[1:]
     return path
 
+# ヘッダーに常時表示する主要リンク（本家サイトと同構成）
+HEADER_NAV = [
+    ("ホーム", "/"),
+    ("代表挨拶", "/message/"),
+    ("当センターについて", "/about/"),
+    ("サービス内容", "/service/"),
+    ("採用情報", "/recruit/"),
+]
+
 def header(depth: int, active: str = "") -> str:
     def _item(label, path):
         cls = ' class="is-active"' if active == label else ""
         return f'<a href="{rel(depth, path)}"{cls}>{label}</a>'
+    hd_items = "".join(f'<a href="{rel(depth, p)}"{" class=\"is-active\"" if active == l else ""}>{l}</a>' for l, p in HEADER_NAV)
     nav_items = "".join(_item(l, p) for l, p in GLOBAL_NAV)
     root = rel(depth, "/")
     return dedent(f"""
-    <div class="topbar">
-      <div class="topbar__inner">
-        <div class="topbar__left">
-          <span class="topbar__badge">本日も無料診断対応中</span>
-          <span>受付時間 10:00 - 20:00（年中無休）</span>
-        </div>
-        <div class="topbar__right">
-          <a href="{rel(depth,'/news/')}">お知らせ</a>
-          <a href="{rel(depth,'/recruit/')}">採用情報</a>
-          <a href="{rel(depth,'/contact/')}">お問い合わせ</a>
-        </div>
-      </div>
-    </div>
+    <a href="{rel(depth,'/admin/')}" class="admin-entry" data-editor-skip title="運営管理者向けページ（現在はモック）">&#128273; 管理<span class="admin-entry__tag">MOCK</span></a>
 
-    <header class="site-header">
-      <div class="site-header__inner">
-        <a href="{root}" class="site-logo">
-          <span class="site-logo__mark">口</span>
-          <span>
-            <span class="site-logo__name">一般社団法人</span>
-            <span class="site-logo__title">口コミ対策センター</span>
-          </span>
+    <header class="hd2">
+      <div class="hd2__inner">
+        <a href="{root}" class="hd2__logo" aria-label="一般社団法人 口コミ対策センター トップページ">
+          <img src="{rel(depth, '/assets/img/top/logo.webp')}" alt="一般社団法人 口コミ対策センター">
         </a>
-        <div class="security-badges">
-          <span class="security-badge">{ICONS['shield']}ISMS準拠</span>
-          <span class="security-badge">{ICONS['lock']}SSL/TLS</span>
-          <span class="security-badge">{ICONS['check']}秘密厳守NDA</span>
+        <nav class="hd2__nav" aria-label="グローバルナビゲーション">{hd_items}</nav>
+        <a href="{rel(depth,'/contact/')}" class="hd2__contact">{ICONS['mail']}<span>お問い合わせ</span></a>
+        <button class="nav-toggle hd2__menu" aria-expanded="false" aria-label="メニューを開く">{ICONS['menu']}<span>MENU</span></button>
+      </div>
+      <div class="global-nav-list">
+        <div class="global-nav-list__panel-head">
+          <span>メニュー</span>
+          <button type="button" class="nav-close" aria-label="メニューを閉じる">×</button>
         </div>
-        <div class="header-contact">
-          <div class="contact-block">
-            <span class="label">法人窓口</span>
-            <span class="tel"><a href="tel:0120000001">0120-000-001</a></span>
-            <span class="hours">平日 10:00-20:00</span>
-          </div>
-          <div class="contact-block is-individual">
-            <span class="label">個人窓口</span>
-            <span class="tel"><a href="tel:0120000002">0120-000-002</a></span>
-            <span class="hours">10:00-20:00</span>
-          </div>
-          <div class="header-cta">
-            <a href="{rel(depth,'/contact/')}" class="btn btn--primary btn--sm">無料診断</a>
-            <a href="{rel(depth,'/contact/')}" class="btn btn--navy btn--sm">面談予約</a>
-          </div>
-        </div>
+        <div class="global-nav-list__primary">{nav_items}</div>
+        <div class="global-nav-list__cta"><a href="{rel(depth,'/form/')}" class="btn btn--primary btn--sm">無料診断・お申し込み</a></div>
+        <div class="global-nav-list__policies"><a href="{rel(depth,'/privacypolicy/')}">プライバシーポリシー</a><a href="{rel(depth,'/social-policy/')}">ソーシャルメディアポリシー</a><a href="{rel(depth,'/security-policy/')}">情報セキュリティ基本方針</a><a href="{rel(depth,'/regulation/')}">特定商取引法に基づく表記</a></div>
       </div>
     </header>
-
-    <nav class="global-nav" aria-label="グローバルナビ">
-      <div class="global-nav__inner">
-        <button class="nav-toggle" aria-expanded="false" aria-label="メニュー">
-          <span></span><span></span><span></span>
-        </button>
-        <div class="global-nav-list">
-          {nav_items}
-        </div>
-      </div>
-    </nav>
     """)
 
 # 47都道府県＋エリアリンク群（共有部分）
@@ -366,6 +406,18 @@ def industry_banners(depth: int) -> str:
             f'<div class="banner__cover"><span class="banner__cover-label">業種別</span>{svg_placeholder(name,"navy",640,360)}</div>'
             f'<div class="banner__body"><div class="banner__title">{name}の口コミ対策</div>'
             f'<div class="banner__sub">{sub}</div><div class="banner__cta">対策事例を見る</div></div></a>'
+        )
+    return f'<div class="banner-grid">{"".join(items)}</div>'
+
+def cases_banners(depth: int) -> str:
+    items = []
+    for slug, name, sub in INDUSTRIES:
+        count = len(CASES.get(slug, []))
+        items.append(
+            f'<a class="banner" href="{rel(depth, f"/cases/{slug}/")}">'
+            f'<div class="banner__cover"><span class="banner__cover-label">成功事例</span>{svg_placeholder(name,"navy",640,360)}</div>'
+            f'<div class="banner__body"><div class="banner__title">{name}の成功事例</div>'
+            f'<div class="banner__sub">{sub}（{count}件）</div><div class="banner__cta">事例を見る</div></div></a>'
         )
     return f'<div class="banner-grid">{"".join(items)}</div>'
 
@@ -401,133 +453,40 @@ def cta_trio(depth: int) -> str:
     </div>
     """
 
-# メガフッター
+# フッター（本家サイト準拠のシンプル構成）
 def mega_footer(depth: int) -> str:
-    def link(label, path):
-        return f'<li><a href="{rel(depth, path)}">{label}</a></li>'
-
-    col_about = "".join([
-        link("対策とは（基礎知識）", "/knowledge/"),
-        link("当センターについて", "/about/"),
-        link("当センターの強み", "/strengths/"),
-        link("代表挨拶", "/message/"),
-        link("組織概要・アクセス", "/access/"),
-        link("採用情報", "/recruit/"),
-        link("登録商標", "/trademark/"),
+    row1 = "".join([
+        f'<a href="{rel(depth,"/")}">ホーム</a>',
+        f'<a href="{rel(depth,"/message/")}">代表者挨拶</a>',
+        f'<a href="{rel(depth,"/about/")}">当センターについて</a>',
+        f'<a href="{rel(depth,"/service/")}">サービス内容</a>',
+        f'<a href="{rel(depth,"/contact/")}">お問い合わせ</a>',
     ])
-    col_service = "".join([
-        link("サービス内容", "/service/"),
-        link("解決プロセス", "/process/"),
-        link("料金・成功報酬", "/pricing/"),
-        link("対策難易度", "/difficulty/"),
-        link("NDAについて", "/nda/"),
-        link("成功事例", "/cases/"),
-        link("FAQ", "/faq/"),
-        link("逆SEO対策", "/method/reverse-seo/"),
-        link("サジェスト浄化", "/method/suggest/"),
-        link("デジタルフォレンジック", "/method/forensics/"),
+    row2 = "".join([
+        f'<a href="{rel(depth,"/privacypolicy/")}">プライバシーポリシー</a>',
+        f'<a href="{rel(depth,"/social-policy/")}">ソーシャルメディアポリシー</a>',
+        f'<a href="{rel(depth,"/security-policy/")}">情報セキュリティ基本方針</a>',
+        f'<a href="{rel(depth,"/recruit/")}">採用情報</a>',
+        f'<a href="{rel(depth,"/sitemap/")}">サイトマップ</a>',
     ])
-    col_target = "".join([
-        link("法人クライアント窓口", "/for-corporate/"),
-        link("個人クライアント窓口", "/for-individual/"),
-        link("上場企業・IR向け", "/for-listed/"),
-        link("エグゼクティブ・経営者向け", "/for-executive/"),
-        link("コラム・ノウハウ", "/column/"),
-        link("お知らせ・注意喚起", "/notice/"),
-        link("お知らせ（一覧）", "/news/"),
-    ])
-    col_legal = "".join([
-        link("プライバシーポリシー", "/privacypolicy/"),
-        link("ソーシャルメディアポリシー", "/social-policy/"),
-        link("情報セキュリティ基本方針", "/security-policy/"),
-        link("特定商取引法に基づく表記", "/regulation/"),
-        link("お問い合わせ", "/contact/"),
-        link("サイトマップ", "/sitemap/"),
-    ])
-    # 都道府県（一部抜粋でも一覧として）
-    pref_links = "".join(f'<li><a href="{rel(depth, f"/area/{s}/")}">{n}の対策</a></li>' for _,_,s,n in PREFECTURES[:12])
-    overseas_links = "".join(f'<li><a href="{rel(depth, f"/overseas/{s}/")}">{n.split("（")[0]}</a></li>' for _,s,n in OVERSEAS)
-    industry_links = "".join(f'<li><a href="{rel(depth, f"/industry/{s}/")}">{n}</a></li>' for s,n,_ in INDUSTRIES[:6])
-    platform_links = "".join(f'<li><a href="{rel(depth, f"/platform/{s}/")}">{n.split("（")[0]}</a></li>' for s,n,_ in PLATFORMS[:6])
-    knowledge_links = "".join(f'<li><a href="{rel(depth, f"/knowledge/{s}/")}">{n}</a></li>' for s,n,_ in KNOWLEDGE[:6])
-    column_links = "".join(f'<li><a href="{rel(depth, f"/column/{s}/")}">{n}</a></li>' for s,n,_ in COLUMNS)
-    notice_links = "".join(f'<li><a href="{rel(depth, f"/notice/{s}/")}">{n}</a></li>' for s,n,_,_ in NOTICES[:6])
-    city_links = "".join(f'<li><a href="{rel(depth, f"/city/{s}/")}">{n}</a></li>' for s,n,_ in CITIES[:8])
-
     return f"""
-    <footer class="site-footer">
-      <div class="container container--wide">
-
-        <div class="mega-footer">
-          <div class="mega-footer__grid">
-            <div><h4>当センターについて</h4><ul>{col_about}</ul></div>
-            <div><h4>サービス</h4><ul>{col_service}</ul></div>
-            <div><h4>対象クライアント</h4><ul>{col_target}</ul></div>
-            <div><h4>規定・お問い合わせ</h4><ul>{col_legal}</ul></div>
-          </div>
-        </div>
-
-        <div class="mega-footer">
-          <div class="mega-footer__grid">
-            <div><h4>主要対応地域（都道府県）</h4><ul>{pref_links}<li><a href="{rel(depth,'/area/')}">全47都道府県を見る</a></li></ul></div>
-            <div><h4>海外対応</h4><ul>{overseas_links}</ul></div>
-            <div><h4>業種別対策</h4><ul>{industry_links}<li><a href="{rel(depth,'/industry/')}">業種別一覧</a></li></ul></div>
-            <div><h4>媒体別対策</h4><ul>{platform_links}<li><a href="{rel(depth,'/platform/')}">媒体別一覧</a></li></ul></div>
-          </div>
-        </div>
-
-        <div class="mega-footer">
-          <div class="mega-footer__grid">
-            <div><h4>基礎知識・概念</h4><ul>{knowledge_links}<li><a href="{rel(depth,'/knowledge/')}">基礎知識一覧</a></li></ul></div>
-            <div><h4>コラム・ノウハウ</h4><ul>{column_links}<li><a href="{rel(depth,'/column/')}">コラム一覧</a></li></ul></div>
-            <div><h4>お知らせ・注意喚起</h4><ul>{notice_links}<li><a href="{rel(depth,'/notice/')}">お知らせ一覧</a></li></ul></div>
-            <div><h4>主要都市</h4><ul>{city_links}<li><a href="{rel(depth,'/city/')}">主要都市一覧</a></li></ul></div>
-          </div>
-        </div>
-
-        <div class="footer-info">
-          <div>
-            <div class="footer-info__brand">一般社団法人 口コミ対策センター</div>
-            <p class="footer-info__about">
-              ネット上の風評から事業者の信用を守る専門機関。法と各プラットフォーム規約に則り、誹謗中傷・悪質な口コミの是正と再発防止を支援します。
-              全国47都道府県および海外サーバーまで対応。完全成功報酬・初期費用0円。
-            </p>
-          </div>
-          <div>
-            <h4>組織概要</h4>
-            <dl>
-              <dt>名称</dt><dd>一般社団法人口コミ対策センター</dd>
-              <dt>代表理事</dt><dd>佐藤 朝亮</dd>
-              <dt>所在地</dt><dd>〒104-0053<br>東京都中央区晴海3-16-1</dd>
-              <dt>設立</dt><dd>2025年2月1日</dd>
-              <dt>法人番号</dt><dd>6010005039630</dd>
-            </dl>
-          </div>
-          <div>
-            <h4>連絡先</h4>
-            <dl>
-              <dt>法人窓口</dt><dd>0120-000-001</dd>
-              <dt>個人窓口</dt><dd>0120-000-002</dd>
-              <dt>受付時間</dt><dd>10:00-20:00 年中無休</dd>
-            </dl>
-          </div>
-        </div>
-
-        <div class="footer-bottom">
-          <span>© 一般社団法人 口コミ対策センター</span>
-          <span>
-            <a href="{rel(depth,'/privacypolicy/')}">プライバシーポリシー</a>
-            <a href="{rel(depth,'/regulation/')}">特商法表記</a>
-            <a href="{rel(depth,'/sitemap/')}">サイトマップ</a>
-            <a href="{rel(depth,'/contact/')}">お問い合わせ</a>
-          </span>
-        </div>
+    <footer class="ft2">
+      <div class="ft2__inner">
+        <a href="{rel(depth,'/')}" class="ft2__logo"><img src="{rel(depth,'/assets/img/top/logo.webp')}" alt="一般社団法人 口コミ対策センター"></a>
+        <nav class="ft2__nav">
+          <div class="ft2__row">{row1}</div>
+          <div class="ft2__row">{row2}</div>
+        </nav>
       </div>
+      <div class="ft2__copy">©️2025 一般社団法人口コミ対策センター　<a href="{rel(depth,'/admin/')}" class="ft2__admin">運営者ログイン</a></div>
     </footer>
 
-    <div class="float-cta">
-      <a href="tel:0120000001" class="f-tel">電話相談</a>
-      <a href="{rel(depth,'/contact/')}" class="f-mail">無料診断</a>
+    <div class="contact-band" role="complementary" aria-label="お問い合わせ">
+      <div class="contact-band__inner">
+        <span class="contact-band__text">ネットの風評・口コミにお困りですか？<strong>無料診断・ご相談を受付中です</strong></span>
+        <a href="tel:0120000001" class="contact-band__tel">{ICONS['phone']}<span>0120-000-001</span></a>
+        <a href="{rel(depth,'/contact/')}" class="contact-band__btn">無料診断・お問い合わせ</a>
+      </div>
     </div>
     """
 
@@ -535,9 +494,12 @@ def write_page(path: Path, html: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(html, encoding="utf-8")
 
-def page_html(*, depth: int, title: str, description: str, body: str, active: str = "") -> str:
-    css = rel(depth, "/assets/css/style.css")
-    js = rel(depth, "/assets/js/main.js")
+def page_html(*, depth: int, title: str, description: str, body: str, active: str = "",
+              robots: str = "all", extra_scripts: str = "") -> str:
+    css = rel(depth, "/assets/css/style.css") + f"?v={ASSET_VER}"
+    js = rel(depth, "/assets/js/main.js") + f"?v={ASSET_VER}"
+    editor_js = rel(depth, "/assets/js/editor.js") + f"?v={ASSET_VER}"
+    track_js = rel(depth, "/assets/js/track.js") + "?v=20260921a"  # アクセス計測・フォーム送信
     return dedent(f"""<!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -545,7 +507,7 @@ def page_html(*, depth: int, title: str, description: str, body: str, active: st
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title}</title>
 <meta name="description" content="{description}">
-<meta name="robots" content="all">
+<meta name="robots" content="{robots}">
 <meta property="og:site_name" content="一般社団法人 口コミ対策センター">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{description}">
@@ -562,6 +524,9 @@ def page_html(*, depth: int, title: str, description: str, body: str, active: st
 </main>
 {mega_footer(depth)}
 <script src="{js}"></script>
+<script src="{track_js}"></script>
+<script src="{editor_js}" data-editor-skip></script>
+{extra_scripts}
 </body>
 </html>
 """)
@@ -584,7 +549,7 @@ def strengths_block() -> str:
 
 def page_header_block(en: str, title: str, sub: str, depth: int) -> str:
     return f"""
-    <section class="page-header">
+    <section class="page-header page-header--light">
       <div class="container">
         <span class="en">{en}</span>
         <h1>{title}</h1>
@@ -600,261 +565,192 @@ def page_header_block(en: str, title: str, sub: str, depth: int) -> str:
 # TOPページ
 # ============================================================
 def build_top():
+    """トップページ（kuchikomi-taisaku.com 本家デザイン準拠）"""
+    hero_slides = "".join(
+        f'<img class="t2-hero__slide" src="assets/img/top/hero_{i}.webp" alt="" loading="{"eager" if i==1 else "lazy"}">'
+        for i in (1, 2, 3, 4)
+    )
+
+    services = [
+        ("service_research.webp", "ネット上の評判調査・リスク分析",
+         "主要なSNSや検索エンジン、口コミサイトを徹底的に調査し、経営リスクを可視化します。", "process/diagnosis/"),
+        ("service_google.webp", "Google口コミ対策",
+         "Googleビジネスプロフィールに投稿された口コミトラブルを、実務面から解決いたします。", "platform/google-maps/"),
+        ("service_suggest.webp", "サジェスト対策",
+         "各検索エンジンにおける検索候補（サジェスト）を整理し、正しい情報が届くよう支援します。", "method/suggest/"),
+        ("service_board.webp", "掲示板対策",
+         "各種匿名掲示板における書き込みに対し、法的・技術的アプローチによる非表示化をサポートします。", "platform/5ch/"),
+    ]
+    svc_cards = "".join(
+        f'<a class="t2-svc" href="{link}">'
+        f'<img class="t2-svc__cover" src="assets/img/top/{img}" alt="{title}" loading="lazy">'
+        f'<div class="t2-svc__title">{title}</div>'
+        f'<p class="t2-svc__text">{text}</p></a>'
+        for img, title, text, link in services
+    )
+    strip = "".join(
+        f'<img src="assets/img/top/strip_{i}.webp" alt="" loading="lazy">' for i in (1, 2, 3, 4)
+    )
+
+    industries = [
+        ("industry_hr.webp", "人材業界",
+         "応募前に必ず口コミがチェックされ、評判一つでエントリー数が激減してしまうのが人材業界の特徴です。<br>現場の実態とかけ離れた書き込みを是正し、本来獲得できるはずの優秀な求職者を逃さない採用環境を取り戻します。"),
+        ("industry_entertainment.webp", "エンタメ業界",
+         "タレントやモデル、インフルエンサーへの根拠のない憶測は、放置すると取り返しのつかない被害に繋がります。<br>当センターでは悪評の早期発見から非表示化手続きまで、迅速に対応。<br>大切な所属者が安心して活動できる環境を構築いたします。"),
+        ("industry_realestate.webp", "不動産業界",
+         "事実無根の書き込み一つで、数千万円の商談が白紙になりかねないのが不動産業界の大きな特徴です。<br>実態と異なる悪評を整理し、検討中のお客様が迷わず相談や内見へ進めるようサポートします。"),
+        ("industry_medical.webp", "病院・クリニック",
+         "医療機関は、患者様や退職者による感情的な書き込みが起きやすいのが特徴です。<br>医療の質とは無関係な悪評を整理し、本来の業務に専念できる環境を整えます。<br>医療機関特有のデリケートな問題解決は、当センターにお任せください。"),
+        ("industry_legal.webp", "士業",
+         "弁護士、税理士、司法書士、行政書士などの専門職は、業務の性質上、不当な逆恨みを受けやすい傾向にあります。<br>皆様の看板を守るため、当センターでは証拠の精査から論理的な是正手続きまでを徹底して行います。"),
+        ("industry_sales.webp", "営業会社",
+         "競合他社による組織的な攻撃や、元従業員の事実無根な批判が書き込まれがちな業種です。<br>「書かれやすい業種」だからと諦める必要はありません。<br>社員の士気低下や採用難を防ぐため、当センターがサポートいたします。"),
+    ]
+    ind_cards = "".join(
+        f'<div class="t2-ind">'
+        f'<img class="t2-ind__cover" src="assets/img/top/{img}" alt="{title}" loading="lazy">'
+        f'<div class="t2-ind__body"><div class="t2-ind__title">{title}</div>'
+        f'<p class="t2-ind__text">{text}</p></div></div>'
+        for img, title, text in industries
+    )
+
+    cases = [
+        ("assets/img/brand/case_01.jpg", "事実無根の★1レビューが削除され、客足が戻りました。", "飲食", "単店舗", "cases/restaurant/"),
+        ("assets/img/brand/case_03.jpg", "院長名のサジェスト汚染が、3か月で解消しました。", "医療", "クリニック", "cases/medical/"),
+        ("assets/img/brand/case_04.jpg", "名指しスレッドが削除され、採用応募が回復しました。", "士業", "中規模事務所", "cases/legal/"),
+    ]
+    case_cards = "".join(
+        f'<div class="t2-case"><div class="t2-case__inner">'
+        f'<div class="t2-case__coverbox"><img src="{img}" alt="" loading="lazy"></div>'
+        f'<div class="t2-case__body">'
+        f'<div class="t2-case__title">{title}</div>'
+        f'<div class="t2-case__meta"><span class="t2-case__chip">業界：{ind}</span><span class="t2-case__scale">規模：{scale}</span></div>'
+        f'</div>'
+        f'<a class="t2-case__btn" href="{link}">解決実績を見る{ICONS["arrow"]}</a>'
+        f'</div></div>'
+        for img, title, ind, scale, link in cases
+    )
+
+    news_items = [
+        ("2026.06.20", "お知らせ", "2026年06月の口コミ対策・風評被害相談 稼働状況", "notice/2026-06/"),
+        ("2026.06.05", "コラム", "Googleマップ口コミガイドラインの2026年改定ポイント解説", "news/"),
+        ("2026.05.12", "注意喚起", "「押し売り系」高額請求の悪質業者にご注意ください", "notice/scam-warning/"),
+    ]
+    news_rows = "".join(
+        f'<a class="t2-news__item" href="{link}">'
+        f'<time>{d}</time><span class="t2-news__cat">{cat}</span><span class="t2-news__title">{t}</span></a>'
+        for d, cat, t, link in news_items
+    )
+
     body = f"""
-    <!-- ===== HERO ===== -->
-    <section class="hero">
-      <div class="container container--wide">
-        <div class="hero__grid">
-          <div>
-            <span class="hero__eyebrow">一般社団法人として運営される専門機関</span>
-            <h1>
-              ネット上の風評から、<br>
-              <span class="accent">会社の信用とブランド</span>を<br>
-              取り戻す。
-            </h1>
-            <p class="hero__sub">
-              事実無根の書き込み、悪質な誹謗中傷、炎上リスクの解消。
-              法と各プラットフォーム規約に則った正攻法で、全国47都道府県・海外サーバーまで対応します。
-              初期費用・着手金0円、完全成功報酬。
-            </p>
-            <div class="hero__ctas">
-              <a href="contact/" class="btn btn--primary btn--lg">{ICONS['mail']}無料診断する</a>
-              <a href="contact/" class="btn btn--navy btn--lg">{ICONS['calendar']}面談予約</a>
-              <a href="tel:0120000001" class="btn btn--ghost">{ICONS['phone']}0120-000-001</a>
-            </div>
-            <p class="hero__note">※フォーム送信から1営業日以内に専門スタッフが返信／秘密厳守 NDA・SSL対応</p>
-          </div>
-          <div class="hero__visual" aria-hidden="true">
-            {svg_placeholder('TRUST GUARDIAN','navy',640,800)}
-          </div>
-        </div>
-        {strengths_block()}
+    <!-- ===== HERO（フェードスライドショー） ===== -->
+    <section class="t2-hero">
+      <div class="t2-hero__slides" aria-hidden="true">{hero_slides}</div>
+      <div class="t2-hero__overlay" aria-hidden="true"></div>
+      <div class="t2-hero__body">
+        <h1>ネット上の風評から<br>会社の信用を守る<br>専門家です。</h1>
+        <p>法と各プラットフォーム規約に則り、悪質な口コミの是正と再発防止を支援します。</p>
       </div>
     </section>
 
-    <!-- ===== 47都道府県 ===== -->
-    <section class="section section--accent-bg">
-      <div class="container container--wide">
-        <div class="section-head">
-          <span class="en">AREA</span>
-          <h2>全国47都道府県・海外サーバーまで対応</h2>
-          <p class="lead">
-            主要都市から地方まで、全国どこからでもオンライン完結でご相談いただけます。海外サーバーや英語圏のレビューにも対応します。
-          </p>
+    <!-- ===== ミッション ===== -->
+    <section class="t2-sec t2-sec--grey t2-mission">
+      <div class="t2-wrap">
+        <div class="t2-head">
+          <span class="t2-head__en">Our Mission</span>
+          <h2 class="t2-head__jp">一般社団法人口コミ対策センターについて</h2>
         </div>
-        {area_grid_block(0)}
-        {cta_trio(0)}
+        <p class="t2-mission__text">
+          私たちは、事実無根の書き込みや悪質な誹謗中傷によって、誠実な事業者の努力が不当に損なわれている現状を正すために活動しています。<br>
+          ネット上のたった一行の言葉が、積み上げてきた信頼を揺るがしてしまう。<br>
+          そんな理不尽な状況を解消し、誰もが安心して事業に打ち込める環境を取り戻すことが、私たちの使命です。
+        </p>
+        <div class="t2-ctaimg"><a href="form/"><img src="assets/img/top/cta_button.webp" alt="簡単1分で完了！無料診断・お申し込み"></a></div>
       </div>
     </section>
 
-    <!-- ===== 業種別 ===== -->
-    <section class="section">
-      <div class="container container--wide">
-        <div class="section-head">
-          <span class="en">INDUSTRY</span>
-          <h2>業種別の口コミ対策事例</h2>
-          <p class="lead">業界特有の口コミ傾向・規制・プラットフォームを踏まえた最適なアプローチをご提案します。</p>
+    <!-- ===== サービス内容 ===== -->
+    <section class="t2-sec t2-sec--white t2-sec--round">
+      <div class="t2-wrap">
+        <div class="t2-head">
+          <span class="t2-head__en">Service</span>
+          <h2 class="t2-head__jp">サービス内容</h2>
         </div>
-        {industry_banners(0)}
+        <div class="t2-svc-grid">{svc_cards}</div>
+        <div class="t2-strip">{strip}</div>
       </div>
     </section>
 
-    <!-- ===== 媒体別 ===== -->
-    <section class="section section--soft">
-      <div class="container container--wide">
-        <div class="section-head">
-          <span class="en">PLATFORM</span>
-          <h2>媒体別の口コミ対策</h2>
-          <p class="lead">Googleマップから5ch、爆サイ、X（旧Twitter）まで、媒体ごとに異なる規約とアルゴリズムを理解した上で対応します。</p>
+    <!-- ===== こんな方に選ばれています ===== -->
+    <section class="t2-sec t2-sec--grey t2-sec--round">
+      <div class="t2-wrap">
+        <div class="t2-head">
+          <span class="t2-head__en">Client</span>
+          <h2 class="t2-head__jp">こんな方に選ばれています</h2>
         </div>
-        {platform_banners(0)}
+        <div class="t2-ind-grid">{ind_cards}</div>
       </div>
     </section>
 
-    <!-- ===== 上場/エグゼクティブ ===== -->
-    <section class="section">
-      <div class="container container--wide">
-        <div class="section-head">
-          <span class="en">FOR EXECUTIVES &amp; LISTED COMPANIES</span>
-          <h2>エグゼクティブ・上場企業向け対策</h2>
-          <p class="lead">経営者個人名・役員人事・適時開示に関わる風評など、IRやレピュテーションリスクに直結する案件をお預かりします。</p>
+    <!-- ===== 解決事例 ===== -->
+    <section class="t2-sec t2-sec--grey t2-sec--round t2-sec--seam">
+      <div class="t2-wrap">
+        <div class="t2-head">
+          <span class="t2-head__en">Works</span>
+          <h2 class="t2-head__jp">解決事例</h2>
         </div>
-        <div class="grid grid--2">
-          <a href="for-executive/" class="banner">
-            <div class="banner__cover">{svg_placeholder('エグゼクティブ向け','dark',640,360)}</div>
-            <div class="banner__body">
-              <div class="banner__title">経営者・著名人向け 個人風評対策</div>
-              <div class="banner__sub">代表者個人名のサジェスト浄化、検索結果コントロール、SNS監視まで一気通貫。</div>
-              <div class="banner__cta">エグゼクティブプランを見る</div>
-            </div>
-          </a>
-          <a href="for-listed/" class="banner">
-            <div class="banner__cover">{svg_placeholder('上場企業・IR向け','navy',640,360)}</div>
-            <div class="banner__body">
-              <div class="banner__title">上場企業・IR広報向け対策</div>
-              <div class="banner__sub">短信前後の風評対応、株主掲示板の監視、開示連動のリスク管理を専任チームで実施。</div>
-              <div class="banner__cta">上場企業向けプランを見る</div>
-            </div>
-          </a>
-        </div>
+        <div class="t2-case-grid">{case_cards}</div>
+        <div class="t2-more"><a href="cases/">もっと見る</a></div>
       </div>
     </section>
 
-    <!-- ===== 解説テキスト ===== -->
-    <section class="section section--soft">
-      <div class="container">
-        <div class="section-head">
-          <span class="en">SERVICE PHILOSOPHY</span>
-          <h2>放置すれば固定化する、ネットの悪評。<br>「信用」を取り戻すための、正攻法。</h2>
+    <!-- ===== 会社情報 ===== -->
+    <section class="t2-sec t2-sec--white t2-sec--round">
+      <div class="t2-wrap">
+        <div class="t2-head">
+          <span class="t2-head__en">Company</span>
+          <h2 class="t2-head__jp">会社情報</h2>
         </div>
-        <div class="prose">
-          <h2>1. ネット上の悪評を放置するリスク</h2>
-          <p>
-            ネット上の悪評は、放置するほど検索結果に固定化し、新規顧客の意思決定に直接的な影響を与えます。
-            来店前の検索行動が当たり前となった現在、Googleマップに表示される<strong>★1〜2の口コミ</strong>や、
-            <strong>サジェスト欄に表示される会社名と一緒に出てくるネガティブワード</strong>は、
-            それだけで採用・営業・売上に致命的なダメージを及ぼします。
-          </p>
-          <p>
-            特に問題なのは、口コミやサジェストは「事実かどうか」とは無関係に表示されるという点です。
-            事実無根の書き込みでも、検索アルゴリズムが「関連性が高い」と判断すれば上位に固定化します。
-            <strong>競合や元従業員、悪意ある第三者による恣意的な投稿</strong>であっても、対策をしなければ事業の信用は黙って削られ続けます。
-          </p>
-
-          <h2>2. クリーンな環境を取り戻すプロセス</h2>
-          <p>
-            当センターが提供する対策は、大きく分けて3つのアプローチで構成されます。
-            <strong>①是正アプローチ（悪質な投稿の削除・非表示化）</strong>、
-            <strong>②逆SEO・サジェスト対策（検索結果上位からの押し下げ）</strong>、
-            <strong>③ポジティブブランディング（公式情報・実績・口コミの整備）</strong>の3層構造です。
-          </p>
-          <p>
-            これらは独立した手法ではなく、案件の性質と難易度に応じて組み合わせます。
-            たとえば「事実無根の名指し中傷」のような明確な規約違反であれば①の比重を上げ、
-            「自社名＋ネガティブワードのサジェスト固定化」のような検索結果課題であれば②に重点を、
-            「業績は好調なのにレビュー比率が低い」のような構造的課題であれば③を中心に組み立てます。
-          </p>
-
-          <h2>3. 逆SEO・サジェスト浄化・ポジティブブランディング</h2>
-          <p>
-            <strong>逆SEO対策</strong>とは、自社名や代表者名で検索した際に表示される検索結果の上位から、
-            ネガティブなページを正攻法で押し下げ、健全なページに置き換えていく中長期施策です。
-            違法な手法は一切使わず、Googleガイドラインに準拠した公式情報整備・関連メディア掲出・SNS運用の総合戦略として実行します。
-          </p>
-          <p>
-            <strong>サジェスト浄化</strong>は、検索窓に会社名を入力した瞬間に表示される候補（オートコンプリート）から、
-            ネガティブワードを表示されにくくする取り組みです。サジェストは検索行動データに基づいて生成されるため、
-            正攻法のコントロールには相応のロジックと継続的なモニタリングが必要です。
-          </p>
-          <p>
-            <strong>ポジティブブランディング</strong>では、公式サイト・採用ページ・取材記事・SNS・社員インタビュー等を通じて、
-            「会社名で検索したときに最初に出てくる景色」をクライアントの実像に近づけます。
-            これは単なるPRではなく、検索エンジンとSNS双方のアルゴリズムに対して「公式の事実」を継続的に供給し、
-            事業の信用を中長期にわたって守る基盤づくりです。
-          </p>
-
-          <h2>4. 当センターが選ばれる理由</h2>
-          <p>
-            違法・グレーな手法は一切採用しません。プラットフォームの規約と法令、双方を遵守する正攻法のみで対応します。
-            完全成功報酬制を採用しており、結果が出るまでご請求は発生しません。
-            ご相談からご報告まで、専任担当が一貫して伴走します。
-          </p>
-        </div>
-        {cta_trio(0)}
-      </div>
-    </section>
-
-    <!-- ===== 解決プロセス（5ステップ） ===== -->
-    <section class="section">
-      <div class="container container--wide">
-        <div class="section-head">
-          <span class="en">FLOW</span>
-          <h2>ご相談から解決までの5ステップ</h2>
-        </div>
-        <div class="flow">
-          <div class="flow__step"><div class="flow__num">STEP 01</div><h3>無料相談</h3><p>フォーム・電話・LINEから状況をお知らせください。</p></div>
-          <div class="flow__step"><div class="flow__num">STEP 02</div><h3>無料診断</h3><p>1営業日以内に対策の可否・想定難易度をご回答。</p></div>
-          <div class="flow__step"><div class="flow__num">STEP 03</div><h3>ご提案・契約</h3><p>方針と料金をご確認のうえ、完全成功報酬で契約。</p></div>
-          <div class="flow__step"><div class="flow__num">STEP 04</div><h3>対策実行</h3><p>専門チームが規約準拠で対策を実行・継続的に進捗報告。</p></div>
-          <div class="flow__step"><div class="flow__num">STEP 05</div><h3>結果報告・再発防止</h3><p>是正完了後、再発防止モニタリングまで対応。</p></div>
-        </div>
-        <div class="text-center mt-48"><a href="process/" class="btn btn--ghost">解決プロセスの詳細を見る</a></div>
-      </div>
-    </section>
-
-    <!-- ===== お知らせ ===== -->
-    <section class="section section--soft">
-      <div class="container">
-        <div class="section-head">
-          <span class="en">NEWS</span>
-          <h2>対策環境ニュース・お知らせ</h2>
-          <p class="lead">法改正・各プラットフォーム規約の変更、当センターからのご案内をお届けします。</p>
-        </div>
-        <div class="news-list">
-          <div class="news-item"><time>2026.06.20</time><span class="tag">お知らせ</span><a href="news/">ホームページをリニューアルいたしました</a></div>
-          <div class="news-item"><time>2026.06.05</time><span class="tag tag--column">コラム</span><a href="news/">Googleマップ口コミガイドラインの2026年改定ポイント解説</a></div>
-          <div class="news-item"><time>2026.05.18</time><span class="tag tag--alert">注意喚起</span><a href="news/">当センターを騙る悪質な代行業者にご注意ください</a></div>
-          <div class="news-item"><time>2026.04.27</time><span class="tag tag--column">コラム</span><a href="news/">採用活動と口コミ評価——求人サイトの低評価が応募率に与える影響</a></div>
-          <div class="news-item"><time>2026.04.10</time><span class="tag">お知らせ</span><a href="news/">医療機関向けサポート体制を強化しました</a></div>
-        </div>
-        <div class="text-center mt-32"><a href="news/" class="btn btn--ghost">お知らせ一覧</a></div>
-      </div>
-    </section>
-
-    <!-- ===== 注意喚起ブロック ===== -->
-    <section class="section">
-      <div class="container">
-        <div class="section-head">
-          <span class="en">NOTICE</span>
-          <h2>ご案内</h2>
-        </div>
-        <div class="notice-list">
-          <div class="notice-item is-alert"><h3>悪質な押し売り・代行業者にご注意ください</h3><p>当センターは、当方からの一方的な営業電話・訪問営業を一切行っておりません。当センター名を騙る業者にはご注意ください。</p></div>
-          <div class="notice-item"><h3>医療機関向けサポート強化のお知らせ</h3><p>クリニック・歯科医院・病院向けに、医師個人名サジェスト・Googleマップレビュー対策の専任体制を整備しました。</p></div>
-          <div class="notice-item"><h3>今月の稼働状況</h3><p>2026年6月は新規受付を継続中です。混雑時はご返信までお時間をいただく場合があります。</p></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== 採用バナー ===== -->
-    <section class="section section--soft">
-      <div class="container container--wide">
-        <div class="recruit-band">
-          <div>
-            <h3>WE'RE HIRING — 採用情報</h3>
-            <p>事業者の信用を守る仕事に、共に向き合える仲間を募集しています。完全リモート可・業務委託可。</p>
-          </div>
-          <div class="recruit-band__actions">
-            <a href="recruit/" class="btn btn--primary">採用情報を見る</a>
+        <div class="t2-company">
+          <dl class="t2-company__list">
+            <div><dt>法人名</dt><dd>一般社団法人口コミ対策センター</dd></div>
+            <div><dt>代表理事</dt><dd>佐藤 朝亮</dd></div>
+            <div><dt>所在地</dt><dd>〒104-0053 東京都中央区晴海3-16-1</dd></div>
+            <div><dt>設立</dt><dd>2025年2月1日</dd></div>
+            <div><dt>法人番号</dt><dd>6010005039630</dd></div>
+            <div><dt>事業内容</dt><dd>・インターネット誹謗中傷対策<br>・権利侵害抑止事業<br>・SEO/SERPs適正化支援<br>・デジタルレピュテーション・インテグリティ事業<br>・社会動向データ・アナリティクス事業</dd></div>
+          </dl>
+          <div class="t2-company__side">
+            <img class="t2-company__photo" src="assets/img/top/company.webp" alt="オフィス" loading="lazy">
+            <a class="t2-company__recruit" href="recruit/">採用情報{ICONS['arrow']}</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ===== 最終CTA ===== -->
-    <section class="section">
-      <div class="container container--wide">
-        <div class="cta-band">
-          <div>
-            <h2>まずは「対策できるか」だけでも、無料でご確認ください。</h2>
-            <p>所要1分のフォームで、1営業日以内に専門家がご返信します。</p>
+    <!-- ===== 最新情報 ===== -->
+    <section class="t2-news">
+      <div class="t2-wrap">
+        <div class="t2-news__head">
+          <div class="t2-head">
+            <span class="t2-head__en">News</span>
+            <h2 class="t2-head__jp">最新情報</h2>
           </div>
-          <div class="cta-band__actions">
-            <a href="contact/" class="btn btn--primary btn--lg">無料診断を申し込む</a>
-            <a href="tel:0120000001" class="btn btn--ghost" style="color:#fff;border-color:#fff;">お電話で相談</a>
-          </div>
+          <a class="t2-news__all" href="news/">すべての記事一覧</a>
         </div>
+        <div class="t2-news__list">{news_rows}</div>
       </div>
     </section>
     """
     html = page_html(
         depth=0,
-        title="一般社団法人 口コミ対策センター｜ネット風評・誹謗中傷から会社の信用とブランドを守る専門機関",
-        description="ネット上の風評から事業者の信用・ブランドを守る専門機関。Googleマップ・5ch・爆サイ等の誹謗中傷対策、サジェスト浄化、逆SEOまで。全国47都道府県・海外対応／完全成功報酬・初期費用0円。",
+        title="一般社団法人 口コミ対策センター",
+        description="ネット上の風評から事業者の信用を守る専門機関。法と各プラットフォーム規約に則り、誹謗中傷・悪質な口コミの是正と再発防止を支援します。",
         body=body,
-        active="",
+        active="ホーム",
     )
     (ROOT / "index.html").write_text(html, encoding="utf-8")
+
 
 # ============================================================
 # 都道府県ページ生成
@@ -1064,6 +960,8 @@ def build_industry_pages():
                 {name}業界の事業者様についても、当センターの標準料金体系（初期費用・着手金0円／完全成功報酬制）が適用されます。
                 結果が出るまでご請求は発生しません。まずは無料診断から、お気軽にご相談ください。
               </p>
+
+              <p><a href="{rel(2,f'/cases/{slug}/')}">{name}の成功事例を見る →</a></p>
             </div>
             {cta_trio(2)}
           </div>
@@ -1398,29 +1296,52 @@ def build_other_pages():
                   body=body, active="解決プロセス"),
         encoding="utf-8")
 
-    # /cases/
+    # /cases/ （業種別の入口＝バナー一覧）
     body = f"""
-    {page_header_block("CASES", "成功事例", "業種・媒体別の解決事例（守秘義務の範囲内で記載）", 1)}
+    {page_header_block("CASES", "成功事例", "業種別の解決事例（守秘義務の範囲内で記載）", 1)}
     <section class="section"><div class="container container--wide">
-      <div class="grid grid--2">
-        {"".join([
-            f'<div class="card"><div class="card__icon">{ICONS["store"]}</div><h3>飲食店 — Googleマップ★1レビューの是正</h3><p>事実無根の名指し中傷★1レビュー6件のうち4件が削除。検索流入が施策前比+38%まで回復。</p></div>',
-            f'<div class="card"><div class="card__icon">{ICONS["medical"]}</div><h3>クリニック — 医師個人名サジェスト浄化</h3><p>医師個人名＋ネガティブワードのサジェスト固定化を、3か月で実質非表示化。</p></div>',
-            f'<div class="card"><div class="card__icon">{ICONS["chart"]}</div><h3>上場企業 — 株主掲示板の風評対応</h3><p>短信前後の風評投稿モニタリング体制を構築。広報部と連携した初動対応で炎上回避。</p></div>',
-            f'<div class="card"><div class="card__icon">{ICONS["map"]}</div><h3>美容サロン — 競合と疑われる連続投稿</h3><p>短期間に集中投稿された不審レビュー群について、規約準拠の申請で大半が削除。</p></div>',
-            f'<div class="card"><div class="card__icon">{ICONS["shield"]}</div><h3>士業事務所 — 名指しスレッド対策</h3><p>巨大掲示板上の名指しスレッドについて、運営規約に基づく申請で削除に成功。</p></div>',
-            f'<div class="card"><div class="card__icon">{ICONS["globe"]}</div><h3>宿泊 — 海外レビューサイト対策</h3><p>英語圏レビューでの事実誤認に対し、現地規約準拠の申請で訂正反映。</p></div>',
-        ])}
+      <div class="prose">
+        <p>業種ごとに、口コミ対策・誹謗中傷対策の解決事例をまとめています。気になる業種をお選びください。守秘義務の範囲内で記載しています。</p>
       </div>
+      {cases_banners(1)}
       {cta_trio(1)}
     </div></section>
     """
     (ROOT / "cases").mkdir(exist_ok=True)
     (ROOT / "cases/index.html").write_text(
         page_html(depth=1, title="成功事例｜一般社団法人 口コミ対策センター",
-                  description="業種別・媒体別の口コミ対策・誹謗中傷対策の解決事例（守秘義務の範囲内で記載）。",
+                  description="業種別の口コミ対策・誹謗中傷対策の解決事例（守秘義務の範囲内で記載）。飲食・医療・美容・不動産・士業ほか全業種。",
                   body=body, active="成功事例"),
         encoding="utf-8")
+
+    # /cases/{slug}/ （業種ごとの成功事例ページ）
+    for slug, name, sub in INDUSTRIES:
+        cards = "".join(
+            f'<div class="card"><div class="card__icon">{ICONS[icon]}</div>'
+            f'<h3>{name} — {title}</h3><p>{desc}</p></div>'
+            for icon, title, desc in CASES.get(slug, [])
+        )
+        d = ROOT / "cases" / slug
+        d.mkdir(parents=True, exist_ok=True)
+        body = f"""
+        {page_header_block("CASES", f"{name}の成功事例", f"{sub}の解決事例（守秘義務の範囲内で記載）", 2)}
+        <section class="section"><div class="container container--wide">
+          <div class="grid grid--2">
+            {cards}
+          </div>
+          <div class="prose">
+            <p>掲載内容は守秘義務の範囲内で加工・要約したものです。{name}業界の対策方針の詳細は<a href="{rel(2,f'/industry/{slug}/')}">{name}の口コミ対策</a>ページをご覧ください。</p>
+            <p><a href="{rel(2,'/cases/')}">← 成功事例（業種一覧）に戻る</a></p>
+          </div>
+          {cta_trio(2)}
+        </div></section>
+        """
+        (d / "index.html").write_text(
+            page_html(depth=2,
+                title=f"{name}の成功事例｜口コミ対策｜一般社団法人 口コミ対策センター",
+                description=f"{name}業界（{sub}）の口コミ対策・誹謗中傷対策の解決事例。守秘義務の範囲内で記載。完全成功報酬・初期費用0円。",
+                body=body, active="成功事例"),
+            encoding="utf-8")
 
     # /faq/
     items = [
@@ -1912,6 +1833,73 @@ def build_misc_pages():
             title=f"{name}｜一般社団法人口コミ対策センター",
             description=lead, body=body, active=""))
 
+def build_admin():
+    """運営者ページの入口（モックのログイン + ダッシュボード）。"""
+    base = ROOT / "admin"
+    base.mkdir(exist_ok=True)
+    admin_js = f'<script src="{rel(1, "/assets/js/admin.js")}?v={ASSET_VER}" data-editor-skip></script>'
+    body = f"""
+    {page_header_block("ADMIN", "運営者ページ", "サイト運営用ツールの入口です。ログインしてご利用ください。", 1)}
+    <section class="section"><div class="container">
+      <div class="admin-wrap" data-admin-page data-editor-skip>
+
+        <div class="admin-login" data-admin-login>
+          <div class="admin-card">
+            <h2 class="admin-card__title">運営者ログイン</h2>
+            <form data-admin-form autocomplete="off">
+              <label class="admin-field">
+                <span>ユーザー名</span>
+                <input type="text" name="user" autocomplete="username" placeholder="admin">
+              </label>
+              <label class="admin-field">
+                <span>パスワード</span>
+                <input type="password" name="pass" autocomplete="current-password" placeholder="••••••••">
+              </label>
+              <p class="admin-error" data-admin-error hidden>ユーザー名またはパスワードが違います。</p>
+              <button type="submit" class="btn btn--primary">ログイン</button>
+            </form>
+            <p class="admin-note">
+              ※これは<strong>モック（デモ）用</strong>のログインです。認証はブラウザ内でのみ行われ、実際のアクセス制御・セキュリティ保護はありません。本番運用時にはサーバー側の認証に置き換えてください。<br>
+              デモ用ログイン: ユーザー名 <code>admin</code> ／ パスワード <code>kuchikomi</code>
+            </p>
+          </div>
+        </div>
+
+        <div class="admin-dashboard" data-admin-dashboard hidden>
+          <div class="admin-dashboard__head">
+            <div>
+              <h2 class="admin-card__title">運営者ダッシュボード</h2>
+              <p class="admin-dashboard__lead">運営用ツールの一覧です。</p>
+            </div>
+            <button type="button" class="btn btn--navy btn--sm" data-admin-logout>ログアウト</button>
+          </div>
+          <div class="admin-tools">
+            <a class="admin-tool" href="{rel(1,'/column/post/')}">
+              <div class="admin-tool__icon">✎</div>
+              <div class="admin-tool__body">
+                <div class="admin-tool__title">コラム記事の投稿・編集</div>
+                <div class="admin-tool__desc">新しい記事を書く／ブログのHTMLをインポート／投稿済み記事を編集</div>
+              </div>
+            </a>
+            <div class="admin-tool is-soon">
+              <div class="admin-tool__icon">＋</div>
+              <div class="admin-tool__body">
+                <div class="admin-tool__title">今後の運営ツール</div>
+                <div class="admin-tool__desc">必要に応じてここに追加していきます。</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div></section>
+    """
+    write_page(base / "index.html", page_html(depth=1,
+        title="運営者ページ｜一般社団法人口コミ対策センター",
+        description="サイト運営者向けページ。", body=body, active="",
+        robots="noindex, nofollow", extra_scripts=admin_js))
+
+
 def build_columns():
     base = ROOT / "column"
     base.mkdir(exist_ok=True)
@@ -1920,14 +1908,30 @@ def build_columns():
         f'<div class="banner__body"><div class="banner__title">{name}</div><div class="banner__sub">{lead}</div><div class="banner__cta">記事を読む</div></div></a>'
         for slug, name, lead in COLUMNS
     )
+    column_js = f'<script src="{rel(1, "/assets/js/column.js")}?v={ASSET_VER}" data-editor-skip></script>'
     body = f"""
     {page_header_block("COLUMN", "コラム・ノウハウ", "口コミ対策・風評対策の知見をまとめたコラム集。", 1)}
-    <section class="section"><div class="container container--wide"><div class="banner-grid">{items}</div></div></section>
+    <section class="section"><div class="container container--wide">
+      <div class="user-posts" data-user-posts hidden>
+        <h2 class="user-posts__title">記事一覧</h2>
+        <div class="post-filter" data-post-filter>
+          <div class="post-filter__row">
+            <div class="post-filter__cats" data-filter-cats></div>
+            <input type="search" class="post-filter__search" data-filter-search placeholder="キーワードで検索（タイトル・本文・タグ）" aria-label="記事を検索">
+          </div>
+          <div class="post-filter__tags" data-filter-tags hidden></div>
+        </div>
+        <div class="news-list" id="userPostList"></div>
+        <p class="post-filter__empty muted" data-filter-empty hidden>条件に一致する記事がありません。</p>
+      </div>
+      <h2 class="user-posts__title">特集コラム</h2>
+      <div class="banner-grid">{items}</div>
+    </div></section>
     """
     write_page(base / "index.html", page_html(depth=1,
         title="コラム｜口コミ対策・風評対策のノウハウ｜一般社団法人口コミ対策センター",
         description="口コミ対策・WEBレピュテーション対策に関する専門家コラム。事例、IT法務、自社でできる予防策まで。",
-        body=body, active=""))
+        body=body, active="コラム", extra_scripts=column_js))
 
     for slug, name, lead in COLUMNS:
         d = base / slug
@@ -1956,6 +1960,127 @@ def build_columns():
         write_page(d / "index.html", page_html(depth=2,
             title=f"{name}｜コラム｜一般社団法人口コミ対策センター",
             description=lead, body=body, active=""))
+
+    column_js2 = f'<script src="{rel(2, "/assets/js/column.js")}?v={ASSET_VER}" data-editor-skip></script>'
+
+    # /column/post/ 記事投稿ページ（運営者ログイン必須）
+    admin_js2 = f'<script src="{rel(2, "/assets/js/admin.js")}?v={ASSET_VER}" data-editor-skip></script>'
+    body = f"""
+    <div data-admin-guard data-admin-home="{rel(2,'/admin/')}" data-editor-skip hidden></div>
+    <div data-admin-content hidden>
+    {page_header_block("COLUMN", "記事の投稿", "エディタで書く／ブログ等のHTMLをそのまま貼り付けて投稿できます。", 2)}
+    <section class="section"><div class="container">
+      <p class="composer-back" data-editor-skip><a href="{rel(2,'/admin/')}">← 管理トップに戻る</a>　<a href="{rel(2,'/column/')}">コラム一覧を見る</a></p>
+      <div class="column-composer" data-column-composer data-editor-skip>
+
+        <div class="composer-fields">
+          <label class="composer-field composer-field--wide">
+            <span>タイトル <em>必須</em></span>
+            <input type="text" id="postTitle" placeholder="記事タイトルを入力">
+          </label>
+          <label class="composer-field">
+            <span>分類 <em>必須</em></span>
+            <select id="postCategory">
+              {"".join(f'<option value="{c}">{c}</option>' for c in COLUMN_CATEGORIES)}
+            </select>
+          </label>
+          <label class="composer-field">
+            <span>公開日</span>
+            <input type="date" id="postDate">
+          </label>
+          <div class="composer-field composer-field--wide">
+            <span>タグ（カンマまたはEnterで区切り／絞り込みに使えます）</span>
+            <div class="composer-tags" data-tags-box>
+              <div class="composer-tags__chips" id="postTagChips"></div>
+              <input type="text" id="postTagInput" placeholder="例: Googleマップ, 削除依頼, 弁護士">
+            </div>
+          </div>
+          <label class="composer-field composer-field--wide">
+            <span>リード文（一覧・検索結果に表示）</span>
+            <textarea id="postSummary" rows="2" placeholder="記事の概要を1〜2文で"></textarea>
+          </label>
+        </div>
+
+        <div class="composer-tabs" role="tablist">
+          <button type="button" data-tab="visual" class="is-active">エディタで書く</button>
+          <button type="button" data-tab="html">HTMLを直接編集・インポート</button>
+        </div>
+
+        <div class="composer-toolbar" data-pane="visual">
+          <button type="button" data-cmd="h2">見出し</button>
+          <button type="button" data-cmd="h3">小見出し</button>
+          <button type="button" data-cmd="p">本文</button>
+          <span class="sep"></span>
+          <button type="button" data-cmd="bold"><b>B</b></button>
+          <button type="button" data-cmd="italic"><i>I</i></button>
+          <span class="sep"></span>
+          <button type="button" data-cmd="insertUnorderedList">・リスト</button>
+          <button type="button" data-cmd="insertOrderedList">1. 番号</button>
+          <button type="button" data-cmd="quote">❝ 引用</button>
+          <span class="sep"></span>
+          <button type="button" data-cmd="link">🔗 リンク</button>
+          <button type="button" data-cmd="image">🖼 画像</button>
+          <button type="button" data-cmd="hr">― 区切り線</button>
+        </div>
+        <div id="postBody" class="composer-visual prose" contenteditable="true" data-pane="visual"></div>
+
+        <div data-pane="html" hidden>
+          <p class="composer-hint">ブログ・CMSからエクスポートしたHTMLをそのまま貼り付けられます（&lt;script&gt;タグは安全のため保存時に除去されます）。</p>
+          <textarea id="postHtml" class="composer-html" placeholder="&lt;h2&gt;見出し&lt;/h2&gt;&#10;&lt;p&gt;本文…&lt;/p&gt;"></textarea>
+          <label class="composer-file">HTMLファイルから読み込み <input type="file" id="htmlFile" accept=".html,.htm,.txt" hidden></label>
+        </div>
+
+        <div class="composer-actions">
+          <button type="button" id="btnSave" class="btn btn--primary btn--sm">保存（公開）</button>
+          <button type="button" id="btnPreview" class="btn btn--navy btn--sm">プレビュー</button>
+          <button type="button" id="btnNew" class="composer-sub">新規作成</button>
+          <span class="composer-status" id="composerStatus"></span>
+        </div>
+
+        <article id="previewArea" class="prose composer-preview" hidden></article>
+
+        <h2 class="composer-list-title">投稿済みの記事</h2>
+        <div id="postList" class="composer-list"></div>
+
+        <div class="composer-io">
+          <button type="button" id="btnExport" class="composer-sub">JSONエクスポート</button>
+          <label class="composer-sub composer-file-btn">JSONインポート<input type="file" id="importFile" accept=".json" hidden></label>
+          <span class="muted">※記事はこのブラウザ（localStorage）に保存されます。別PCへはJSONで受け渡しできます。</span>
+        </div>
+      </div>
+    </div></section>
+    </div>
+    """
+    write_page(base / "post" / "index.html", page_html(depth=2,
+        title="記事の投稿｜コラム｜一般社団法人口コミ対策センター",
+        description="コラム記事の投稿・編集ページ。", body=body, active="コラム",
+        robots="noindex, nofollow", extra_scripts=admin_js2 + column_js2))
+
+    # /column/article/ 投稿記事ビューア（?id= で表示）
+    body = f"""
+    <section class="page-header">
+      <div class="container">
+        <span class="en">COLUMN</span>
+        <h1 data-article-title data-editor-skip>記事を読み込んでいます…</h1>
+        <p data-article-meta data-editor-skip></p>
+      </div>
+    </section>
+    <div class="container">
+      <p class="breadcrumb" data-editor-skip><a href="{rel(2,'/')}">ホーム</a><span>›</span><a href="{rel(2,'/column/')}">コラム</a><span>›</span><span data-article-crumb>記事</span></p>
+    </div>
+    <section class="section"><div class="container">
+      <div class="article-tags" data-article-tags data-editor-skip hidden></div>
+      <article class="prose" data-article-body data-editor-skip>
+        <p>記事を読み込んでいます…</p>
+      </article>
+      <p class="article-back" data-editor-skip><a href="{rel(2,'/column/')}">← コラム一覧へ戻る</a></p>
+      {cta_trio(2)}
+    </div></section>
+    """
+    write_page(base / "article" / "index.html", page_html(depth=2,
+        title="記事｜コラム｜一般社団法人口コミ対策センター",
+        description="投稿されたコラム記事。", body=body, active="コラム",
+        robots="noindex", extra_scripts=column_js2))
 
 def build_notices():
     base = ROOT / "notice"
@@ -2220,6 +2345,7 @@ if __name__ == "__main__":
     build_process_sub_pages()
     build_extra_methods()
     build_misc_pages()
+    build_admin()
     build_columns()
     build_notices()
     build_cities()

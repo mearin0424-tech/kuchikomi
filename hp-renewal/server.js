@@ -245,7 +245,7 @@ function proseRange(html) {
 }
 
 function pageHeaderRange(html) {
-  const m = /<section class="page-header">/.exec(html);
+  const m = /<section class="page-header[^"]*">/.exec(html);
   if (!m) return null;
   const start = m.index + m[0].length;
   const end = html.indexOf('</section>', start);
@@ -389,7 +389,7 @@ function listArticles() {
     for (const slug of slugs) {
       const html = fs.readFileSync(path.join(dir, slug, 'index.html'), 'utf8');
       if (!proseRange(html)) continue;
-      const h1 = /<section class="page-header">[\s\S]*?<h1[^>]*>([\s\S]*?)<\/h1>/.exec(html);
+      const h1 = /<section class="page-header[^"]*">[\s\S]*?<h1[^>]*>([\s\S]*?)<\/h1>/.exec(html);
       const stat = fs.statSync(path.join(dir, slug, 'index.html'));
       result.push({ path: `${category}/${slug}`, category, categoryLabel: label, slug, title: h1 ? decodeText(h1[1]) : slug, updatedAt: stat.mtime.toISOString() });
     }
@@ -591,5 +591,6 @@ const server = http.createServer((req, res) => {
 
 server.listen(port, () => {
   console.log(`Site is running at http://localhost:${port}`);
-  console.log(`記事エディタ: http://localhost:${port}/admin/`);
+  console.log(`記事エディタ: http://localhost:${port}/admin/editor/`);
+  console.log(`アクセス解析: http://localhost:${port}/admin/dashboard.html`);
 });

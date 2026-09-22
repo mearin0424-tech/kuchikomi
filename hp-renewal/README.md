@@ -38,7 +38,7 @@ hp-renewal/
 │   ├── js/editor.js             ページ文字編集ツールバー（ローカル起動時のみ表示）
 │   ├── js/track.js              アクセス計測・フォーム送信
 │   └── img/                     画像
-├── admin/                       管理画面（記事エディタ・アクセス解析）※公開されません
+├── admin/                       運営者ページ（入口・モックログイン）／editor/ 記事エディタ／dashboard.html アクセス解析 ※公開サーバーでは非公開
 ├── backend/                     フォーム受付・計測・集計（PHP、XServerで動作）
 ├── server.js                    ローカル用のプレビュー＆編集サーバー（Node.js）
 ├── _backups/                    編集前のHTMLの控え（自動作成・git管理外）
@@ -67,7 +67,8 @@ node server.js
 
 ```
 Site is running at http://localhost:8080
-記事エディタ: http://localhost:8080/admin/
+記事エディタ: http://localhost:8080/admin/editor/
+アクセス解析: http://localhost:8080/admin/dashboard.html
 ```
 
 ### 3. ブラウザで開く
@@ -75,7 +76,8 @@ Site is running at http://localhost:8080
 | 開くURL | できること |
 |---|---|
 | http://localhost:8080/ | サイトのプレビュー。各ページ下部のツールバーで文字を直接編集 |
-| http://localhost:8080/admin/ | 記事エディタ（コラム・基礎知識・お知らせを章立てから編集） |
+| http://localhost:8080/admin/ | 運営者ページ（ツールの入口。デモ用ログイン: admin / kuchikomi） |
+| http://localhost:8080/admin/editor/ | 記事エディタ（コラム・基礎知識・お知らせを章立てから編集） |
 | http://localhost:8080/admin/dashboard.html | アクセス解析（公開サイトの閲覧数・流入元・申し込み） |
 
 URLの末尾の `/` は付けなくても自動で補われます。
@@ -124,7 +126,7 @@ URLの末尾の `/` は付けなくても自動で補われます。
 `node server.js` で起動したときだけ、各ページ下部に編集ツールバーが表示されます（`start index.html` で直接開いた場合や、公開サーバーでは表示されません）。保存するとHTMLファイルが直接書き換わるため、JSONの書き出しは不要です。
 
 - **ページ文字編集**（全ページ）: 「編集開始」→ 文字を直接書き換え →「保存してHPに反映」。
-- **記事エディタ** `http://localhost:8080/admin/`（コラム `column/`・基礎知識 `knowledge/`・お知らせ `notice/`）
+- **記事エディタ** `http://localhost:8080/admin/editor/`（コラム `column/`・基礎知識 `knowledge/`・お知らせ `notice/`）
   - 記事タイトル、見出し下の説明文、英字ラベル、SEOタイトル、メタディスクリプション、一覧ページの紹介文（お知らせは日付・分類）
   - 本文をブロック単位で編集：章見出し(H2)・小見出し(H3/H4)・段落・箇条書き・番号リスト・引用・補足・HTML（表など）
   - 章立ての変更：ブロックの追加／削除／複製／種類変更、ドラッグ・▲▼での並べ替え、章（H2〜次のH2まで）ごとの移動・削除

@@ -1,184 +1,116 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>お問い合わせ | 一般社団法人口コミ対策センター</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              navy: '#0B2240',
-              blue: '#00539C',
-              gold: '#E5A93C',
-              goldHover: '#CD932B',
-              lightBg: '#F8F9FA',
-              footerBg: '#F4F4F2',
-              inputBg: '#F5F5F5'
-            }
-          }
-        }
-      }
-    }
-  </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>お問い合わせ・無料診断｜一般社団法人 口コミ対策センター</title>
+<meta name="description" content="法人・個人どちらの窓口にも対応。1営業日以内に専門スタッフよりご返信いたします。秘密厳守・しつこい営業は一切いたしません。">
+<meta name="robots" content="all">
+<meta property="og:site_name" content="一般社団法人 口コミ対策センター">
+<meta property="og:title" content="お問い合わせ・無料診断｜一般社団法人 口コミ対策センター">
+<meta property="og:description" content="法人・個人どちらの窓口にも対応。1営業日以内に専門スタッフよりご返信いたします。秘密厳守・しつこい営業は一切いたしません。">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Zen+Old+Mincho:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css?v=20260704c">
 </head>
-<body class="text-gray-800 bg-brand-lightBg antialiased font-sans leading-relaxed pb-20">
+<body>
 
-  <header class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm">
-    <div class="container mx-auto px-4 md:px-8 py-3.5 flex justify-between items-center max-w-6xl">
-      <a href="../contact/" class="flex items-center gap-2">
-        <img src="../assets/img/brand/logo_header.png" alt="一般社団法人 口コミ対策センター" class="h-8 md:h-9 object-contain">
-        <div class="flex flex-col text-left">
-          <span class="text-xs md:text-sm font-extrabold text-brand-navy tracking-wider leading-none">一般社団法人</span>
-          <span class="text-sm md:text-base font-black text-brand-navy tracking-widest mt-0.5 leading-none">口コミ対策センター</span>
-          <span class="text-[8px] text-gray-400 font-medium tracking-wide mt-0.5 leading-none">Review Risk Management Center</span>
-        </div>
-      </a>
-      <button class="flex items-center gap-1.5 text-xs font-bold text-brand-navy group focus:outline-none" aria-label="メニューを開く">
-        <div class="flex flex-col gap-1 w-4">
-          <span class="h-0.5 w-full bg-brand-navy group-hover:bg-brand-blue transition"></span>
-          <span class="h-0.5 w-full bg-brand-navy group-hover:bg-brand-blue transition"></span>
-        </div>
-        <span class="tracking-wider text-[10px] md:text-xs">MENU</span>
-      </button>
-    </div>
-  </header>
+<a href="../admin/" class="admin-entry" data-editor-skip title="運営管理者向けページ（現在はモック）">&#128273; 管理<span class="admin-entry__tag">MOCK</span></a>
 
-  <section class="pt-16 pb-10 text-center max-w-3xl mx-auto px-4">
-    <span class="text-xs tracking-widest text-gray-400 font-bold uppercase block mb-3">CONTACT</span>
-    <h1 class="text-xl md:text-2xl font-bold text-brand-navy tracking-wide leading-snug">
-      弊社へのお問い合わせは<br class="sm:hidden">こちらのフォームより承っております
-    </h1>
-    <div class="mt-6 text-xs text-gray-500 leading-loose max-w-xl mx-auto">
-      <p>ご返信に3営業日ほどお時間をいただいております。</p>
-      <p>3営業日を過ぎても返信がない場合は、お手数ですが再度お問い合わせをお願いいたします。</p>
-    </div>
-  </section>
-
-  <main class="container mx-auto px-4 md:px-6 relative z-20 max-w-2xl mb-20">
-    <div class="bg-white rounded-[24px] md:rounded-[32px] shadow-sm border border-gray-100 p-6 sm:p-10 md:p-12">
-      
-      <form action="#" method="POST" data-form="contact" data-thanks="thanks/" class="space-y-6 text-xs md:text-sm">
-        
-        <div class="space-y-2">
-          <label class="block font-bold text-gray-700">
-            お名前<span class="text-red-500 ml-1">*</span>
-          </label>
-          <input type="text" placeholder="山田 太郎" required
-                 class="w-full bg-brand-inputBg border border-transparent rounded-lg px-4 py-3.5 text-gray-800 placeholder-gray-300 focus:outline-none focus:bg-white focus:border-gray-200 transition">
-        </div>
-
-        <div class="space-y-2">
-          <label class="block font-bold text-gray-700">
-            会社名
-          </label>
-          <input type="text" placeholder="〇〇株式会社"
-                 class="w-full bg-brand-inputBg border border-transparent rounded-lg px-4 py-3.5 text-gray-800 placeholder-gray-300 focus:outline-none focus:bg-white focus:border-gray-200 transition">
-        </div>
-
-        <div class="space-y-2">
-          <label class="block font-bold text-gray-700">
-            メールアドレス<span class="text-red-500 ml-1">*</span>
-          </label>
-          <input type="email" placeholder="xxx@example.com" required
-                 class="w-full bg-brand-inputBg border border-transparent rounded-lg px-4 py-3.5 text-gray-800 placeholder-gray-300 focus:outline-none focus:bg-white focus:border-gray-200 transition">
-        </div>
-
-        <div class="space-y-2">
-          <label class="block font-bold text-gray-700">
-            電話番号
-          </label>
-          <input type="tel" placeholder="000-0000-0000"
-                 class="w-full bg-brand-inputBg border border-transparent rounded-lg px-4 py-3.5 text-gray-800 placeholder-gray-300 focus:outline-none focus:bg-white focus:border-gray-200 transition">
-        </div>
-
-        <div class="space-y-2">
-          <label class="block font-bold text-gray-700">
-            お問い合わせ内容<span class="text-red-500 ml-1">*</span>
-          </label>
-          <textarea rows="6" placeholder="詳しい内容を記入してください" required
-                    class="w-full bg-brand-inputBg border border-transparent rounded-lg px-4 py-3.5 text-gray-800 placeholder-gray-300 focus:outline-none focus:bg-white focus:border-gray-200 transition resize-none"></textarea>
-        </div>
-
-        <div class="flex items-center justify-center pt-4">
-          <label class="flex items-center gap-2 cursor-pointer select-none text-xs text-gray-600 font-medium">
-            <input type="checkbox" required
-                   class="w-3.5 h-3.5 rounded border-gray-300 text-brand-blue focus:ring-0">
-            <span>
-              <a href="../contact/" class="text-brand-blue underline hover:text-brand-navy transition">プライバシーポリシー</a> に同意して送信する
-            </span>
-          </label>
-        </div>
-
-        <div class="flex justify-center pt-4">
-          <button type="submit" 
-                  class="bg-black hover:bg-gray-800 text-white font-bold text-xs md:text-sm px-8 py-3.5 rounded-lg shadow transition duration-200 tracking-wider flex items-center gap-2">
-            <span>この内容で送信する</span>
-            <span class="text-[10px] font-bold">&gt;</span>
-          </button>
-        </div>
-
-      </form>
-
-    </div>
-  </main>
-
-  <footer class="bg-brand-footerBg text-gray-600 pt-16 pb-24 md:pb-16 text-xs border-t border-gray-200/60">
-    <div class="container mx-auto px-6 max-w-5xl">
-      
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 items-start mb-12">
-        <div class="md:col-span-1 flex flex-col items-start gap-3">
-          <img src="../assets/img/brand/logo_footer.png" alt="口コミ対策センターロゴ" class="h-10 object-contain">
-          <div class="text-left">
-            <p class="font-black text-sm text-brand-navy tracking-wider">一般社団法人</p>
-            <p class="font-black text-base text-brand-navy tracking-widest mt-0.5">口コミ対策センター</p>
-            <p class="text-[9px] text-gray-400 font-medium tracking-wide mt-1">Review Risk Management Center</p>
-          </div>
-        </div>
-
-        <div class="md:col-span-2 grid grid-cols-2 gap-6 md:gap-4 text-left font-medium text-gray-600 text-[11px] md:text-xs">
-          <div class="space-y-3">
-            <a href="../contact/" class="block hover:text-brand-blue hover:underline transition">ホーム</a>
-            <a href="../contact/" class="block hover:text-brand-blue hover:underline transition">代表者挨拶</a>
-            <a href="../contact/" class="block hover:text-brand-blue hover:underline transition">当センターについて</a>
-            <a href="../contact/" class="block hover:text-brand-blue hover:underline transition">サービス内容</a>
-            <a href="../contact/" class="block hover:text-brand-blue hover:underline transition">お問い合わせ</a>
-          </div>
-          <div class="space-y-3">
-            <a href="../contact/" class="block hover:text-brand-blue hover:underline transition">プライバシーポリシー</a>
-            <a href="../contact/" class="block hover:text-brand-blue hover:underline transition">ソーシャルメディアポリシー</a>
-            <a href="../contact/" class="block hover:text-brand-blue hover:underline transition">情報セキュリティ基本方針</a>
-            <a href="../contact/" class="block hover:text-brand-blue hover:underline transition">採用情報</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="border-t border-gray-300/60 pt-6 text-center text-[10px] text-gray-400 tracking-wide">
-        <p>©2025 一般社団法人口コミ対策センター</p>
-      </div>
-
-    </div>
-  </footer>
-
-  <div class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-t border-gray-200 shadow-2xl px-4 py-3 flex justify-between items-center z-50 md:max-w-xl md:mx-auto md:rounded-t-2xl">
-    <div class="flex items-center gap-2 pl-1">
-      <img src="../assets/img/brand/logo_fixed_bar.png" alt="ロゴ" class="h-5 w-auto object-contain">
-      <div class="flex flex-col text-left">
-        <span class="text-[8px] font-bold text-brand-navy leading-none">一般社団法人</span>
-        <span class="text-[10px] font-black text-brand-navy tracking-tight leading-none mt-0.5">口コミ対策センター</span>
-      </div>
-    </div>
-    <a href="../contact/" class="bg-brand-gold hover:bg-brand-goldHover text-white font-bold text-xs md:text-sm px-5 py-2.5 rounded-lg shadow-md transition duration-200 tracking-wider flex items-center gap-2">
-      <span class="text-[9px] bg-white/20 px-1.5 py-0.5 rounded-sm">簡単1分で完了!</span>
-      <span>無料診断・お申し込み</span>
-      <span class="text-[10px] font-bold">&gt;</span>
+<header class="hd2">
+  <div class="hd2__inner">
+    <a href="../" class="hd2__logo" aria-label="一般社団法人 口コミ対策センター トップページ">
+      <img src="../assets/img/top/logo.webp" alt="一般社団法人 口コミ対策センター">
     </a>
+    <nav class="hd2__nav" aria-label="グローバルナビゲーション"><a href="../">ホーム</a><a href="../message/">代表挨拶</a><a href="../about/">当センターについて</a><a href="../service/">サービス内容</a><a href="../recruit/">採用情報</a></nav>
+    <a href="../contact/" class="hd2__contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span>お問い合わせ</span></a>
+    <button class="nav-toggle hd2__menu" aria-expanded="false" aria-label="メニューを開く"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg><span>MENU</span></button>
   </div>
+  <div class="global-nav-list">
+    <div class="global-nav-list__panel-head">
+      <span>メニュー</span>
+      <button type="button" class="nav-close" aria-label="メニューを閉じる">×</button>
+    </div>
+    <div class="global-nav-list__primary"><a href="../">ホーム</a><a href="../about/">当センターについて</a><a href="../message/">代表者挨拶</a><a href="../service/">サービス紹介</a><a href="../process/">解決プロセス</a><a href="../cases/">成功事例</a><a href="../pricing/">料金</a><a href="../area/">対応地域</a><a href="../industry/">業種別</a><a href="../platform/">媒体別</a><a href="../column/">コラム</a><a href="../faq/">FAQ</a><a href="../recruit/">採用情報</a><a href="../contact/">お問い合わせ</a></div>
+    <div class="global-nav-list__cta"><a href="../form/" class="btn btn--primary btn--sm">無料診断・お申し込み</a></div>
+    <div class="global-nav-list__policies"><a href="../privacypolicy/">プライバシーポリシー</a><a href="../social-policy/">ソーシャルメディアポリシー</a><a href="../security-policy/">情報セキュリティ基本方針</a><a href="../regulation/">特定商取引法に基づく表記</a></div>
+  </div>
+</header>
 
+<main>
+
+
+    <section class="page-header page-header--light">
+      <div class="container">
+        <span class="en">CONTACT</span>
+        <h1>お問い合わせ・無料診断</h1>
+        <p>1営業日以内に専門スタッフよりご返信いたします。</p>
+      </div>
+    </section>
+    <div class="container">
+      <p class="breadcrumb"><a href="../">ホーム</a><span>›</span>お問い合わせ・無料診断</p>
+    </div>
+
+    <section class="section"><div class="container">
+
+    <div class="cta-trio">
+      <a class="cta-trio__item is-tel" href="tel:0120000001">
+        <span class="label">お電話で相談</span>
+        <span class="main">0120-000-001</span>
+        <span class="sub">受付 10:00-20:00 年中無休</span>
+      </a>
+      <a class="cta-trio__item is-mail" href="../contact/">
+        <span class="label">メールで無料診断</span>
+        <span class="main">無料診断フォーム</span>
+        <span class="sub">1営業日以内に返信</span>
+      </a>
+      <a class="cta-trio__item is-meet" href="../contact/">
+        <span class="label">直接相談したい方へ</span>
+        <span class="main">面談予約</span>
+        <span class="sub">対面／オンライン可</span>
+      </a>
+    </div>
+
+      <form class="form-grid mt-48" action="#" method="post" novalidate data-form="contact" data-thanks="thanks/">
+        <div class="form-field"><label>会社名／屋号<span class="req">必須</span></label><input type="text" name="company" required placeholder="例）株式会社サンプル"></div>
+        <div class="form-field"><label>ご担当者名<span class="req">必須</span></label><input type="text" name="name" required placeholder="例）山田 太郎"></div>
+        <div class="form-field"><label>窓口区分</label>
+          <select name="segment"><option>法人としてのご相談</option><option>個人としてのご相談</option><option>上場企業 / IR関連</option><option>エグゼクティブ・経営者個人</option></select>
+        </div>
+        <div class="form-field"><label>メールアドレス<span class="req">必須</span></label><input type="email" name="email" required placeholder="example@example.com"></div>
+        <div class="form-field"><label>お電話番号</label><input type="tel" name="tel" placeholder="03-0000-0000"></div>
+        <div class="form-field"><label>対象URL（Googleマップ等）</label><input type="url" name="target_url" placeholder="https://maps.google.com/..."></div>
+        <div class="form-field"><label>ご相談内容</label><textarea name="message" placeholder="現状や気になる口コミ等、わかる範囲でお書きください。"></textarea></div>
+        <div class="form-actions"><button type="submit" class="btn btn--primary btn--lg">無料診断を送信する</button><p class="form-note">SSL暗号化通信採用 / 秘密厳守 / 営業電話は致しません</p></div>
+      </form>
+    </div></section>
+
+</main>
+
+    <footer class="ft2">
+      <div class="ft2__inner">
+        <a href="../" class="ft2__logo"><img src="../assets/img/top/logo.webp" alt="一般社団法人 口コミ対策センター"></a>
+        <nav class="ft2__nav">
+          <div class="ft2__row"><a href="../">ホーム</a><a href="../message/">代表者挨拶</a><a href="../about/">当センターについて</a><a href="../service/">サービス内容</a><a href="../contact/">お問い合わせ</a></div>
+          <div class="ft2__row"><a href="../privacypolicy/">プライバシーポリシー</a><a href="../social-policy/">ソーシャルメディアポリシー</a><a href="../security-policy/">情報セキュリティ基本方針</a><a href="../recruit/">採用情報</a><a href="../sitemap/">サイトマップ</a></div>
+        </nav>
+      </div>
+      <div class="ft2__copy">©️2025 一般社団法人口コミ対策センター　<a href="../admin/" class="ft2__admin">運営者ログイン</a></div>
+    </footer>
+
+    <div class="contact-band" role="complementary" aria-label="お問い合わせ">
+      <div class="contact-band__inner">
+        <span class="contact-band__text">ネットの風評・口コミにお困りですか？<strong>無料診断・ご相談を受付中です</strong></span>
+        <a href="tel:0120000001" class="contact-band__tel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.71 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.58 2.81.71A2 2 0 0 1 22 16.92z"/></svg><span>0120-000-001</span></a>
+        <a href="../contact/" class="contact-band__btn">無料診断・お問い合わせ</a>
+      </div>
+    </div>
+
+<script src="../assets/js/main.js?v=20260704c"></script>
 <script src="../assets/js/track.js?v=20260921a"></script>
-<script src="../assets/js/editor.js?v=20260629a" data-editor-skip></script>
+<script src="../assets/js/editor.js?v=20260704c" data-editor-skip></script>
+
 </body>
 </html>
